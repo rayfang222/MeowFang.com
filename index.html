@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>喵方旅團</title>
+    <title>喵方旅團 | MeowFang Legion</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* 全域樣式重置 */
+        /* 全局重置與字體 */
         * {
             margin: 0;
             padding: 0;
@@ -14,16 +14,16 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        /* 顏色變數 */
+        /* 顏色變量 */
         :root {
             --primary: #F454F0;
             --secondary: #8b5cf6;
             --dark: #1e293b;
             --light: #F3D0FF;
             --accent: #831FD7;
-            --header-height: 81px; /* 用於計算 mobile menu top position */
         }
 
+        /* 頁面背景與文字顏色 */
         body {
             background: linear-gradient(135deg, #0f172a, #1e293b);
             color: var(--light);
@@ -31,6 +31,7 @@
             overflow-x: hidden;
         }
 
+        /* 內容容器 */
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -94,19 +95,6 @@
 
         .nav-links a:hover::after {
             width: 100%;
-        }
-
-        /* Hamburger Menu Icon (Desktop Hidden) */
-        .hamburger-menu {
-            font-size: 1.5rem;
-            cursor: pointer;
-            display: none; 
-            color: var(--light);
-            transition: color 0.3s ease;
-        }
-
-        .hamburger-menu:hover {
-            color: var(--accent);
         }
 
         .cta-button {
@@ -411,56 +399,82 @@
             font-size: 0.9rem;
         }
 
-        /* Responsive Design - Mobile Styles (<= 768px) */
+        /* --- 新增的 RWD 漢堡選單樣式 --- */
+
+        /* 隱藏漢堡選單按鈕（桌面版） */
+        .menu-toggle {
+            display: none;
+            background: transparent;
+            border: none;
+            color: var(--light);
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1001;
+            margin-left: 20px; /* 與 CTA 按鈕隔開 */
+        }
+        
+        /* 響應式設計 (RWD) */
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2.5rem;
             }
 
-            /* 1. Show the hamburger icon */
-            .hamburger-menu {
-                display: block;
-            }
-
-            /* 2. Hide the desktop CTA button in the header */
-            header .cta-button {
-                display: none; 
-            }
-            
-            /* 3. Mobile Navigation Styling */
-            .nav-links {
-                position: fixed;
-                top: var(--header-height); /* Set position right below the fixed header */
-                right: 0;
-                width: 70%; /* Menu width */
-                height: calc(100vh - var(--header-height));
-                background: rgba(30, 41, 59, 0.95);
-                backdrop-filter: blur(15px);
-                flex-direction: column;
-                padding: 30px 20px;
-                gap: 25px;
-                /* Initial state: Hidden off-screen to the right */
-                transform: translateX(100%); 
-                transition: transform 0.4s ease-in-out;
-                z-index: 999;
-                /* Overwrite the previous desktop 'display: flex;' */
-                display: flex; 
-                border-left: 1px solid rgba(255, 255, 255, 0.1);
-            }
-
-            /* State when active (clicked) */
-            .nav-links.active {
-                transform: translateX(0); /* Slide into view */
-            }
-
-            /* Remove the underline effect on mobile for cleaner look */
-            .nav-links a::after {
-                display: none;
-            }
-
             .hero-buttons {
                 flex-direction: column;
                 align-items: center;
+            }
+            
+            /* 顯示漢堡選單按鈕（行動版） */
+            .menu-toggle {
+                display: block;
+            }
+            
+            /* 調整導航欄佈局 */
+            nav {
+                align-items: center;
+                /* 確保 logo 和 cta-button/menu-toggle 保持在同一行 */
+            }
+            
+            /* 漢堡選單的樣式和隱藏/顯示邏輯 */
+            .nav-links {
+                /* 預設狀態：垂直堆疊，全寬，隱藏 */
+                position: absolute;
+                top: 81px; /* 位於 Header 下方 (20px top + content + 20px bottom) */
+                left: 0;
+                width: 100%;
+                background: rgba(30, 41, 59, 0.95);
+                flex-direction: column;
+                gap: 0;
+                padding: 0; /* 移除頂部 padding，由 a 元素 padding 控制 */
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+                
+                /* 透過 max-height 控制隱藏/顯示，實現平滑過渡 */
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.4s ease-in-out;
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+            }
+
+            /* 選單開啟狀態 */
+            .nav-links.active {
+                max-height: 500px; /* 一個足夠大的值來顯示所有菜單項 */
+            }
+
+            .nav-links a {
+                display: block; /* 使鏈接佔滿寬度 */
+                padding: 15px 20px;
+                text-align: center;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            }
+            
+            .nav-links a:last-child {
+                border-bottom: none;
+            }
+            
+            /* 調整 cta-button 在 mobile view 上的位置 */
+            nav .cta-button {
+                /* 在這裡不特別調整，使其保持在 logo 旁邊，但在 nav-links 展開時，
+                   它會因為絕對定位的 nav-links 覆蓋而看起來不受影響 */
             }
         }
     </style>
@@ -470,17 +484,21 @@
         <div class="container">
             <nav>
                 <div class="logo">喵方旅團</div>
-                <div class="hamburger-menu">
-                    <i class="fas fa-bars"></i>
-                </div>
-                <div class="nav-links" id="navLinks">
+                
+                <div class="nav-links" id="menu">
                     <a href="https://www.minecraft.net/zh-hant">Home</a>
                     <a href="#">Features</a>
                     <a href="#">Solutions</a>
                     <a href="#">Pricing</a>
                     <a href="#">Contact</a>
                 </div>
-                <button class="cta-button">加入旅團</button>
+                
+                <div style="display: flex; align-items: center;">
+                    <button class="cta-button" style="margin-right: 10px;">加入旅團</button>
+                    <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
             </nav>
         </div>
     </header>
@@ -489,7 +507,7 @@
         <div class="container">
             <h1>MeowFang Legion | 喵方旅團</h1>
             <p>喵方旅團是一個玩Minecraft為主的團體。我們聚集了來自各地的玩家，無論你喜歡建築、探索、對戰或單純聊天，都能在這裡找到屬於自己的位置。</p>
-            <p>「加入旅團不只是玩遊戲，而是一趟夢幻的旅程」</p>  
+            <p>「加入旅團不只是玩遊戲，而是一趟夢幻的旅程」</p>  	
             <div class="hero-buttons">
                 <button class="cta-button">Start Free Trial</button>
                 <button class="secondary-button">View Demo</button>
@@ -649,8 +667,10 @@
     </footer>
 
     <script>
-        // 1. Feature Cards Fade-in Animation on Scroll
         document.addEventListener('DOMContentLoaded', function() {
+            // ------------------------------------
+            // 1. Feature Cards Intersection Observer
+            // ------------------------------------
             const featureCards = document.querySelectorAll('.feature-card');
             
             const observer = new IntersectionObserver((entries) => {
@@ -658,7 +678,6 @@
                     if (entry.isIntersecting) {
                         entry.target.style.opacity = 1;
                         entry.target.style.transform = 'translateY(0)';
-                        observer.unobserve(entry.target); // 只需要執行一次
                     }
                 });
             }, { threshold: 0.1 });
@@ -669,23 +688,25 @@
                 card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
                 observer.observe(card);
             });
-            
-            // 2. Hamburger Menu Toggle Logic
-            const hamburger = document.querySelector('.hamburger-menu');
-            const navLinks = document.getElementById('navLinks');
-            const icon = document.querySelector('.hamburger-menu i');
 
-            hamburger.addEventListener('click', () => {
-                // Toggle 'active' class to slide the menu in/out
+            // ------------------------------------
+            // 2. Hamburger Menu Toggle Logic
+            // ------------------------------------
+            const menuToggle = document.getElementById('menu-toggle');
+            const navLinks = document.getElementById('menu');
+            const menuIcon = menuToggle.querySelector('i');
+
+            menuToggle.addEventListener('click', function() {
+                // 切換導航連結的 'active' class (CSS 會控制顯示/隱藏)
                 navLinks.classList.toggle('active');
                 
-                // Toggle the icon between bars (≡) and times (X)
+                // 切換圖標 (漢堡 ☰ 變成 關閉 X)
                 if (navLinks.classList.contains('active')) {
-                    icon.classList.remove('fa-bars');
-                    icon.classList.add('fa-times');
+                    menuIcon.classList.remove('fa-bars');
+                    menuIcon.classList.add('fa-times');
                 } else {
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
+                    menuIcon.classList.remove('fa-times');
+                    menuIcon.classList.add('fa-bars');
                 }
             });
         });

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>喵方旅團 | MeowFang Legion</title>
+    <title>現代網路體驗 - 喵方旅團</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* 全局重置與字體 */
@@ -56,14 +56,40 @@
             align-items: center;
         }
 
+        /* ==================================== */
+        /* 優化點：Logo 顏色渲染動畫 */
+        /* ==================================== */
+        
+        /* 1. 定義顏色渲染動畫 */
+        @keyframes gradient-shift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        /* 2. 更新 Logo 樣式以應用動畫 */
         .logo {
             font-size: 28px;
             font-weight: 700;
-            background: linear-gradient(to right, var(--primary), var(--light), var(--accent));
+            /* 擴大漸變區域，確保動畫移動時有足夠的空間 */
+            background: linear-gradient(90deg, var(--primary), var(--light), var(--accent), var(--secondary));
+            background-size: 200% 100%; /* 使漸變色條寬度為容器的兩倍 */
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            /* 應用動畫：動畫名稱 時長 速度曲線 重複次數 */
+            animation: gradient-shift 4s ease-in-out infinite; 
         }
+        /* ==================================== */
+        /* Logo 優化結束 */
+        /* ==================================== */
+
 
         .nav-links {
             display: flex;
@@ -399,7 +425,7 @@
             font-size: 0.9rem;
         }
 
-        /* --- 新增的 RWD 漢堡選單樣式 --- */
+        /* --- 漢堡選單樣式優化 --- */
 
         /* 隱藏漢堡選單按鈕（桌面版） */
         .menu-toggle {
@@ -410,7 +436,7 @@
             font-size: 24px;
             cursor: pointer;
             z-index: 1001;
-            margin-left: 20px; /* 與 CTA 按鈕隔開 */
+            margin-left: 20px;
         }
         
         /* 響應式設計 (RWD) */
@@ -429,26 +455,19 @@
                 display: block;
             }
             
-            /* 調整導航欄佈局 */
-            nav {
-                align-items: center;
-                /* 確保 logo 和 cta-button/menu-toggle 保持在同一行 */
-            }
-            
             /* 漢堡選單的樣式和隱藏/顯示邏輯 */
             .nav-links {
-                /* 預設狀態：垂直堆疊，全寬，隱藏 */
                 position: absolute;
-                top: 81px; /* 位於 Header 下方 (20px top + content + 20px bottom) */
+                top: 81px;
                 left: 0;
                 width: 100%;
                 background: rgba(30, 41, 59, 0.95);
                 flex-direction: column;
                 gap: 0;
-                padding: 0; /* 移除頂部 padding，由 a 元素 padding 控制 */
-                border-top: 1px solid rgba(255, 255, 255, 0.1);
+                padding: 0;
+                /* 保持頂部邊框，作為與 Header 的分隔線 */
+                border-top: 1px solid rgba(255, 255, 255, 0.1); 
                 
-                /* 透過 max-height 控制隱藏/顯示，實現平滑過渡 */
                 max-height: 0;
                 overflow: hidden;
                 transition: max-height 0.4s ease-in-out;
@@ -457,24 +476,15 @@
 
             /* 選單開啟狀態 */
             .nav-links.active {
-                max-height: 500px; /* 一個足夠大的值來顯示所有菜單項 */
+                max-height: 500px;
             }
 
+            /* 優化點：移除分隔線 */
             .nav-links a {
-                display: block; /* 使鏈接佔滿寬度 */
+                display: block;
                 padding: 15px 20px;
                 text-align: center;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            }
-            
-            .nav-links a:last-child {
-                border-bottom: none;
-            }
-            
-            /* 調整 cta-button 在 mobile view 上的位置 */
-            nav .cta-button {
-                /* 在這裡不特別調整，使其保持在 logo 旁邊，但在 nav-links 展開時，
-                   它會因為絕對定位的 nav-links 覆蓋而看起來不受影響 */
+                border-bottom: none; 
             }
         }
     </style>
@@ -486,16 +496,16 @@
                 <div class="logo">喵方旅團</div>
                 
                 <div class="nav-links" id="menu">
-                    <a href="https://www.minecraft.net/zh-hant">Home</a>
-                    <a href="#">Features</a>
-                    <a href="#">Solutions</a>
-                    <a href="#">Pricing</a>
-                    <a href="#">Contact</a>
+                    <a href="https://www.minecraft.net/zh-hant">首頁</a>
+                    <a href="#">特色</a>
+                    <a href="#">解決方案</a>
+                    <a href="#">價格</a>
+                    <a href="#">聯繫我們</a>
                 </div>
                 
                 <div style="display: flex; align-items: center;">
                     <button class="cta-button" style="margin-right: 10px;">加入旅團</button>
-                    <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation">
+                    <button class="menu-toggle" id="menu-toggle" aria-label="切換導航">
                         <i class="fas fa-bars"></i>
                     </button>
                 </div>
@@ -506,39 +516,39 @@
     <section class="hero">
         <div class="container">
             <h1>MeowFang Legion | 喵方旅團</h1>
-            <p>喵方旅團是一個玩Minecraft為主的團體。我們聚集了來自各地的玩家，無論你喜歡建築、探索、對戰或單純聊天，都能在這裡找到屬於自己的位置。</p>
-            <p>「加入旅團不只是玩遊戲，而是一趟夢幻的旅程」</p>  	
+            <p>喵方旅團是一個玩 **Minecraft** 為主的團體。我們聚集了來自各地的玩家，無論你喜歡建築、探索、對戰或單純聊天，都能在這裡找到屬於自己的位置。</p>
+            <p>「加入旅團不只是玩遊戲，而是一趟夢幻的旅程」</p> 	
             <div class="hero-buttons">
-                <button class="cta-button">Start Free Trial</button>
-                <button class="secondary-button">View Demo</button>
+                <button class="cta-button">開始免費試用</button>
+                <button class="secondary-button">觀看演示</button>
             </div>
         </div>
     </section>
 
     <section class="features">
         <div class="container">
-            <h2 class="section-title">Powerful <span>Features</span></h2>
+            <h2 class="section-title">強大<span translate="no">Features</span> <span>特色功能</span></h2>
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-bolt"></i>
                     </div>
-                    <h3>Lightning Fast</h3>
-                    <p>Optimized performance ensures your applications run at peak speed with minimal latency.</p>
+                    <h3>閃電般快速</h3>
+                    <p>優化後的性能確保您的應用程式以峰值速度運行，並將延遲降至最低。</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-shield-alt"></i>
                     </div>
-                    <h3>Enterprise Security</h3>
-                    <p>Military-grade encryption and advanced security protocols protect your data at all times.</p>
+                    <h3>企業級安全</h3>
+                    <p>軍用級加密和先進的安全協定隨時保護您的數據安全。</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-sync-alt"></i>
                     </div>
-                    <h3>Seamless Integration</h3>
-                    <p>Connect with your favorite tools and services through our extensive API ecosystem.</p>
+                    <h3>無縫整合</h3>
+                    <p>透過我們廣泛的 API 生態系統，與您喜愛的工具和服務輕鬆連接。</p>
                 </div>
             </div>
         </div>
@@ -549,19 +559,19 @@
             <div class="stats-grid">
                 <div class="stat-item">
                     <h3>99.9%</h3>
-                    <p>Uptime Guarantee</p>
+                    <p>正常運行時間保證</p>
                 </div>
                 <div class="stat-item">
                     <h3>10K+</h3>
-                    <p>Active Users</p>
+                    <p>活躍用戶</p>
                 </div>
                 <div class="stat-item">
                     <h3>500+</h3>
-                    <p>Integrations</p>
+                    <p>整合項目</p>
                 </div>
                 <div class="stat-item">
                     <h3>24/7</h3>
-                    <p>Support Available</p>
+                    <p>提供支援服務</p>
                 </div>
             </div>
         </div>
@@ -569,42 +579,42 @@
 
     <section class="testimonials">
         <div class="container">
-            <h2 class="section-title">What Our <span>Clients Say</span></h2>
+            <h2 class="section-title">我們的<span translate="no">Clients Say</span> <span>客戶評價</span></h2>
             <div class="testimonial-grid">
                 <div class="testimonial-card">
                     <div class="testimonial-header">
-                        <div class="testimonial-avatar">JD</div>
+                        <div class="testimonial-avatar">李大</div>
                         <div class="testimonial-info">
-                            <h4>John Doe</h4>
-                            <p>CEO, TechCorp</p>
+                            <h4>李大明</h4>
+                            <p>科技公司 CEO</p>
                         </div>
                     </div>
                     <div class="testimonial-content">
-                        <p>"This platform has completely transformed our workflow. The efficiency gains have been incredible for our team."</p>
+                        <p>"這個平台完全改變了我們的工作流程。對於我們的團隊來說，效率的提升令人難以置信。"</p>
                     </div>
                 </div>
                 <div class="testimonial-card">
                     <div class="testimonial-header">
-                        <div class="testimonial-avatar">AS</div>
+                        <div class="testimonial-avatar">陳小</div>
                         <div class="testimonial-info">
-                            <h4>Alex Smith</h4>
-                            <p>CTO, InnovateX</p>
+                            <h4>陳小美</h4>
+                            <p>創新科技 CTO</p>
                         </div>
                     </div>
                     <div class="testimonial-content">
-                        <p>"The scalability and reliability of this solution have exceeded our expectations. Highly recommended!"</p>
+                        <p>"這個解決方案的可擴展性和可靠性超出了我們的預期。強烈推薦！"</p>
                     </div>
                 </div>
                 <div class="testimonial-card">
                     <div class="testimonial-header">
-                        <div class="testimonial-avatar">MR</div>
+                        <div class="testimonial-avatar">王經</div>
                         <div class="testimonial-info">
-                            <h4>Maria Rodriguez</h4>
-                            <p>Director, GrowthLab</p>
+                            <h4>王經理</h4>
+                            <p>增長實驗室 總監</p>
                         </div>
                     </div>
                     <div class="testimonial-content">
-                        <p>"Customer support is exceptional. They've helped us customize the platform to fit our unique needs perfectly."</p>
+                        <p>"客戶支援非常出色。他們幫助我們客製化平台，完美地滿足了我們的獨特需求。"</p>
                     </div>
                 </div>
             </div>
@@ -613,9 +623,9 @@
 
     <section class="cta-section">
         <div class="container">
-            <h2>Ready to Get Started?</h2>
-            <p>Join thousands of satisfied customers who have transformed their business with our platform.</p>
-            <button class="cta-button">Create Your Account</button>
+            <h2>準備好開始了嗎？</h2>
+            <p>加入成千上萬滿意的客戶行列，他們使用我們的平台改變了他們的業務。</p>
+            <button class="cta-button">創建您的帳戶</button>
         </div>
     </section>
 
@@ -624,7 +634,7 @@
             <div class="footer-grid">
                 <div class="footer-column">
                     <h3>Nexus</h3>
-                    <p style="color: #94a3b8; line-height: 1.6;">Empowering businesses with cutting-edge digital solutions for the modern world.</p>
+                    <p style="color: #94a3b8; line-height: 1.6;">為現代世界提供尖端數位解決方案，賦予企業無限可能。</p>
                     <div class="social-icons">
                         <a href="#"><i class="fab fa-twitter"></i></a>
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -633,35 +643,35 @@
                     </div>
                 </div>
                 <div class="footer-column">
-                    <h3>Products</h3>
+                    <h3>產品</h3>
                     <ul class="footer-links">
-                        <li><a href="#">Features</a></li>
-                        <li><a href="#">Solutions</a></li>
-                        <li><a href="#">Pricing</a></li>
-                        <li><a href="#">Tutorials</a></li>
+                        <li><a href="#">特色</a></li>
+                        <li><a href="#">解決方案</a></li>
+                        <li><a href="#">價格</a></li>
+                        <li><a href="#">教學</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
-                    <h3>Resources</h3>
+                    <h3>資源</h3>
                     <ul class="footer-links">
-                        <li><a href="#">Documentation</a></li>
-                        <li><a href="#">Support</a></li>
-                        <li><a href="#">API Status</a></li>
-                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">文件</a></li>
+                        <li><a href="#">支援</a></li>
+                        <li><a href="#">API 狀態</a></li>
+                        <li><a href="#">部落格</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
-                    <h3>Company</h3>
+                    <h3>公司</h3>
                     <ul class="footer-links">
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Careers</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">Partners</a></li>
+                        <li><a href="#">關於我們</a></li>
+                        <li><a href="#">職涯發展</a></li>
+                        <li><a href="#">聯繫我們</a></li>
+                        <li><a href="#">合作夥伴</a></li>
                     </ul>
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2023 Nexus. All rights reserved. Designed with ❤️ for the future.</p>
+                <p>&copy; 2023 Nexus. 保留所有權利。為未來而設計 ❤️。</p>
             </div>
         </div>
     </footer>

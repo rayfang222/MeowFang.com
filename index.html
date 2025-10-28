@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MeowFang Legion | 喵方旅團官網</title>
+    <title>喵方旅團</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* 全域樣式重置 */
         * {
             margin: 0;
             padding: 0;
@@ -13,12 +14,14 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
+        /* 顏色變數 */
         :root {
             --primary: #F454F0;
             --secondary: #8b5cf6;
             --dark: #1e293b;
             --light: #F3D0FF;
             --accent: #831FD7;
+            --header-height: 81px; /* 用於計算 mobile menu top position */
         }
 
         body {
@@ -91,6 +94,19 @@
 
         .nav-links a:hover::after {
             width: 100%;
+        }
+
+        /* Hamburger Menu Icon (Desktop Hidden) */
+        .hamburger-menu {
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: none; 
+            color: var(--light);
+            transition: color 0.3s ease;
+        }
+
+        .hamburger-menu:hover {
+            color: var(--accent);
         }
 
         .cta-button {
@@ -395,13 +411,50 @@
             font-size: 0.9rem;
         }
 
-        /* Responsive Design */
+        /* Responsive Design - Mobile Styles (<= 768px) */
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2.5rem;
             }
 
+            /* 1. Show the hamburger icon */
+            .hamburger-menu {
+                display: block;
+            }
+
+            /* 2. Hide the desktop CTA button in the header */
+            header .cta-button {
+                display: none; 
+            }
+            
+            /* 3. Mobile Navigation Styling */
             .nav-links {
+                position: fixed;
+                top: var(--header-height); /* Set position right below the fixed header */
+                right: 0;
+                width: 70%; /* Menu width */
+                height: calc(100vh - var(--header-height));
+                background: rgba(30, 41, 59, 0.95);
+                backdrop-filter: blur(15px);
+                flex-direction: column;
+                padding: 30px 20px;
+                gap: 25px;
+                /* Initial state: Hidden off-screen to the right */
+                transform: translateX(100%); 
+                transition: transform 0.4s ease-in-out;
+                z-index: 999;
+                /* Overwrite the previous desktop 'display: flex;' */
+                display: flex; 
+                border-left: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            /* State when active (clicked) */
+            .nav-links.active {
+                transform: translateX(0); /* Slide into view */
+            }
+
+            /* Remove the underline effect on mobile for cleaner look */
+            .nav-links a::after {
                 display: none;
             }
 
@@ -413,12 +466,14 @@
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header>
         <div class="container">
             <nav>
                 <div class="logo">喵方旅團</div>
-                <div class="nav-links">
+                <div class="hamburger-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <div class="nav-links" id="navLinks">
                     <a href="https://www.minecraft.net/zh-hant">Home</a>
                     <a href="#">Features</a>
                     <a href="#">Solutions</a>
@@ -430,12 +485,11 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero">
         <div class="container">
             <h1>MeowFang Legion | 喵方旅團</h1>
             <p>喵方旅團是一個玩Minecraft為主的團體。我們聚集了來自各地的玩家，無論你喜歡建築、探索、對戰或單純聊天，都能在這裡找到屬於自己的位置。</p>
-            <p>「加入旅團不只是玩遊戲，而是一趟夢幻的旅程」</p>    
+            <p>「加入旅團不只是玩遊戲，而是一趟夢幻的旅程」</p>  
             <div class="hero-buttons">
                 <button class="cta-button">Start Free Trial</button>
                 <button class="secondary-button">View Demo</button>
@@ -443,7 +497,6 @@
         </div>
     </section>
 
-    <!-- Features Section -->
     <section class="features">
         <div class="container">
             <h2 class="section-title">Powerful <span>Features</span></h2>
@@ -473,7 +526,6 @@
         </div>
     </section>
 
-    <!-- Stats Section -->
     <section class="stats">
         <div class="container">
             <div class="stats-grid">
@@ -497,7 +549,6 @@
         </div>
     </section>
 
-    <!-- Testimonials -->
     <section class="testimonials">
         <div class="container">
             <h2 class="section-title">What Our <span>Clients Say</span></h2>
@@ -542,7 +593,6 @@
         </div>
     </section>
 
-    <!-- CTA Section -->
     <section class="cta-section">
         <div class="container">
             <h2>Ready to Get Started?</h2>
@@ -551,7 +601,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-grid">
@@ -600,7 +649,7 @@
     </footer>
 
     <script>
-        // Simple animation for feature cards on scroll
+        // 1. Feature Cards Fade-in Animation on Scroll
         document.addEventListener('DOMContentLoaded', function() {
             const featureCards = document.querySelectorAll('.feature-card');
             
@@ -609,6 +658,7 @@
                     if (entry.isIntersecting) {
                         entry.target.style.opacity = 1;
                         entry.target.style.transform = 'translateY(0)';
+                        observer.unobserve(entry.target); // 只需要執行一次
                     }
                 });
             }, { threshold: 0.1 });
@@ -618,6 +668,25 @@
                 card.style.transform = 'translateY(20px)';
                 card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
                 observer.observe(card);
+            });
+            
+            // 2. Hamburger Menu Toggle Logic
+            const hamburger = document.querySelector('.hamburger-menu');
+            const navLinks = document.getElementById('navLinks');
+            const icon = document.querySelector('.hamburger-menu i');
+
+            hamburger.addEventListener('click', () => {
+                // Toggle 'active' class to slide the menu in/out
+                navLinks.classList.toggle('active');
+                
+                // Toggle the icon between bars (≡) and times (X)
+                if (navLinks.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
             });
         });
     </script>

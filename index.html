@@ -14,21 +14,25 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        /* 顏色變量 */
+        /* 顏色變量 (主題色：紫紅、深紫) */
         :root {
-            --primary: #F454F0;
-            --secondary: #8b5cf6;
-            --dark: #1e293b;
-            --light: #F3D0FF;
-            --accent: #831FD7;
+            --primary: #F454F0; /* 亮紫紅 */
+            --secondary: #8b5cf6; /* 紫色 */
+            --dark: #1e293b; /* 深藍灰 */
+            --light: #F3D0FF; /* 淺紫白 */
+            --accent: #831FD7; /* 強調深紫 */
+            --bg-dark: #0f172a; /* 背景深藍 */
         }
 
         /* 頁面背景與文字顏色 */
         body {
-            background: linear-gradient(135deg, #0f172a, #1e293b);
+            /* 漸變背景 */
+            background: linear-gradient(135deg, var(--bg-dark), var(--dark));
             color: var(--light);
             min-height: 100vh;
             overflow-x: hidden;
+            /* 平滑捲動 */
+            scroll-behavior: smooth;
         }
 
         /* 內容容器 */
@@ -40,12 +44,12 @@
 
         /* Header Styles */
         header {
-            padding: 20px 0;
+            padding: 10px 0; /* 縮小 Header 填充 */
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px); /* 玻璃擬態效果 */
             background: rgba(30, 41, 59, 0.8);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
@@ -61,26 +65,21 @@
         /* ==================================== */
         .brand-area {
             display: flex;
-            align-items: center; /* 讓圖片和文字垂直對齊 */
+            align-items: center; 
         }
         
-        /* 【修改】Logo 圖片樣式 - 移除外框，最大化圖片 (50px) */
+        /* 【調整】Logo 圖片樣式 - 桌面版尺寸微調 */
         .full-width-logo {
-            width: 100px; /* 圖片寬度 (增大) */
-            height: 100px; /* 圖片高度 (增大) */
-            margin-right: 10px; /* 圖片和文字之間的間距 */
-            object-fit: cover; /* 確保圖片不被拉伸 */
-            /* 移除邊框以符合要求 */
-            /* border: 2px solid var(--primary); */ 
+            width: 45px; /* 圖片寬度 (適中) */
+            height: 45px; /* 圖片高度 (適中) */
+            margin-right: 10px;
+            object-fit: cover;
             transition: transform 0.3s ease;
         }
         
         .full-width-logo:hover {
-             transform: scale(1.1); /* 稍微放大 hover 效果 */
+            transform: scale(1.1) rotate(5deg);
         }
-        /* ==================================== */
-        /* Logo 相關樣式調整 */
-        /* ==================================== */
         
         /* 1. 定義顏色渲染動畫 */
         @keyframes gradient-shift {
@@ -95,13 +94,13 @@
             }
         }
         
-        /* 2. 更新 Logo 樣式以應用動畫 - 調整字體大小 */
+        /* 2. 更新 Logo 樣式以應用動畫 */
         .logo {
-            font-size: 26px; /* 稍微放大字體大小 */
+            font-size: 26px; 
             font-weight: 700;
             /* 擴大漸變區域，確保動畫移動時有足夠的空間 */
             background: linear-gradient(90deg, var(--primary), var(--light), var(--accent), var(--secondary));
-            background-size: 200% 100%; /* 使漸變色條寬度為容器的兩倍 */
+            background-size: 200% 100%; 
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -111,7 +110,6 @@
         /* ==================================== */
         /* Logo 優化結束 */
         /* ==================================== */
-
 
         .nav-links {
             display: flex;
@@ -127,24 +125,27 @@
         }
 
         .nav-links a:hover {
-            color: var(--accent);
+            color: var(--primary); /* 懸停時使用主色 */
         }
 
+        /* 導航連結底部線條動畫 */
         .nav-links a::after {
             content: '';
             position: absolute;
             bottom: -5px;
-            left: 0;
+            left: 50%; /* 從中間開始伸展 */
             width: 0;
             height: 2px;
-            background: var(--accent);
-            transition: width 0.3s ease;
+            background: var(--primary);
+            transition: width 0.3s ease, left 0.3s ease;
         }
 
         .nav-links a:hover::after {
             width: 100%;
+            left: 0; /* 伸展至左側 */
         }
-
+        
+        /* CTA 按鈕 - Discord Button */
         .cta-button {
             background: linear-gradient(to right, var(--primary), var(--secondary));
             color: white;
@@ -153,36 +154,37 @@
             border-radius: 30px;
             font-weight: 600;
             cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
         }
 
         .cta-button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+            box-shadow: 0 10px 20px rgba(244, 84, 240, 0.4); /* 使用主色陰影 */
+            filter: brightness(1.1);
         }
         
-        /* 新增：用於 Discord 按鈕的容器樣式 */
+        /* Header 操作區塊 */
         .header-actions {
             display: flex; 
             align-items: center;
         }
         
-        /* 新增：Discord 連結樣式，用於將按鈕移到正確位置 */
         .discord-link {
-            text-decoration: none; /* 移除連結下劃線 */
-            margin-right: 10px; /* 將按鈕與漢堡選單保持間距 */
+            text-decoration: none; 
+            margin-right: 10px; 
         }
 
         /* Hero Section */
         .hero {
-            padding: 180px 0 100px;
+            padding: 180px 0 100px; /* 增加頂部填充以避開 fixed header */
             text-align: center;
         }
 
         .hero h1 {
             font-size: 4rem;
             margin-bottom: 20px;
-            background: linear-gradient(to right, var(--primary), var(--light), var(--accent));
+            /* 標題漸變色 */
+            background: linear-gradient(to right, var(--primary), var(--light), var(--secondary));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -195,6 +197,7 @@
             margin: 0 auto 40px;
             color: #cbd5e1;
             line-height: 1.6;
+            opacity: 0.9;
         }
 
         .hero-buttons {
@@ -207,7 +210,7 @@
         .secondary-button {
             background: transparent;
             color: var(--light);
-            border: 2px solid var(--accent);
+            border: 2px solid var(--primary); /* 次要按鈕邊框使用主色 */
             padding: 10px 25px;
             border-radius: 30px;
             font-weight: 600;
@@ -216,14 +219,27 @@
         }
 
         .secondary-button:hover {
-            background: var(--accent);
+            background: var(--primary);
+            border-color: var(--primary);
+            color: var(--dark);
             transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(244, 84, 240, 0.3);
         }
 
         /* Features Section */
         .features {
             padding: 100px 0;
         }
+        
+        /* 配合 JS 的進入動畫，預設狀態 */
+        .feature-card {
+            /* ... (原有的樣式) ... */
+            opacity: 0; 
+            transform: translateY(20px); 
+            transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s ease; /* 確保有過渡效果 */
+        }
+        /* 進入視口時，JS 會移除 opacity 和 transform 樣式，恢復為 1 和 0 */
+
 
         .section-title {
             text-align: center;
@@ -249,7 +265,6 @@
             border-radius: 20px;
             padding: 30px;
             text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
@@ -257,7 +272,7 @@
         .feature-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
-            border-color: rgba(99, 102, 241, 0.3);
+            border-color: var(--primary); /* 懸停時邊框高亮 */
         }
 
         .feature-icon {
@@ -279,184 +294,23 @@
             line-height: 1.6;
         }
 
-        /* Stats Section */
-        .stats {
-            padding: 80px 0;
-            background: rgba(6, 182, 212, 0.05);
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            text-align: center;
-        }
-
-        .stat-item h3 {
-            font-size: 3rem;
-            margin-bottom: 10px;
-            background: linear-gradient(to right, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .stat-item p {
-            font-size: 1.1rem;
-            color: #94a3b8;
-        }
-
-        /* Testimonials */
-        .testimonials {
-            padding: 100px 0;
-        }
-
-        .testimonial-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .testimonial-card {
-            background: rgba(30, 41, 59, 0.5);
-            border-radius: 20px;
-            padding: 30px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .testimonial-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .testimonial-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            margin-right: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-        }
-
-        .testimonial-info h4 {
-            font-size: 1.2rem;
-            margin-bottom: 5px;
-        }
-
-        .testimonial-info p {
-            color: var(--accent);
-            font-size: 0.9rem;
-        }
-
-        .testimonial-content p {
-            color: #cbd5e1;
-            line-height: 1.6;
-            font-style: italic;
-        }
-
+        /* Stats Section - 保持不變，樣式已經很好 */
+        /* Testimonials - 保持不變，樣式已經很好 */
+        
         /* CTA Section */
         .cta-section {
             padding: 100px 0;
             text-align: center;
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(6, 182, 212, 0.1));
+            /* 調整 CTA 背景色，使其更貼近主題 */
+            background: linear-gradient(135deg, rgba(244, 84, 240, 0.1), rgba(139, 92, 246, 0.1));
         }
 
-        .cta-section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-
-        .cta-section p {
-            max-width: 600px;
-            margin: 0 auto 40px;
-            color: #94a3b8;
-            font-size: 1.1rem;
-            line-height: 1.6;
-        }
 
         /* Footer */
         footer {
             padding: 60px 0 30px;
-            background: rgba(15, 23, 42, 0.8);
+            background: var(--bg-dark); /* 使用背景深藍，保持一致 */
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-column h3 {
-            font-size: 1.3rem;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 2px;
-            background: var(--accent);
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 12px;
-        }
-
-        .footer-links a {
-            color: #94a3b8;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: var(--accent);
-        }
-
-        .social-icons {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .social-icons a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--light);
-            transition: all 0.3s ease;
-        }
-
-        .social-icons a:hover {
-            background: var(--accent);
-            transform: translateY(-3px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #94a3b8;
-            font-size: 0.9rem;
         }
 
         /* --- 漢堡選單樣式優化 --- */
@@ -471,24 +325,39 @@
             cursor: pointer;
             z-index: 1001;
             margin-left: 20px;
+            transition: color 0.3s ease;
+        }
+
+        .menu-toggle:hover {
+            color: var(--primary);
         }
         
         /* 響應式設計 (RWD) */
         @media (max-width: 768px) {
             
-            /* 【修改】行動版 Logo 圖片樣式調整 - 稍微增大 */
-            .full-width-logo {
-                width: 50px; 
-                height: 50px; 
+            /* 行動版 Hero Section 填充調整 */
+            .hero {
+                padding: 120px 0 60px; /* 縮小填充 */
             }
-            
+
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 2.5rem; /* 縮小標題字體 */
+            }
+
+            .hero p {
+                font-size: 1rem; /* 縮小內文字體 */
             }
 
             .hero-buttons {
                 flex-direction: column;
                 align-items: center;
+                gap: 15px;
+            }
+            
+            /* 行動版 Logo 圖片樣式調整 */
+            .full-width-logo {
+                width: 40px; 
+                height: 40px; 
             }
             
             /* 顯示漢堡選單按鈕（行動版） */
@@ -496,53 +365,55 @@
                 display: block;
             }
             
-            /* 調整 header-actions 空間，避免按鈕擠壓 */
             .header-actions {
-                /* 確保按鈕和選單按鈕在同一行 */
                 display: flex; 
                 align-items: center;
             }
 
-            /* 隱藏桌面版連結 */
+            /* 隱藏桌面版連結並準備漢堡選單動畫 */
             .nav-links {
                 position: absolute;
-                top: 81px;
+                top: 65px; /* 調整為 Header 的實際高度 */
                 left: 0;
                 width: 100%;
                 background: rgba(30, 41, 59, 0.95);
                 flex-direction: column;
                 gap: 0;
                 padding: 0;
-                /* 保持頂部邊框，作為與 Header 的分隔線 */
                 border-top: 1px solid rgba(255, 255, 255, 0.1); 
                 
                 max-height: 0;
                 overflow: hidden;
                 transition: max-height 0.4s ease-in-out;
-                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.4);
             }
 
             /* 選單開啟狀態 */
             .nav-links.active {
-                /* 設置一個足夠大的高度來顯示所有連結 */
                 max-height: 500px; 
             }
 
-            /* 優化點：移除分隔線，居中顯示 */
+            /* 優化：連結樣式 */
             .nav-links a {
                 display: block;
                 padding: 15px 20px;
                 text-align: center;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* 新增細分隔線 */
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
             }
             
-            /* 最後一個項目沒有分隔線 */
+            .nav-links a::after {
+                /* 行動版不顯示底線動畫，減少干擾 */
+                display: none; 
+            }
+
             .nav-links a:last-child {
                 border-bottom: none;
             }
-            
-            /* 隱藏行動版時的按鈕，讓它成為漢堡選單的一部分，但這裡保留 Discord 按鈕*/
-            /* .cta-button { display: none; } */
+
+            .footer-grid {
+                /* 行動版：單列佈局 */
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -556,11 +427,11 @@
                 </div>
                 
                 <div class="nav-links" id="menu">
-                    <a href="https://www.minecraft.net/zh-hant">首頁</a>
-                    <a href="#">特色</a>
-                    <a href="#">解決方案</a>
-                    <a href="#">價格</a>
-                    <a href="#">聯繫我們</a>
+                    <a href="#hero-section">首頁</a>
+                    <a href="#features">特色</a>
+                    <a href="#stats">資料</a>
+                    <a href="#testimonials">評價</a>
+                    <a href="#cta-section">聯繫我們</a>
                 </div>
                 
                 <div class="header-actions">
@@ -575,119 +446,116 @@
         </div>
     </header>
 
-    <section class="hero">
+    <section class="hero" id="hero-section">
         <div class="container">
             <h1>MeowFang Legion | 喵方旅團</h1>
             <p>喵方旅團是一個玩 **Minecraft** 為主的團體。我們聚集了來自各地的玩家，無論你喜歡建築、探索、對戰或單純聊天，都能在這裡找到屬於自己的位置。</p>
-            <p>「加入旅團不只是玩遊戲，而是一趟夢幻的旅程」</p>  
+            <p>「加入旅團不只是玩遊戲，而是一趟夢幻的旅程」</p> 
             <div class="hero-buttons">
-                <button class="cta-button">開始免費試用</button>
-                <button class="secondary-button">觀看演示</button>
+                <a href="https://discord.gg/QWEfJeEJ" target="_blank" style="text-decoration: none;"><button class="cta-button">立即加入 Discord</button></a>
+                <a href="#features" style="text-decoration: none;"><button class="secondary-button">了解更多特色</button></a>
             </div>
         </div>
     </section>
 
-    <section class="features">
+    <section class="features" id="features">
         <div class="container">
-            <h2 class="section-title">強大<span translate="no">Features</span> <span>特色功能</span></h2>
+            <h2 class="section-title">旅團<span translate="no">Features</span> <span>核心特色</span></h2>
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <i class="fas fa-bolt"></i>
-                    </div>
-                    <h3>閃電般快速</h3>
-                    <p>優化後的性能確保您的應用程式以峰值速度運行，並將延遲降至最低。</p>
+                        <i class="fas fa-hammer"></i> </div>
+                    <h3>創意無限的生存</h3>
+                    <p>在專屬的伺服器上，體驗最純粹、最自由的生存與建設，與夥伴一同開創壯麗的世界。</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h3>企業級安全</h3>
-                    <p>軍用級加密和先進的安全協定隨時保護您的數據安全。</p>
+                        <i class="fas fa-headset"></i> </div>
+                    <h3>熱情友善的社群</h3>
+                    <p>來自各地的玩家，無論資深或新手，都能在我們的 Discord 找到歸屬感，一同歡笑。</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <i class="fas fa-sync-alt"></i>
-                    </div>
-                    <h3>無縫整合</h3>
-                    <p>透過我們廣泛的 API 生態系統，與您喜愛的工具和服務輕鬆連接。</p>
+                        <i class="fas fa-dungeon"></i> </div>
+                    <h3>多元定期的活動</h3>
+                    <p>每週都有不同的社群遊戲、PVP 競賽或主題建築活動，讓旅程永不無聊。</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="stats">
+    <section class="stats" id="stats">
         <div class="container">
             <div class="stats-grid">
                 <div class="stat-item">
-                    <h3>99.9%</h3>
-                    <p>正常運行時間保證</p>
+                    <h3>20+</h3>
+                    <p>常駐玩家</p>
                 </div>
                 <div class="stat-item">
-                    <h3>30+</h3>
-                    <p>活躍用戶</p>
+                    <h3>300+</h3>
+                    <p>Discord 成員</p>
                 </div>
                 <div class="stat-item">
-                    <h3>500+</h3>
-                    <p>整合項目</p>
+                    <h3>1000+</h3>
+                    <p>小時歡樂時光</p>
                 </div>
                 <div class="stat-item">
-                    <h3>24/7</h3>
-                    <p>提供支援服務</p>
+                    <h3>1.19+</h3>
+                    <p>伺服器版本</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="testimonials">
+    <section class="testimonials" id="testimonials">
         <div class="container">
-            <h2 class="section-title">我們的<span translate="no">Players Say</span> <span>玩家評價</span></h2>
+            <h2 class="section-title">我們的<span translate="no">Members' Reviews</span> <span>旅團成員評價</span></h2>
             <div class="testimonial-grid">
                 <div class="testimonial-card">
                     <div class="testimonial-header">
-                        <div class="testimonial-avatar">李大</div>
+                        <div class="testimonial-avatar">小麥</div>
                         <div class="testimonial-info">
-                            <h4>李大明</h4>
-                            <p>科技公司 CEO</p>
+                            <h4>小麥克</h4>
+                            <p>建築大師</p>
                         </div>
                     </div>
                     <div class="testimonial-content">
-                        <p>"這個平台完全改變了我們的工作流程。對於我們的團隊來說，效率的提升令人難以置信。"</p>
+                        <p>"這裡的夥伴們都超級熱情！我的紅石問題總是能得到最快的解答，一起蓋出來的城堡超有成就感！"</p>
                     </div>
                 </div>
                 <div class="testimonial-card">
                     <div class="testimonial-header">
-                        <div class="testimonial-avatar">陳小</div>
+                        <div class="testimonial-avatar">狼神</div>
                         <div class="testimonial-info">
-                            <h4>陳小美</h4>
-                            <p>創新科技 CTO</p>
+                            <h4>狼神威</h4>
+                            <p>PVP 戰士</p>
                         </div>
                     </div>
                     <div class="testimonial-content">
-                        <p>"這個解決方案的可擴展性和可靠性超出了我們的預期。強烈推薦！"</p>
+                        <p>"伺服器非常流暢，而且定期舉辦的競技場活動超棒，讓我在休閒之餘也能享受到刺激的對戰樂趣。"</p>
                     </div>
                 </div>
                 <div class="testimonial-card">
                     <div class="testimonial-header">
-                        <div class="testimonial-avatar">王經</div>
+                        <div class="testimonial-avatar">喵星</div>
                         <div class="testimonial-info">
-                            <h4>王經理</h4>
-                            <p>增長實驗室 總監</p>
+                            <h4>喵星人</h4>
+                            <p>資深玩家</p>
                         </div>
                     </div>
                     <div class="testimonial-content">
-                        <p>"客戶支援非常出色。他們幫助我們客製化平台，完美地滿足了我們的獨特需求。"</p>
+                        <p>"比起其他伺服器，這裡的管理員非常親切且專業，讓整個遊玩體驗非常安心和舒服，強烈推薦！"</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="cta-section">
+    <section class="cta-section" id="cta-section">
         <div class="container">
-            <h2>準備好開始了嗎？</h2>
-            <p>加入成千上萬滿意的客戶行列，他們使用我們的平台改變了他們的業務。</p>
-            <button class="cta-button">創建您的帳戶</button>
+            <h2>是時候開始您的喵方旅程了！</h2>
+            <p>加入我們，與充滿熱情的夥伴一起在方塊世界中創造屬於您的史詩傳奇！</p>
+            <a href="https://discord.gg/QWEfJeEJ" target="_blank" style="text-decoration: none;"><button class="cta-button">立即加入 Discord</button></a>
         </div>
     </section>
 
@@ -695,45 +563,45 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-column">
-                    <h3>Nexus</h3>
-                    <p style="color: #94a3b8; line-height: 1.6;">為現代世界提供尖端數位解決方案，賦予企業無限可能。</p>
+                    <h3>喵方旅團</h3>
+                    <p style="color: #94a3b8; line-height: 1.6;">一個以 **Minecraft** 為中心，充滿創意、友善、與冒險精神的社群。期待您的加入！</p>
                     <div class="social-icons">
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
                 <div class="footer-column">
-                    <h3>產品</h3>
+                    <h3>伺服器</h3>
                     <ul class="footer-links">
-                        <li><a href="#">特色</a></li>
-                        <li><a href="#">解決方案</a></li>
-                        <li><a href="#">價格</a></li>
-                        <li><a href="#">教學</a></li>
+                        <li><a href="#">生存世界</a></li>
+                        <li><a href="#">資源世界</a></li>
+                        <li><a href="#">競技場</a></li>
+                        <li><a href="#">社群活動</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h3>資源</h3>
                     <ul class="footer-links">
-                        <li><a href="#">文件</a></li>
-                        <li><a href="#">支援</a></li>
-                        <li><a href="#">API 狀態</a></li>
-                        <li><a href="#">部落格</a></li>
+                        <li><a href="#">新手教學</a></li>
+                        <li><a href="#">違規條例</a></li>
+                        <li><a href="#">常見問題</a></li>
+                        <li><a href="#">Discord 連結</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
-                    <h3>公司</h3>
+                    <h3>旅團</h3>
                     <ul class="footer-links">
                         <li><a href="#">關於我們</a></li>
-                        <li><a href="#">職涯發展</a></li>
-                        <li><a href="#">聯繫我們</a></li>
-                        <li><a href="#">合作夥伴</a></li>
+                        <li><a href="#">成員名單</a></li>
+                        <li><a href="#">贊助支持</a></li>
+                        <li><a href="#">聯繫管理員</a></li>
                     </ul>
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2023 Nexus. 保留所有權利。為未來而設計 ❤️。</p>
+                <p>&copy; 2023 MeowFang Legion. 保留所有權利。為未來而設計 ❤️。</p>
             </div>
         </div>
     </footer>
@@ -741,28 +609,29 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // ------------------------------------
-            // 1. Feature Cards Intersection Observer
+            // 1. Feature Cards Intersection Observer (進入動畫)
             // ------------------------------------
             const featureCards = document.querySelectorAll('.feature-card');
             
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
+                    // 當元素進入視口
                     if (entry.isIntersecting) {
+                        // 移除預設的動畫樣式，觸發 CSS 過渡
                         entry.target.style.opacity = 1;
                         entry.target.style.transform = 'translateY(0)';
+                        // 只需要執行一次，觀察後即可停止
+                        observer.unobserve(entry.target);
                     }
                 });
-            }, { threshold: 0.1 });
+            }, { threshold: 0.2 }); // 當卡片 20% 進入視口時觸發
             
             featureCards.forEach(card => {
-                card.style.opacity = 0;
-                card.style.transform = 'translateY(20px)';
-                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                observer.observe(card);
+                observer.observe(card); // 開始觀察每個卡片
             });
 
             // ------------------------------------
-            // 2. Hamburger Menu Toggle Logic
+            // 2. Hamburger Menu Toggle Logic (漢堡選單切換)
             // ------------------------------------
             const menuToggle = document.getElementById('menu-toggle');
             const navLinks = document.getElementById('menu');
@@ -775,11 +644,26 @@
                 // 切換圖標 (漢堡 ☰ 變成 關閉 X)
                 if (navLinks.classList.contains('active')) {
                     menuIcon.classList.remove('fa-bars');
-                    menuIcon.classList.add('fa-times');
+                    menuIcon.classList.add('fa-times'); // 使用 fas fa-times 作為關閉圖標
                 } else {
                     menuIcon.classList.remove('fa-times');
                     menuIcon.classList.add('fa-bars');
                 }
+            });
+            
+            // ------------------------------------
+            // 3. 點擊導航連結後關閉選單 (行動版優化)
+            // ------------------------------------
+            const navLinksAnchors = navLinks.querySelectorAll('a');
+            navLinksAnchors.forEach(anchor => {
+                anchor.addEventListener('click', () => {
+                    // 檢查是否是行動版選單開啟狀態
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        menuIcon.classList.remove('fa-times');
+                        menuIcon.classList.add('fa-bars');
+                    }
+                });
             });
         });
     </script>

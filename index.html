@@ -57,7 +57,30 @@
         }
 
         /* ==================================== */
-        /* 優化點：Logo 顏色渲染動畫 */
+        /* Logo 圖片和文字的容器樣式 */
+        /* ==================================== */
+        .brand-area {
+            display: flex;
+            align-items: center; /* 讓圖片和文字垂直對齊 */
+        }
+        
+        /* 【修改】Logo 圖片樣式 - 移除外框，最大化圖片 (50px) */
+        .full-width-logo {
+            width: 50px; /* 圖片寬度 (增大) */
+            height: 50px; /* 圖片高度 (增大) */
+            border-radius: 50%; /* 圓形圖片 */
+            margin-right: 10px; /* 圖片和文字之間的間距 */
+            object-fit: cover; /* 確保圖片不被拉伸 */
+            /* 移除邊框以符合要求 */
+            /* border: 2px solid var(--primary); */ 
+            transition: transform 0.3s ease;
+        }
+        
+        .full-width-logo:hover {
+             transform: scale(1.1); /* 稍微放大 hover 效果 */
+        }
+        /* ==================================== */
+        /* Logo 相關樣式調整 */
         /* ==================================== */
         
         /* 1. 定義顏色渲染動畫 */
@@ -73,9 +96,9 @@
             }
         }
         
-        /* 2. 更新 Logo 樣式以應用動畫 */
+        /* 2. 更新 Logo 樣式以應用動畫 - 調整字體大小 */
         .logo {
-            font-size: 28px;
+            font-size: 26px; /* 稍微放大字體大小 */
             font-weight: 700;
             /* 擴大漸變區域，確保動畫移動時有足夠的空間 */
             background: linear-gradient(90deg, var(--primary), var(--light), var(--accent), var(--secondary));
@@ -137,6 +160,18 @@
         .cta-button:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+        }
+        
+        /* 新增：用於 Discord 按鈕的容器樣式 */
+        .header-actions {
+            display: flex; 
+            align-items: center;
+        }
+        
+        /* 新增：Discord 連結樣式，用於將按鈕移到正確位置 */
+        .discord-link {
+            text-decoration: none; /* 移除連結下劃線 */
+            margin-right: 10px; /* 將按鈕與漢堡選單保持間距 */
         }
 
         /* Hero Section */
@@ -441,6 +476,13 @@
         
         /* 響應式設計 (RWD) */
         @media (max-width: 768px) {
+            
+            /* 【修改】行動版 Logo 圖片樣式調整 - 稍微增大 */
+            .full-width-logo {
+                width: 40px; 
+                height: 40px; 
+            }
+            
             .hero h1 {
                 font-size: 2.5rem;
             }
@@ -455,7 +497,14 @@
                 display: block;
             }
             
-            /* 漢堡選單的樣式和隱藏/顯示邏輯 */
+            /* 調整 header-actions 空間，避免按鈕擠壓 */
+            .header-actions {
+                /* 確保按鈕和選單按鈕在同一行 */
+                display: flex; 
+                align-items: center;
+            }
+
+            /* 隱藏桌面版連結 */
             .nav-links {
                 position: absolute;
                 top: 81px;
@@ -476,16 +525,25 @@
 
             /* 選單開啟狀態 */
             .nav-links.active {
-                max-height: 500px;
+                /* 設置一個足夠大的高度來顯示所有連結 */
+                max-height: 500px; 
             }
 
-            /* 優化點：移除分隔線 */
+            /* 優化點：移除分隔線，居中顯示 */
             .nav-links a {
                 display: block;
                 padding: 15px 20px;
                 text-align: center;
-                border-bottom: none; 
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* 新增細分隔線 */
             }
+            
+            /* 最後一個項目沒有分隔線 */
+            .nav-links a:last-child {
+                border-bottom: none;
+            }
+            
+            /* 隱藏行動版時的按鈕，讓它成為漢堡選單的一部分，但這裡保留 Discord 按鈕*/
+            /* .cta-button { display: none; } */
         }
     </style>
 </head>
@@ -493,7 +551,10 @@
     <header>
         <div class="container">
             <nav>
-                <div class="logo">喵方旅團</div>
+                <div class="brand-area"> 
+                    <img class="full-width-logo" src="YOUR_LOGO_IMAGE_URL" alt="喵方旅團 Logo">
+                    <div class="logo">喵方旅團</div>
+                </div>
                 
                 <div class="nav-links" id="menu">
                     <a href="https://www.minecraft.net/zh-hant">首頁</a>
@@ -502,13 +563,13 @@
                     <a href="#">價格</a>
                     <a href="#">聯繫我們</a>
                 </div>
-               
-                <div style="display: flex; align-items: center;">
-                    <a href="https://discord.gg/QWEfJeEJ" target="_blank">    
-                        <button class="cta-button" style="margin-right: 10px;">加入旅團</button>
-                        </a>
-                        <button class="menu-toggle" id="menu-toggle" aria-label="切換導航">
-                          <i class="fas fa-bars"></i>
+                
+                <div class="header-actions">
+                    <a href="https://discord.gg/QWEfJeEJ" target="_blank" class="discord-link">  
+                        <button class="cta-button">加入旅團</button>
+                    </a>
+                    <button class="menu-toggle" id="menu-toggle" aria-label="切換導航">
+                        <i class="fas fa-bars"></i>
                     </button>
                 </div>
             </nav>
@@ -519,7 +580,7 @@
         <div class="container">
             <h1>MeowFang Legion | 喵方旅團</h1>
             <p>喵方旅團是一個玩 **Minecraft** 為主的團體。我們聚集了來自各地的玩家，無論你喜歡建築、探索、對戰或單純聊天，都能在這裡找到屬於自己的位置。</p>
-            <p>「加入旅團不只是玩遊戲，而是一趟夢幻的旅程」</p> 	
+            <p>「加入旅團不只是玩遊戲，而是一趟夢幻的旅程」</p>  
             <div class="hero-buttons">
                 <button class="cta-button">開始免費試用</button>
                 <button class="secondary-button">觀看演示</button>

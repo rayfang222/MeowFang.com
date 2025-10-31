@@ -14,23 +14,26 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        /* 顏色變量 */
+        /* 顏色變量 - 更協調的霓虹色調 */
         :root {
-            --primary: #F454F0;
-            --secondary: #8b5cf6;
-            --dark: #1e293b;
-            --light: #F3D0FF;
-            --accent: #831FD7;
-            /* 優化：Header 高度，便於 RWD 調整 (桌面版) */
-            --header-height: 80px; 
+            --primary: #FF00FF; /* 亮洋紅 (Neon Pink) */
+            --secondary: #00FFFF; /* 青色 (Cyan) */
+            --dark: #0f172a; /* 更深的背景色 */
+            --mid-dark: #1e293b; /* 中間層背景色 */
+            --light: #e0f2fe; /* 淺文字色 */
+            --accent: #a855f7; /* 紫色 (Violet Accent) */
+            --header-height: 80px; /* 桌面版 Header 高度 */
+            --mobile-header-height: 60px; /* 行動版 Header 高度 */
         }
 
-        /* 頁面背景與文字顏色 */
+        /* 頁面背景與文字顏色 - 強化深空漸變感 */
         body {
-            background: linear-gradient(135deg, #0f172a, #1e293b);
+            background: linear-gradient(145deg, var(--dark) 0%, var(--mid-dark) 100%);
             color: var(--light);
             min-height: 100vh;
             overflow-x: hidden;
+            /* 平滑捲動 */
+            scroll-behavior: smooth; 
         }
 
         /* 內容容器 */
@@ -40,470 +43,310 @@
             padding: 0 20px;
         }
 
-        /* Header Styles */
+        /* ==================================== */
+        /* Header & Navigation Styles */
+        /* ==================================== */
         header {
-            /* 使用 Header 高度變數 */
             height: var(--header-height);
-            display: flex; /* 讓內容垂直居中 */
-            align-items: center; /* 讓內容垂直居中 */
-            padding: 0; /* 移除原本的 padding: 20px 0; */
-            position: fixed;
+            display: flex;
+            align-items: center;
+            padding: 0;
+            position: sticky; /* 改為 sticky 讓導航捲動時固定在頂部 */
             width: 100%;
             top: 0;
             z-index: 1000;
-            backdrop-filter: blur(10px);
-            background: rgba(30, 41, 59, 0.8);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px); /* 輕微增強模糊效果 */
+            background: rgba(15, 23, 42, 0.9); /* 使用更深的背景色，透明度更高 */
+            border-bottom: 2px solid var(--accent); /* 邊框更醒目 */
         }
-
+        
+        /* 移除 header hover 效果，改為更專業的 sticky */
+        
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            /* 讓 nav 佔滿 header 的高度 */
-            height: 100%; 
+            height: 100%;
+            width: 100%;
         }
 
-        /* ==================================== */
-        /* Logo 圖片和文字的容器樣式 */
-        /* ==================================== */
         .brand-area {
             display: flex;
             align-items: center;
         }
         
-        /* 【優化】Logo 圖片樣式 - 調整為桌面版適中尺寸 (60px) */
         .full-width-logo {
-            width: 60px; /* 圖片寬度：調整為 60px */
-            height: 60px; /* 圖片高度：調整為 60px */
+            width: 50px; /* 略微縮小，更精緻 */
+            height: 50px;
             margin-right: 10px;
             object-fit: cover;
-            transition: transform 0.3s ease;
+            border-radius: 10px; /* 輕微圓角 */
+            box-shadow: 0 0 10px rgba(255, 0, 255, 0.5); /* 霓虹陰影 */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         
         .full-width-logo:hover {
-              transform: scale(1.1);
+            transform: rotate(5deg) scale(1.05); /* 添加旋轉和縮放 */
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
         }
-        /* ==================================== */
-        /* Logo 相關樣式調整 */
-        /* ==================================== */
-        
-        /* 1. 定義顏色渲染動畫 */
+
+        /* Logo 動畫 */
         @keyframes gradient-shift {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
         
-        /* 2. 更新 Logo 樣式以應用動畫 - 調整字體大小 */
         .logo {
-            font-size: 26px;
-            font-weight: 700;
-            background: linear-gradient(90deg, var(--primary), var(--light), var(--accent), var(--secondary));
-            background-size: 200% 100%;
+            font-size: 28px;
+            font-weight: 800; /* 更粗的字體 */
+            letter-spacing: 1px;
+            /* 調整漸變顏色，更具霓虹感 */
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent), var(--light)); 
+            background-size: 300% 100%; /* 增加漸變尺寸 */
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            animation: gradient-shift 4s ease-in-out infinite; 
+            animation: gradient-shift 6s linear infinite; /* 調整動畫速度 */
         }
-        /* ==================================== */
-        /* Logo 優化結束 */
-        /* ==================================== */
-
 
         .nav-links {
             display: flex;
-            gap: 30px;
+            gap: 40px; /* 增加間距 */
         }
 
         .nav-links a {
             color: var(--light);
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
+            padding: 5px 0;
             transition: color 0.3s ease;
             position: relative;
         }
 
         .nav-links a:hover {
-            color: var(--accent);
+            color: var(--secondary);
         }
-
+        /* 導航下劃線優化 */
         .nav-links a::after {
             content: '';
             position: absolute;
-            bottom: -5px;
-            left: 0;
+            bottom: 0px; 
+            left: 50%; /* 從中間開始延伸 */
             width: 0;
-            height: 2px;
-            background: var(--accent);
-            transition: width 0.3s ease;
+            height: 3px; /* 稍粗 */
+            background: linear-gradient(to right, var(--primary), var(--secondary)); /* 漸變下劃線 */
+            transition: width 0.3s ease, left 0.3s ease;
         }
 
         .nav-links a:hover::after {
             width: 100%;
+            left: 0;
         }
 
+        /* Call To Action 按鈕 - 強化光暈效果 */
         .cta-button {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
+            background: linear-gradient(45deg, var(--primary), var(--accent));
             color: white;
             border: none;
-            padding: 10px 25px;
+            padding: 12px 30px;
             border-radius: 30px;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            white-space: nowrap; /* 防止按鈕文字換行 */
         }
 
         .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+            transform: translateY(-5px);
+            /* 增加霓虹光暈陰影 */
+            box-shadow: 0 0 20px var(--primary), 0 0 40px var(--accent);
         }
         
-        /* 新增：用於 Discord 按鈕的容器樣式 */
         .header-actions {
             display: flex; 
             align-items: center;
         }
         
-        /* 新增：Discord 連結樣式 */
+        /* 將 discord-link 從導覽列移到最右側，與漢堡選單並列 */
         .discord-link {
             text-decoration: none;
-            margin-right: 10px;
+            margin-left: 20px; /* 與菜單或漢堡按鈕保持間距 */
         }
 
-        /* Hero Section */
+
+        /* ==================================== */
+        /* Hero Section Styles (略) */
+        /* ==================================== */
         .hero {
-            /* 優化：動態計算頂部填充 */
-            padding: calc(var(--header-height) + 100px) 0 100px;
+            padding: calc(var(--header-height) + 120px) 0 150px; /* 增加頂部和底部間距 */
             text-align: center;
+            position: relative;
+            /* 增加圓形光暈背景 (僅為裝飾，不影響內容) */
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.1), rgba(15, 23, 42, 0));
+            border-radius: 50%;
+            z-index: -1;
         }
 
         .hero h1 {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            background: linear-gradient(to right, var(--primary), var(--light), var(--accent));
+            font-size: 5rem; /* 更大的標題 */
+            margin-bottom: 25px;
+            background: linear-gradient(to right, var(--primary), var(--secondary), var(--light), var(--accent));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            line-height: 1.2;
+            line-height: 1.1;
+            font-weight: 900;
+            text-shadow: 0 0 5px rgba(255, 0, 255, 0.5); /* 標題霓虹陰影 */
         }
 
         .hero p {
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin: 0 auto 40px;
-            color: #cbd5e1;
-            line-height: 1.6;
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 50px;
+            color: #a8a8a8; /* 柔和的副文字色 */
+            line-height: 1.7;
         }
 
         .hero-buttons {
             display: flex;
             justify-content: center;
-            gap: 20px;
-            margin-top: 30px;
+            gap: 30px;
+            margin-top: 40px;
         }
 
+        /* 次要按鈕樣式優化 */
         .secondary-button {
             background: transparent;
             color: var(--light);
-            border: 2px solid var(--accent);
-            padding: 10px 25px;
+            border: 2px solid var(--secondary); /* 使用次要色邊框 */
+            padding: 12px 30px;
             border-radius: 30px;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .secondary-button:hover {
-            background: var(--accent);
-            transform: translateY(-3px);
+            background: var(--secondary);
+            border-color: var(--secondary);
+            color: var(--dark);
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5); /* 青色光暈 */
         }
-
-        /* Features Section */
-        .features {
-            padding: 100px 0;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 60px;
-        }
-
-        .section-title span {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .feature-card {
-            background: rgba(30, 41, 59, 0.5);
-            border-radius: 20px;
-            padding: 30px;
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
-            border-color: rgba(99, 102, 241, 0.3);
-        }
-
-        .feature-icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            background: linear-gradient(to right, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .feature-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-        }
-
-        .feature-card p {
-            color: #94a3b8;
-            line-height: 1.6;
-        }
-
-        /* Stats Section */
-        .stats {
-            padding: 80px 0;
-            background: rgba(6, 182, 212, 0.05);
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            text-align: center;
-        }
-
-        .stat-item h3 {
-            font-size: 3rem;
-            margin-bottom: 10px;
-            background: linear-gradient(to right, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .stat-item p {
-            font-size: 1.1rem;
-            color: #94a3b8;
-        }
-
-        /* Testimonials */
-        .testimonials {
-            padding: 100px 0;
-        }
-
-        .testimonial-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .testimonial-card {
-            background: rgba(30, 41, 59, 0.5);
-            border-radius: 20px;
-            padding: 30px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .testimonial-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .testimonial-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            margin-right: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-        }
-
-        .testimonial-info h4 {
-            font-size: 1.2rem;
-            margin-bottom: 5px;
-        }
-
-        .testimonial-info p {
-            color: var(--accent);
-            font-size: 0.9rem;
-        }
-
-        .testimonial-content p {
-            color: #cbd5e1;
-            line-height: 1.6;
-            font-style: italic;
-        }
-
-        /* CTA Section */
-        .cta-section {
-            padding: 100px 0;
-            text-align: center;
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(6, 182, 212, 0.1));
-        }
-
-        .cta-section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-
-        .cta-section p {
-            max-width: 600px;
-            margin: 0 auto 40px;
-            color: #94a3b8;
-            font-size: 1.1rem;
-            line-height: 1.6;
-        }
-
-        /* Footer */
-        footer {
-            padding: 60px 0 30px;
-            background: rgba(15, 23, 42, 0.8);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-column h3 {
-            font-size: 1.3rem;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 2px;
-            background: var(--accent);
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 12px;
-        }
-
-        .footer-links a {
-            color: #94a3b8;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: var(--accent);
-        }
-
-        .social-icons {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .social-icons a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--light);
-            transition: all 0.3s ease;
-        }
-
-        .social-icons a:hover {
-            background: var(--accent);
-            transform: translateY(-3px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #94a3b8;
-            font-size: 0.9rem;
-        }
-
+        /* Features Section Styles (略) */
+        .features { padding: 100px 0; background: rgba(168, 85, 247, 0.05); }
+        .section-title { text-align: center; font-size: 3rem; margin-bottom: 80px; font-weight: 800; }
+        .section-title span { background: linear-gradient(to right, var(--primary), var(--accent)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
+        .feature-card { background: rgba(30, 41, 59, 0.6); border-radius: 20px; padding: 35px; text-align: center; transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease; backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.15); opacity: 0; transform: translateY(20px); }
+        .feature-card:hover { transform: translateY(-15px); box-shadow: 0 25px 40px rgba(0, 0, 0, 0.5), 0 0 15px var(--accent); border-color: var(--accent); }
+        .feature-icon { font-size: 3.5rem; margin-bottom: 25px; background: linear-gradient(45deg, var(--primary), var(--secondary)); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 0 5px rgba(0, 255, 255, 0.5); }
+        .feature-card h3 { font-size: 1.7rem; margin-bottom: 15px; color: var(--light); font-weight: 700; }
+        .feature-card p { color: #94a3b8; line-height: 1.8; }
+        /* Stats Section Styles (略) */
+        .stats { padding: 100px 0; background: var(--mid-dark); }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; text-align: center; }
+        .stat-item h3 { font-size: 4.5rem; margin-bottom: 10px; background: linear-gradient(to right, var(--primary), var(--secondary)); -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: 900; text-shadow: 0 0 8px rgba(255, 0, 255, 0.5); }
+        .stat-item p { font-size: 1.3rem; color: var(--light); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+        /* Testimonials Section Styles (略) */
+        .testimonials { padding: 100px 0; }
+        .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .testimonial-card { background: rgba(30, 41, 59, 0.8); border-radius: 20px; padding: 30px; backdrop-filter: blur(10px); border: 1px solid rgba(168, 85, 247, 0.3); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); transition: transform 0.3s ease; }
+        .testimonial-card:hover { transform: scale(1.03); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5); }
+        .testimonial-header { display: flex; align-items: center; margin-bottom: 20px; }
+        .testimonial-avatar { width: 55px; height: 55px; border-radius: 50%; background: linear-gradient(45deg, var(--primary), var(--secondary)); margin-right: 15px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.1rem; color: var(--dark); box-shadow: 0 0 8px var(--primary); }
+        .testimonial-info h4 { font-size: 1.4rem; margin-bottom: 3px; color: var(--light); }
+        .testimonial-info p { color: var(--secondary); font-size: 1rem; font-weight: 600; }
+        .testimonial-content p { color: #cbd5e1; line-height: 1.7; font-style: italic; }
+        /* CTA Section Styles (略) */
+        .cta-section { padding: 120px 0; text-align: center; background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(0, 255, 255, 0.1)); border-top: 1px solid rgba(255, 255, 255, 0.1); }
+        .cta-section h2 { font-size: 3.5rem; margin-bottom: 25px; background: linear-gradient(to right, var(--primary), var(--secondary)); -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: 800; }
+        .cta-section p { max-width: 700px; margin: 0 auto 50px; color: #94a3b8; font-size: 1.2rem; line-height: 1.6; }
+        /* Footer Styles (略) */
+        footer { padding: 80px 0 40px; background: var(--dark); border-top: 2px solid var(--accent); }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 50px; }
+        .footer-column h3 { font-size: 1.5rem; margin-bottom: 20px; position: relative; padding-bottom: 10px; color: var(--light); }
+        .footer-column h3::after { content: ''; position: absolute; bottom: 0; left: 0; width: 60px; height: 3px; background: var(--secondary); }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 15px; }
+        .footer-links a { color: #94a3b8; text-decoration: none; transition: color 0.3s ease, transform 0.3s ease; display: inline-block; }
+        .footer-links a:hover { color: var(--primary); transform: translateX(5px); }
+        .social-icons { display: flex; gap: 15px; margin-top: 25px; }
+        .social-icons a { display: flex; align-items: center; justify-content: center; width: 45px; height: 45px; border-radius: 50%; background: rgba(168, 85, 247, 0.2); color: var(--light); font-size: 1.2rem; transition: all 0.3s ease; }
+        .social-icons a:hover { background: var(--primary); color: var(--dark); transform: scale(1.1) rotate(5deg); box-shadow: 0 0 15px var(--primary); }
+        .copyright { text-align: center; padding-top: 40px; border-top: 1px solid rgba(255, 255, 255, 0.1); color: #94a3b8; font-size: 1rem; }
+        
         /* --- 漢堡選單樣式優化 --- */
-
-        /* 隱藏漢堡選單按鈕（桌面版） */
         .menu-toggle {
             display: none;
             background: transparent;
             border: none;
             color: var(--light);
-            font-size: 24px;
+            font-size: 30px; /* 稍大一點 */
             cursor: pointer;
             z-index: 1001;
             margin-left: 20px;
+            transition: color 0.3s ease;
+            padding: 5px; /* 增加點擊區域 */
+        }
+        
+        .menu-toggle:hover {
+            color: var(--secondary);
         }
         
         /* 響應式設計 (RWD) */
+        @media (max-width: 992px) {
+            /* 調整桌面版導航間距，為行動版做準備 */
+            .nav-links {
+                gap: 20px;
+            }
+        }
+
         @media (max-width: 768px) {
             
-            /* 【優化】行動版 Header 變數 */
             :root {
-                --header-height: 60px; /* 行動版 Header 高度設為 60px */
+                --header-height: var(--mobile-header-height); /* 使用行動版變數 */
             }
 
-            /* 確保 Header 佔用整個新高度 */
             header {
                 height: var(--header-height);
             }
 
-            /* 【優化】行動版 Logo 圖片樣式調整 - 調整為 40px */
             .full-width-logo {
                 width: 40px; 
                 height: 40px; 
             }
             
+            .logo {
+                font-size: 22px; /* 行動版 Logo 縮小 */
+            }
+
             .hero {
-                 /* 根據新 header 高度調整頂部填充，例如 60px (header) + 60px (間距) */
-                padding: calc(var(--header-height) + 60px) 0 100px; 
+                padding: calc(var(--header-height) + 80px) 0 100px; /* 根據新 header 高度調整 */
             }
 
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 3rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
             }
 
             .hero-buttons {
@@ -516,46 +359,63 @@
                 display: block;
             }
             
+            /* 調整 header-actions 的 flex 順序 */
             .header-actions {
+                /* 確保按鈕、漢堡選單可以並列顯示 */
                 display: flex; 
                 align-items: center;
+                /* 讓 CTA 按鈕和漢堡選單圖標靠右對齊 */
             }
 
-            /* 隱藏桌面版連結 */
+            /* 隱藏桌面版連結，準備垂直顯示 */
             .nav-links {
                 position: absolute;
-                /* 優化：使用變數來動態調整 top 值 */
                 top: var(--header-height); 
                 left: 0;
                 width: 100%;
-                background: rgba(30, 41, 59, 0.95);
+                background: rgba(15, 23, 42, 0.98); /* 更深的背景，幾乎不透明 */
                 flex-direction: column;
                 gap: 0;
                 padding: 0;
-                border-top: 1px solid rgba(255, 255, 255, 0.1); 
+                border-top: 1px solid var(--accent); 
                 
                 max-height: 0;
                 overflow: hidden;
-                transition: max-height 0.4s ease-in-out;
-                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+                /* 更改為 cubic-bezier 增加開合的科技感 */
+                transition: max-height 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5);
             }
 
             /* 選單開啟狀態 */
             .nav-links.active {
-                max-height: 500px; 
+                max-height: 500px; /* 必須設置一個足夠大的值 */ 
             }
 
-            /* 優化點：移除分隔線，居中顯示 */
+            /* 優化點：居中顯示，底部分隔線 */
             .nav-links a {
                 display: block;
-                padding: 15px 20px;
+                padding: 18px 25px; /* 增加點擊和視覺空間 */
                 text-align: center;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* 淺淡的分隔線 */
+                font-size: 1.1rem;
             }
             
-            /* 最後一個項目沒有分隔線 */
+            /* 移除行動版連結的下劃線動畫，專注於全螢幕顯示 */
+            .nav-links a::after {
+                content: none;
+            }
+
             .nav-links a:last-child {
                 border-bottom: none;
+            }
+            
+            /* 行動版卡片和標題調整 */
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .cta-section h2 {
+                font-size: 2.5rem;
             }
         }
     </style>
@@ -569,18 +429,19 @@
                     <div class="logo">喵方旅團</div>
                 </div>
                 
-                <div class="nav-links" id="menu">
-                    <a href="https://www.minecraft.net/zh-hant">首頁</a>
-                    <a href="#">特色</a>
-                    <a href="#">解決方案</a>
-                    <a href="#">價格</a>
-                    <a href="#">聯繫我們</a>
-                </div>
-                
                 <div class="header-actions">
+                    <div class="nav-links" id="menu">
+                        <a href="#home">首頁</a> 
+                        <a href="#features">特色</a>
+                        <a href="#features">解決方案</a> 
+                        <a href="#features">價格</a> 
+                        <a href="#contact">聯繫我們</a>
+                    </div>
+                    
                     <a href="https://discord.gg/QWEfJeEJ" target="_blank" class="discord-link">  
                         <button class="cta-button">加入旅團</button>
                     </a>
+
                     <button class="menu-toggle" id="menu-toggle" aria-label="切換導航">
                         <i class="fas fa-bars"></i>
                     </button>
@@ -589,42 +450,42 @@
         </div>
     </header>
 
-    <section class="hero">
+    <section class="hero" id="home">
         <div class="container">
             <h1>MeowFang Legion | 喵方旅團</h1>
             <p>喵方旅團是一個玩 Minecraft 為主的團體。我們聚集了來自各地的玩家，無論你喜歡建築、探索、對戰或單純聊天，都能在這裡找到屬於自己的位置。</p>
-            <p>「加入旅團不只是玩遊戲，而是一趟夢幻的旅程」</p>  
+            <p>「加入旅團不只是玩遊戲，而是一趟夢幻的旅程」</p> 
             <div class="hero-buttons">
-                <button class="cta-button">加入喵方旅團</button>
-                <button class="secondary-button">查看詳情</button>
+                <a href="https://discord.gg/QWEfJeEJ" target="_blank"><button class="cta-button">立即加入旅團</button></a>
+                <a href="#features"><button class="secondary-button">探索旅團特色</button></a>
             </div>
         </div>
     </section>
 
-    <section class="features">
+    <section class="features" id="features">
         <div class="container">
-            <h2 class="section-title">強大<span translate="no">Features</span> <span>特色功能</span></h2>
+            <h2 class="section-title">✨ 旅團核心 <span>特色功能</span></h2>
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <i class="fas fa-bolt"></i>
+                        <i class="fas fa-handshake"></i>
                     </div>
                     <h3>我們重視社群互助</h3>
-                    <p>喵方旅團相信，Minecraft不只是遊戲，更是一群人一起冒險、一起成長的地方。</p>
+                    <p>喵方旅團相信，Minecraft 不只是遊戲，更是一群人一起冒險、一起成長的地方。互助合作是我們的核心精神。</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <i class="fas fa-shield-alt"></i>
+                        <i class="fas fa-graduation-cap"></i>
                     </div>
                     <h3>歡迎新手加入</h3>
-                    <p>不論你是剛踏入方塊世界的新手、還是已經打造無數奇蹟的老手，我們都會在這裡陪伴你。</p>
+                    <p>不論你是剛踏入方塊世界的新手、還是已經打造無數奇蹟的老手，我們都會在這裡陪伴你，提供新手指導與資源。</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <i class="fas fa-sync-alt"></i>
+                        <i class="fas fa-microphone"></i>
                     </div>
                     <h3>Discord 活躍社群</h3>
-                    <p>我們每天都會在語音房聊天、分享日常，也會不定期舉辦活動、小遊戲、抽獎。</p>
+                    <p>我們每天都會在語音房聊天、分享日常，也會不定期舉辦活動、小遊戲、抽獎，確保社群的熱絡與活力。</p>
                 </div>
             </div>
         </div>
@@ -655,42 +516,42 @@
 
     <section class="testimonials">
         <div class="container">
-            <h2 class="section-title">我們的<span translate="no">Discord伺服器</span> <span>幹部</span></h2>
+            <h2 class="section-title">⭐ 伺服器 <span>核心幹部</span></h2>
             <div class="testimonial-grid">
                 <div class="testimonial-card">
                     <div class="testimonial-header">
-                        <div class="testimonial-avatar">李大</div>
+                        <div class="testimonial-avatar">羅</div> 
                         <div class="testimonial-info">
                             <h4>羅伯特</h4>
                             <p>副團長</p>
                         </div>
                     </div>
                     <div class="testimonial-content">
-                        <p>"這個平台完全改變了我們的工作流程。對於我們的團隊來說，效率的提升令人難以置信。"</p>
+                        <p>"喵方不僅是個伺服器，更像是第二個家。這裡的團隊合作和友善氛圍無與倫比。"</p>
                     </div>
                 </div>
                 <div class="testimonial-card">
                     <div class="testimonial-header">
-                        <div class="testimonial-avatar">陳小</div>
+                        <div class="testimonial-avatar">陳</div>
                         <div class="testimonial-info">
                             <h4>Lyvia</h4>
                             <p>副團長</p>
                         </div>
                     </div>
                     <div class="testimonial-content">
-                        <p>"這個解決方案的可擴展性和可靠性超出了我們的預期。強烈推薦！"</p>
+                        <p>"管理團隊專業又熱情，活動豐富，讓我們在這裡找到無限的創造力和樂趣。"</p>
                     </div>
                 </div>
                 <div class="testimonial-card">
                     <div class="testimonial-header">
-                        <div class="testimonial-avatar">王經</div>
+                        <div class="testimonial-avatar">王</div>
                         <div class="testimonial-info">
                             <h4>企鵝</h4>
                             <p>副團長</p>
                         </div>
                     </div>
                     <div class="testimonial-content">
-                        <p>"客戶支援非常出色。他們幫助我們客製化平台，完美地滿足了我們的獨特需求。"</p>
+                        <p>"無論遇到什麼遊戲問題，社群支援總是迅速且到位。這就是我喜歡喵方的原因！"</p>
                     </div>
                 </div>
             </div>
@@ -699,9 +560,9 @@
 
     <section class="cta-section">
         <div class="container">
-            <h2>準備加入旅團了嗎？</h2>
-            <p>有好多團員都急著想認識你，還不趕快加入嗎？</p>
-            <button class="cta-button">加入喵方旅團</button>
+            <h2>🎉 準備加入旅團了嗎？</h2>
+            <p>有好多團員都急著想認識你，還不趕快點擊按鈕，加入我們這趟夢幻的方塊旅程嗎？</p>
+            <a href="https://discord.gg/QWEfJeEJ" target="_blank"><button class="cta-button">立即加入喵方旅團</button></a>
         </div>
     </section>
 
@@ -710,20 +571,20 @@
             <div class="footer-grid">
                 <div class="footer-column">
                     <h3>MeowFang</h3>
-                    <p style="color: #94a3b8; line-height: 1.6;">只要願意打開 Discord，把這裡當放鬆的地方——我們都很歡迎你加入。</p>
+                    <p style="color: #94a3b8; line-height: 1.8;">只要願意打開 Discord，把這裡當放鬆的地方——我們都很歡迎你加入。</p>
                     <div class="social-icons">
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
                 <div class="footer-column">
                     <h3>產品</h3>
                     <ul class="footer-links">
-                        <li><a href="#">特色</a></li>
-                        <li><a href="#">解決方案</a></li>
-                        <li><a href="#">價格</a></li>
+                        <li><a href="#features">特色</a></li>
+                        <li><a href="#features">解決方案</a></li>
+                        <li><a href="#features">價格</a></li>
                         <li><a href="#">教學</a></li>
                     </ul>
                 </div>
@@ -755,7 +616,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // ------------------------------------
-            // 1. Feature Cards Intersection Observer
+            // 1. Feature Cards Intersection Observer (滾動淡入動畫)
             // ------------------------------------
             const featureCards = document.querySelectorAll('.feature-card');
             
@@ -764,26 +625,26 @@
                     if (entry.isIntersecting) {
                         entry.target.style.opacity = 1;
                         entry.target.style.transform = 'translateY(0)';
+                        observer.unobserve(entry.target); // 觀察到後停止觀察，避免重複觸發
                     }
                 });
-            }, { threshold: 0.1 });
+            }, { 
+                threshold: 0.1 // 卡片 10% 進入視野時觸發
+            });
             
             featureCards.forEach(card => {
-                card.style.opacity = 0;
-                card.style.transform = 'translateY(20px)';
-                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                // 初始樣式已在 CSS 中定義，這裡只需開始觀察
                 observer.observe(card);
             });
 
             // ------------------------------------
-            // 2. Hamburger Menu Toggle Logic
+            // 2. Hamburger Menu Toggle Logic (優化後的漢堡選單切換)
             // ------------------------------------
             const menuToggle = document.getElementById('menu-toggle');
             const navLinks = document.getElementById('menu');
             const menuIcon = menuToggle.querySelector('i');
 
-            menuToggle.addEventListener('click', function() {
-                // 切換導航連結的 'active' class (CSS 會控制顯示/隱藏)
+            function toggleMenu() {
                 navLinks.classList.toggle('active');
                 
                 // 切換圖標 (漢堡 ☰ 變成 關閉 X)
@@ -791,6 +652,29 @@
                     menuIcon.classList.remove('fa-bars');
                     menuIcon.classList.add('fa-times');
                 } else {
+                    menuIcon.classList.remove('fa-times');
+                    menuIcon.classList.add('fa-bars');
+                }
+            }
+
+            menuToggle.addEventListener('click', toggleMenu);
+            
+            // 點擊菜單連結後自動關閉菜單 (行動版優化)
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    // 僅在菜單開啟時執行關閉操作，並檢查是否在行動版尺寸
+                    if (navLinks.classList.contains('active') && window.innerWidth <= 768) {
+                        navLinks.classList.remove('active');
+                        menuIcon.classList.remove('fa-times');
+                        menuIcon.classList.add('fa-bars');
+                    }
+                });
+            });
+
+            // 調整視窗大小時自動關閉選單，並重設圖標 (從行動版變回桌面版時，確保菜單是收起的)
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768) {
+                    navLinks.classList.remove('active');
                     menuIcon.classList.remove('fa-times');
                     menuIcon.classList.add('fa-bars');
                 }

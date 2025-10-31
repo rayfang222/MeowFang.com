@@ -18,19 +18,24 @@
         :root {
             --primary: #FF00FF; /* 亮洋紅 (Neon Pink) */
             --secondary: #00FFFF; /* 青色 (Cyan) */
-            --dark: #0f172a; /* 更深的背景色 */
+            --dark: #0f172a; /* 更深的背景色 (初始深藍灰) */
             --mid-dark: #1e293b; /* 中間層背景色 */
             --light: #e0f2fe; /* 淺文字色 */
             --accent: #a855f7; /* 紫色 (Violet Accent) */
             --header-height: 80px; /* 桌面版 Header 高度 */
             --mobile-header-height: 60px; /* 行動版 Header 高度 */
+            
+            /* 【優化】捲動後的背景色改為更深的紫色 */
+            --scroll-bg: rgba(38, 10, 60, 0.95);
+            
+            --scroll-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* 捲動後的陰影 */
         }
 
         /* 頁面背景與文字顏色 - 強化深空漸變感 */
         body {
             background: linear-gradient(145deg, var(--dark) 0%, var(--mid-dark) 100%);
             color: var(--light);
-            min-height: 100vh;
+            min-height: 200vh; /* 故意增加高度以方便測試捲動效果 */
             overflow-x: hidden;
             /* 平滑捲動 */
             scroll-behavior: smooth; 
@@ -51,19 +56,32 @@
             display: flex;
             align-items: center;
             padding: 0;
-            position: sticky; /* 改為 sticky 讓導航捲動時固定在頂部 */
+            position: fixed; /* 確保導覽列初始在最頂部，並固定 */
             width: 100%;
             top: 0;
             z-index: 1000;
-            backdrop-filter: blur(15px); /* 輕微增強模糊效果 */
-            background: rgba(15, 23, 42, 0.9); /* 使用更深的背景色，透明度更高 */
-            border-bottom: 2px solid var(--accent); /* 邊框更醒目 */
+            /* 初始狀態：透明/半透明背景 */
+            background: transparent; /* 初始背景透明 */
+            backdrop-filter: blur(5px); /* 輕微模糊效果 */
+            border-bottom: none; /* 初始無邊框 */
+            /* 關鍵：實現平滑過渡 */
+            transition: background 0.4s ease, border-bottom 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease;
         }
         
-        /* 【已修改】讓 Logo 和標題在桌面版上緊貼左側邊緣 */
+        /* 捲動後 (Scrolled) 狀態的樣式 */
+        header.scrolled {
+            background: var(--scroll-bg); /* 變成深紫色不透明背景 */
+            backdrop-filter: blur(15px); /* 模糊效果更強 */
+            /* ====== 依您的要求移除紫色線 ====== */
+            border-bottom: none; 
+            /* ================================= */
+            box-shadow: var(--scroll-shadow); /* 增加陰影，更有層次感 */
+        }
+        
+        /* 讓 Logo 和標題在桌面版上緊貼左側邊緣 */
         header .container {
-            padding-left: 0; /* 移除左側 20px 內邊距，使 Logo 貼邊 */
-            padding-right: 20px; /* 保持右側 20px 內邊距 */
+            padding-left: 0;
+            padding-right: 20px;
         }
         
         nav {
@@ -77,26 +95,17 @@
         .brand-area {
             display: flex;
             align-items: center;
-            /* 由於 header .container 移除了左 padding，這裡的內容將完全貼邊 */
         }
         
         .full-width-logo {
-            width: 50px; /* 略微縮小，更精緻 */
+            width: 50px;
             height: 50px;
             margin-right: 10px;
             object-fit: cover;
-            /* ------------------------------------ */
-            /* [已修改] 移除 border-radius (圓框) */
-            /* 移除 box-shadow (霓虹陰影) */
-            transition: none; /* [已修改] 移除 transform 過渡效果 */
-            /* ------------------------------------ */
+            transition: none;
         }
         
-        .full-width-logo:hover {
-            /* [已修改] 移除 hover 旋轉、縮放和陰影 */
-        }
-
-        /* Logo 動畫 (文字漸變動畫保留) */
+        /* Logo 動畫 */
         @keyframes gradient-shift {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
@@ -105,20 +114,19 @@
         
         .logo {
             font-size: 28px;
-            font-weight: 800; /* 更粗的字體 */
+            font-weight: 800;
             letter-spacing: 1px;
-            /* 調整漸變顏色，更具霓虹感 */
             background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent), var(--light)); 
-            background-size: 300% 100%; /* 增加漸變尺寸 */
+            background-size: 300% 100%;
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            animation: gradient-shift 6s linear infinite; /* 調整動畫速度 */
+            animation: gradient-shift 6s linear infinite;
         }
 
         .nav-links {
             display: flex;
-            gap: 40px; /* 增加間距 */
+            gap: 40px;
         }
 
         .nav-links a {
@@ -138,10 +146,10 @@
             content: '';
             position: absolute;
             bottom: 0px; 
-            left: 50%; /* 從中間開始延伸 */
+            left: 50%; 
             width: 0;
-            height: 3px; /* 稍粗 */
-            background: linear-gradient(to right, var(--primary), var(--secondary)); /* 漸變下劃線 */
+            height: 3px;
+            background: linear-gradient(to right, var(--primary), var(--secondary)); 
             transition: width 0.3s ease, left 0.3s ease;
         }
 
@@ -162,7 +170,7 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
-            white-space: nowrap; /* 防止按鈕文字換行 */
+            white-space: nowrap;
         }
 
         .cta-button:hover {
@@ -176,21 +184,20 @@
             align-items: center;
         }
         
-        /* 將 discord-link 從導覽列移到最右側，與漢堡選單並列 */
         .discord-link {
             text-decoration: none;
-            margin-left: 20px; /* 與菜單或漢堡按鈕保持間距 */
+            margin-left: 20px;
         }
 
 
         /* ==================================== */
-        /* Hero Section Styles (略) */
+        /* Hero Section Styles */
         /* ==================================== */
         .hero {
-            padding: calc(var(--header-height) + 120px) 0 150px; /* 增加頂部和底部間距 */
+            /* 由於 Header 改為 fixed，需要用 padding 頂起內容 */
+            padding: calc(var(--header-height) + 120px) 0 150px;
             text-align: center;
             position: relative;
-            /* 增加圓形光暈背景 (僅為裝飾，不影響內容) */
             overflow: hidden;
         }
         
@@ -208,7 +215,7 @@
         }
 
         .hero h1 {
-            font-size: 5rem; /* 更大的標題 */
+            font-size: 5rem;
             margin-bottom: 25px;
             background: linear-gradient(to right, var(--primary), var(--secondary), var(--light), var(--accent));
             -webkit-background-clip: text;
@@ -216,14 +223,14 @@
             color: transparent;
             line-height: 1.1;
             font-weight: 900;
-            text-shadow: 0 0 5px rgba(255, 0, 255, 0.5); /* 標題霓虹陰影 */
+            text-shadow: 0 0 5px rgba(255, 0, 255, 0.5);
         }
 
         .hero p {
             font-size: 1.3rem;
             max-width: 800px;
             margin: 0 auto 50px;
-            color: #a8a8a8; /* 柔和的副文字色 */
+            color: #a8a8a8;
             line-height: 1.7;
         }
 
@@ -238,7 +245,7 @@
         .secondary-button {
             background: transparent;
             color: var(--light);
-            border: 2px solid var(--secondary); /* 使用次要色邊框 */
+            border: 2px solid var(--secondary);
             padding: 12px 30px;
             border-radius: 30px;
             font-weight: 700;
@@ -253,7 +260,7 @@
             border-color: var(--secondary);
             color: var(--dark);
             transform: translateY(-5px);
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5); /* 青色光暈 */
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
         }
         /* Features Section Styles (略) */
         .features { padding: 100px 0; background: rgba(168, 85, 247, 0.05); }
@@ -304,12 +311,12 @@
             background: transparent;
             border: none;
             color: var(--light);
-            font-size: 30px; /* 稍大一點 */
+            font-size: 30px;
             cursor: pointer;
             z-index: 1001;
             margin-left: 20px;
             transition: color 0.3s ease;
-            padding: 5px; /* 增加點擊區域 */
+            padding: 5px;
         }
         
         .menu-toggle:hover {
@@ -334,10 +341,10 @@
                 height: var(--header-height);
             }
 
-            /* 【已修改】行動版還原 Header 內的 container padding，避免 Logo 貼死邊緣 */
+            /* 行動版還原 Header 內的 container padding，避免 Logo 貼死邊緣 */
             header .container {
-                padding-left: 5px; /* 行動版保留 20px 邊距 */
-                padding-right: 5px; /* 行動版保留 20px 邊距 */
+                padding-left: 5px; 
+                padding-right: 5px;
             }
 
             .full-width-logo {
@@ -373,10 +380,8 @@
             
             /* 調整 header-actions 的 flex 順序 */
             .header-actions {
-                /* 確保按鈕、漢堡選單可以並列顯示 */
                 display: flex; 
                 align-items: center;
-                /* 讓 CTA 按鈕和漢堡選單圖標靠右對齊 */
             }
 
             /* 隱藏桌面版連結，準備垂直顯示 */
@@ -433,7 +438,7 @@
     </style>
 </head>
 <body>
-    <header>
+    <header id="mainHeader">
         <div class="container">
             <nav>
                 <div class="brand-area"> 
@@ -450,7 +455,7 @@
                         <a href="#contact">聯繫我們</a>
                     </div>
                     
-                    <a href="https://discord.gg/QWEfJeEJ" target="_blank" class="discord-link">  
+                    <a href="https://discord.gg/QWEfJeEJ" target="_blank" class="discord-link"> 
                         <button class="cta-button">加入旅團</button>
                     </a>
 
@@ -691,6 +696,29 @@
                     menuIcon.classList.add('fa-bars');
                 }
             });
+
+            // ====================================
+            // 3. 捲動顏色變化邏輯 (實現透明到深紫色的平滑過渡)
+            // ====================================
+            const header = document.getElementById('mainHeader');
+            const scrollThreshold = 50; // 設定捲動超過 50px 後變色
+
+            function handleScroll() {
+                // 取得當前垂直捲動的距離
+                if (window.scrollY > scrollThreshold) {
+                    // 捲動超過閾值，新增 'scrolled' 類別
+                    header.classList.add('scrolled');
+                } else {
+                    // 捲動仍在頂部，移除 'scrolled' 類別
+                    header.classList.remove('scrolled');
+                }
+            }
+
+            // 監聽網頁的捲動事件
+            window.addEventListener('scroll', handleScroll);
+            
+            // 初始化時檢查一次，以防頁面載入時就在非頂部（例如重新整理頁面）
+            handleScroll();
         });
     </script>
 </body>

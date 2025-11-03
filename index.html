@@ -8,7 +8,7 @@
     <link rel="apple-touch-icon" href="img/MeowFang-logo.PNG">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* 全局重置與字體 */
+        /* 全局重置與字體 (略) */
         * {
             margin: 0;
             padding: 0;
@@ -16,14 +16,14 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        /* 顏色變量 - 更協調的霓虹色調 */
+        /* 顏色變量 - 更協調的霓虹色調 (略) */
         :root {
-            --primary: #F454F0; /* 亮洋紅 (Neon Pink) */
+            --primary: #FF00FF; /* 亮洋紅 (Neon Pink) */
             --secondary: #F3D0FF; /* 淡紫色 （) */
             --dark: #0f172a; /* 更深的背景色 (初始深藍灰) */
             --mid-dark: #1e293b; /* 中間層背景色 */
             --light: #e0f2fe; /* 淺文字色 */
-            --accent: #831FD7; /* 紫色 (Violet Accent) */
+            --accent: #a855f7; /* 紫色 (Violet Accent) */
             --header-height: 80px; /* 桌面版 Header 高度 */
             --mobile-header-height: 60px; /* 行動版 Header 高度 */
             
@@ -33,7 +33,7 @@
             --scroll-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* 捲動後的陰影 */
         }
 
-        /* 頁面背景與文字顏色 - 強化深空漸變感 */
+        /* 頁面背景與文字顏色 - 強化深空漸變感 (略) */
         body {
             background: linear-gradient(145deg, var(--dark) 0%, var(--mid-dark) 100%);
             color: var(--light);
@@ -43,7 +43,7 @@
             scroll-behavior: smooth; 
         }
 
-        /* 內容容器 */
+        /* 內容容器 (略) */
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -51,7 +51,7 @@
         }
 
         /* ==================================== */
-        /* Header & Navigation Styles */
+        /* Header & Navigation Styles (略) */
         /* ==================================== */
         header {
             height: var(--header-height);
@@ -70,7 +70,7 @@
             transition: background 0.4s ease, border-bottom 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease;
         }
         
-        /* 捲動後 (Scrolled) 狀態的樣式 */
+        /* 捲動後 (Scrolled) 狀態的樣式 (略) */
         header.scrolled {
             background: var(--scroll-bg); /* 變成深紫色不透明背景 */
             backdrop-filter: blur(15px); /* 模糊效果更強 */
@@ -80,7 +80,7 @@
             box-shadow: var(--scroll-shadow); /* 增加陰影，更有層次感 */
         }
         
-        /* 讓 Logo 和標題在桌面版上緊貼左側邊緣 */
+        /* 讓 Logo 和標題在桌面版上緊貼左側邊緣 (略) */
         header .container {
             padding-left: 0px;
             padding-right: 20px;
@@ -107,15 +107,24 @@
             transition: none;
         }
         
-        /* Logo 動畫 */
+        /* Logo 動畫 (略) */
         @keyframes gradient-shift {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
         
+        /* ---------------------------------------------------- */
+        /* 【核心修改區域】Logo 樣式：實現中文/英文兩行不換行 */
+        /* ---------------------------------------------------- */
         .logo {
-            font-size: 28px;
+            /* 啟用 Flexbox 垂直佈局 */
+            display: flex;
+            flex-direction: column; 
+            /* 確保整個 Logo 區域不會換行 */
+            white-space: nowrap; 
+            
+            font-size: 28px; /* 桌面版總體大小 */
             font-weight: 800;
             letter-spacing: 1px;
             background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent), var(--light)); 
@@ -125,6 +134,20 @@
             color: transparent;
             animation: gradient-shift 6s linear infinite;
         }
+
+        /* 調整中文行樣式 */
+        .logo .zh {
+            font-size: 1em; /* 繼承父層的 28px */
+            line-height: 1.1;
+        }
+
+        /* 調整英文行樣式 */
+        .logo .en {
+            font-size: 0.5em; /* 英文行較小，約為中文行的一半 */
+            font-weight: 600;
+            line-height: 1; /* 調整行高讓兩行緊密一點 */
+        }
+        /* ---------------------------------------------------- */
 
         .nav-links {
             display: flex;
@@ -143,7 +166,7 @@
         .nav-links a:hover {
             color: var(--secondary);
         }
-        /* 導航下劃線優化 */
+        /* 導航下劃線優化 (略) */
         .nav-links a::after {
             content: '';
             position: absolute;
@@ -160,7 +183,7 @@
             left: 0;
         }
 
-        /* Call To Action 按鈕 - 強化光暈效果 */
+        /* Call To Action 按鈕 - 強化光暈效果 (略) */
         .cta-button {
             background: linear-gradient(45deg, var(--primary), var(--accent));
             color: white;
@@ -193,7 +216,7 @@
 
 
         /* ==================================== */
-        /* Hero Section Styles */
+        /* Hero Section Styles (略) */
         /* ==================================== */
         .hero {
             /* 由於 Header 改為 fixed，需要用 padding 頂起內容 */
@@ -243,7 +266,7 @@
             margin-top: 40px;
         }
 
-        /* 次要按鈕樣式優化 */
+        /* 次要按鈕樣式優化 (略) */
         .secondary-button {
             background: transparent;
             color: var(--light);
@@ -286,7 +309,7 @@
         .testimonial-card:hover { transform: scale(1.03); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5); }
         .testimonial-header { display: flex; align-items: center; margin-bottom: 20px; }
         
-        /* 【修改點一：移除原文字頭像樣式】 */
+        /* 【修改點一：移除原文字頭像樣式】 (略) */
         .testimonial-avatar { 
              /* 保持原有定位和邊距設定，但移除背景和字體相關 */
              width: 55px; 
@@ -299,7 +322,7 @@
              margin-right: 15px; 
         }
 
-        /* 【新增樣式：圖片頭像樣式】 */
+        /* 【新增樣式：圖片頭像樣式】 (略) */
         .testimonial-avatar-img {
             width: 55px;
             height: 55px;
@@ -330,7 +353,7 @@
         .social-icons a:hover { background: var(--primary); color: var(--dark); transform: scale(1.1) rotate(5deg); box-shadow: 0 0 15px var(--primary); }
         .copyright { text-align: center; padding-top: 40px; border-top: 1px solid rgba(255, 255, 255, 0.1); color: #94a3b8; font-size: 1rem; }
         
-        /* --- 漢堡選單樣式優化 --- */
+        /* --- 漢堡選單樣式優化 --- (略) */
         .menu-toggle {
             display: none;
             background: transparent;
@@ -348,9 +371,9 @@
             color: var(--secondary);
         }
         
-        /* 響應式設計 (RWD) */
+        /* 響應式設計 (RWD) (略) */
         @media (max-width: 992px) {
-            /* 調整桌面版導航間距，為行動版做準備 */
+            /* 調整桌面版導航間距，為行動版做準備 (略) */
             .nav-links {
                 gap: 20px;
             }
@@ -366,7 +389,7 @@
                 height: var(--header-height);
             }
 
-            /* 行動版還原 Header 內的 container padding，避免 Logo 貼死邊緣 */
+            /* 行動版還原 Header 內的 container padding，避免 Logo 貼死邊緣 (略) */
             header .container {
                 padding-left: 5px; 
                 padding-right: 5px;
@@ -377,9 +400,20 @@
                 height: 40px; 
             }
             
+            /* 【核心修改區域】行動版 Logo 尺寸調整 */
             .logo {
-                font-size: 22px; /* 行動版 Logo 縮小 */
+                font-size: 20px; /* 行動版 Logo 縮小 (原本是 22px，現改為 20px 作為基礎) */
             }
+
+            .logo .zh {
+                font-size: 1em; 
+            }
+
+            .logo .en {
+                font-size: 0.5em; /* 英文行維持一半大小 */
+            }
+            /* -------------------------------------- */
+
 
             .hero {
                 padding: calc(var(--header-height) + 80px) 0 100px; /* 根據新 header 高度調整 */
@@ -398,18 +432,18 @@
                 align-items: center;
             }
             
-            /* 顯示漢堡選單按鈕（行動版） */
+            /* 顯示漢堡選單按鈕（行動版） (略) */
             .menu-toggle {
                 display: block;
             }
             
-            /* 調整 header-actions 的 flex 順序 */
+            /* 調整 header-actions 的 flex 順序 (略) */
             .header-actions {
                 display: flex; 
                 align-items: center;
             }
 
-            /* 隱藏桌面版連結，準備垂直顯示 */
+            /* 隱藏桌面版連結，準備垂直顯示 (略) */
             .nav-links {
                 position: absolute;
                 top: var(--header-height); 
@@ -428,12 +462,12 @@
                 box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5);
             }
 
-            /* 選單開啟狀態 */
+            /* 選單開啟狀態 (略) */
             .nav-links.active {
                 max-height: 500px; /* 必須設置一個足夠大的值 */ 
             }
 
-            /* 優化點：居中顯示，底部分隔線 */
+            /* 優化點：居中顯示，底部分隔線 (略) */
             .nav-links a {
                 display: block;
                 padding: 18px 25px; /* 增加點擊和視覺空間 */
@@ -442,7 +476,7 @@
                 font-size: 1.1rem;
             }
             
-            /* 移除行動版連結的下劃線動畫，專注於全螢幕顯示 */
+            /* 移除行動版連結的下劃線動畫，專注於全螢幕顯示 (略) */
             .nav-links a::after {
                 content: none;
             }
@@ -451,7 +485,7 @@
                 border-bottom: none;
             }
             
-            /* 行動版卡片和標題調整 */
+            /* 行動版卡片和標題調整 (略) */
             .section-title {
                 font-size: 2.2rem;
             }
@@ -468,7 +502,11 @@
             <nav>
                 <div class="brand-area"> 
                     <img class="full-width-logo" src="https://raw.githubusercontent.com/rayfang222/MeowFang.com/main/img/MeowFang_Logo.png" alt="喵方旅團 Logo">
-                    <div class="logo">喵方旅團</div>
+                    
+                    <div class="logo">
+                        <span class="zh">喵方旅團</span>
+                        <span class="en">MeowFang Legion</span>
+                    </div>
                 </div>
                 
                 <div class="header-actions">
@@ -576,7 +614,7 @@
                 </div>
                 <div class="testimonial-card">
                     <div class="testimonial-header">
-                         <div class="testimonial-avatar">
+                           <div class="testimonial-avatar">
                             <img src="https://raw.githubusercontent.com/rayfang222/MeowFang.com/main/img/Lyvia.png" alt="Lyvia頭像" class="testimonial-avatar-img">
                         </div>
                         <div class="testimonial-info">
@@ -590,7 +628,7 @@
                 </div>
                 <div class="testimonial-card">
                     <div class="testimonial-header">
-                         <div class="testimonial-avatar">
+                           <div class="testimonial-avatar">
                             <img src="https://raw.githubusercontent.com/rayfang222/MeowFang.com/main/img/penguinkiki%20.png" alt="企鵝頭像" class="testimonial-avatar-img">
                         </div>
                         <div class="testimonial-info">

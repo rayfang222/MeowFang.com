@@ -329,23 +329,58 @@
         .stat-item p { font-size: 1.3rem; color: var(--light); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
         /* Testimonials Section Styles (略) */
         .testimonials { padding: 100px 0; }
-        .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .testimonial-card { background: rgba(36, 18, 60, 0.8); border-radius: 20px; padding: 30px; backdrop-filter: blur(10px); 
+        /* 調整 Testimonial Grid 佈局以容納 5 個元素 */
+        .testimonial-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* 略微縮小最小寬度以容納更多欄位 */
+            gap: 30px; 
+            justify-content: center; /* 讓整體居中 */
+        }
+        .testimonial-card { 
+            background: rgba(36, 18, 60, 0.8); 
+            border-radius: 20px; 
+            padding: 30px; 
+            backdrop-filter: blur(10px); 
             /* 卡片邊框變更為藍紫色透明 */
             border: 1px solid rgba(138, 43, 226, 0.3); 
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); transition: transform 0.3s ease; }
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); 
+            transition: transform 0.3s ease; 
+        }
+        /* 新增：在較大的螢幕上，確保每列顯示的卡片數量適當 (例如 5 個卡片時，一行 3 個，下一行 2 個) */
+        @media (min-width: 1200px) {
+            .testimonial-grid {
+                /* 在大螢幕上嘗試 4 欄或 5 欄 */
+                grid-template-columns: repeat(5, 1fr); 
+            }
+        }
+
+        @media (max-width: 1199px) and (min-width: 992px) {
+             .testimonial-grid {
+                /* 在中等螢幕上嘗試 3 欄 */
+                grid-template-columns: repeat(3, 1fr); 
+            }
+        }
+        
+        @media (max-width: 991px) and (min-width: 769px) {
+             .testimonial-grid {
+                /* 在平板螢幕上嘗試 2 欄 */
+                grid-template-columns: repeat(2, 1fr); 
+            }
+        }
+
+
         .testimonial-card:hover { transform: scale(1.03); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5); }
         .testimonial-header { display: flex; align-items: center; margin-bottom: 20px; }
         
         /* 【修改點一：移除原文字頭像樣式】 (略) */
         .testimonial-avatar { 
-             /* 保持原有定位和邊距設定，但移除背景和字體相關 */
-             width: 55px; 
-             height: 55px; 
-             border-radius: 50%; 
-             /* 光暈效果變更為洋紅色 */
-             box-shadow: 0 0 8px var(--primary); 
-             margin-right: 15px; 
+            /* 保持原有定位和邊距設定，但移除背景和字體相關 */
+            width: 55px; 
+            height: 55px; 
+            border-radius: 50%; 
+            /* 光暈效果變更為洋紅色 */
+            box-shadow: 0 0 8px var(--primary); 
+            margin-right: 15px; 
         }
 
         /* 【新增樣式：圖片頭像樣式】 (略) */
@@ -674,6 +709,34 @@
                     </div>
                     <div class="testimonial-content">
                         <p>"管理團隊專業又熱情，活動豐富，讓我們在這裡找到無限的創造力和樂趣。"</p>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                            <div class="testimonial-avatar">
+                            <img src="https://raw.githubusercontent.com/rayfang222/MeowFang.com/main/img/Lyvia.png" alt="Ray Fang 頭像" class="testimonial-avatar-img">
+                        </div>
+                        <div class="testimonial-info">
+                            <h4>Ray Fang</h4>
+                            <p>團長 / 創始人</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-content">
+                        <p>"我堅信社群的力量，希望這裡能成為所有玩家的避風港和夢想實現地！"</p>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                            <div class="testimonial-avatar">
+                            <img src="https://raw.githubusercontent.com/rayfang222/MeowFang.com/main/img/Lyvia.png" alt="夜貓頭像" class="testimonial-avatar-img">
+                        </div>
+                        <div class="testimonial-info">
+                            <h4>夜貓</h4>
+                            <p>副團長</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-content">
+                        <p>"夜貓出沒，必有歡樂。在這裡，你永遠不會感到孤單，總有隊友在線陪你一起嗨！"</p>
                     </div>
                 </div>
                 <div class="testimonial-card">

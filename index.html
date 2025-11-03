@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MeowFang Legion | 喵方旅團</title>
-    <link rel="icon" type="image/png" href="img/MeowFang_Logo.png">
-    <link rel="apple-touch-icon" href="img/MeowFang_Logo.png">
+    <link rel="icon" type="image/png" href="img/MeowFang-logo.PNG">
+    <link rel="apple-touch-icon" href="img/MeowFang-logo.PNG">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* 全局重置與字體 */
@@ -285,7 +285,30 @@
         .testimonial-card { background: rgba(30, 41, 59, 0.8); border-radius: 20px; padding: 30px; backdrop-filter: blur(10px); border: 1px solid rgba(168, 85, 247, 0.3); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); transition: transform 0.3s ease; }
         .testimonial-card:hover { transform: scale(1.03); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5); }
         .testimonial-header { display: flex; align-items: center; margin-bottom: 20px; }
-        .testimonial-avatar { width: 55px; height: 55px; border-radius: 50%; background: linear-gradient(45deg, var(--primary), var(--secondary)); margin-right: 15px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.1rem; color: var(--dark); box-shadow: 0 0 8px var(--primary); }
+        
+        /* 【修改點一：移除原文字頭像樣式】 */
+        .testimonial-avatar { 
+             /* 保持原有定位和邊距設定，但移除背景和字體相關 */
+             width: 55px; 
+             height: 55px; 
+             border-radius: 50%; 
+             /* 移除：background: linear-gradient(45deg, var(--primary), var(--secondary)); */
+             /* 移除：display: flex; align-items: center; justify-content: center; */
+             /* 移除：font-weight: bold; font-size: 1.1rem; color: var(--dark); */
+             box-shadow: 0 0 8px var(--primary); /* 保留光暈效果 */
+             margin-right: 15px; 
+        }
+
+        /* 【新增樣式：圖片頭像樣式】 */
+        .testimonial-avatar-img {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%; /* 圓形 */
+            object-fit: cover; /* 確保圖片不被拉伸 */
+            border: 3px solid var(--primary); /* 增加一個亮邊框 */
+            box-shadow: 0 0 8px var(--primary), 0 0 15px rgba(255, 0, 255, 0.5); /* 強化光暈效果 */
+        }
+        
         .testimonial-info h4 { font-size: 1.4rem; margin-bottom: 3px; color: var(--light); }
         .testimonial-info p { color: var(--secondary); font-size: 1rem; font-weight: 600; }
         .testimonial-content p { color: #cbd5e1; line-height: 1.7; font-style: italic; }
@@ -444,7 +467,7 @@
         <div class="container">
             <nav>
                 <div class="brand-area"> 
-                    <img class="full-width-logo" src="img/MeowFang_Logo.png" alt="喵方旅團 Logo">
+                    <img class="full-width-logo" src="https://raw.githubusercontent.com/rayfang222/MeowFang.com/main/img/MeowFang_Logo.png" alt="喵方旅團 Logo">
                     <div class="logo">喵方旅團</div>
                 </div>
                 
@@ -539,7 +562,9 @@
             <div class="testimonial-grid">
                 <div class="testimonial-card">
                     <div class="testimonial-header">
-                        <div class="testimonial-avatar">羅</div> 
+                        <div class="testimonial-avatar">
+                            <img src="https://raw.githubusercontent.com/rayfang222/MeowFang.com/main/img/Lyvia.png" alt="羅伯特頭像" class="testimonial-avatar-img">
+                        </div> 
                         <div class="testimonial-info">
                             <h4>羅伯特</h4>
                             <p>副團長</p>
@@ -551,7 +576,9 @@
                 </div>
                 <div class="testimonial-card">
                     <div class="testimonial-header">
-                        <div class="testimonial-avatar">陳</div>
+                         <div class="testimonial-avatar">
+                            <img src="https://raw.githubusercontent.com/rayfang222/MeowFang.com/main/img/penguinkiki%20.png" alt="Lyvia頭像" class="testimonial-avatar-img">
+                        </div>
                         <div class="testimonial-info">
                             <h4>Lyvia</h4>
                             <p>副團長</p>
@@ -563,7 +590,9 @@
                 </div>
                 <div class="testimonial-card">
                     <div class="testimonial-header">
-                        <div class="testimonial-avatar">王</div>
+                         <div class="testimonial-avatar">
+                            <img src="https://raw.githubusercontent.com/rayfang222/MeowFang.com/main/img/willy._..PNG" alt="企鵝頭像" class="testimonial-avatar-img">
+                        </div>
                         <div class="testimonial-info">
                             <h4>企鵝</h4>
                             <p>副團長</p>

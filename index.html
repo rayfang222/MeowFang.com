@@ -151,10 +151,10 @@
         }
         /* ---------------------------------------------------- */
         
-        /* **【新增/修改樣式：Hero 區塊 <h1> 樣式覆蓋】** */
+        /* **【核心修改：Hero 區塊 <h1> 樣式覆蓋】** */
         .hero h1 {
             /* 繼承 .logo 的漸層設定 */
-            font-size: 4rem; /* 比原來的 5rem 稍大一點 */
+            font-size: 4.5rem; /* 比原來的 5rem 稍大一點 */
             margin-bottom: 25px;
             font-weight: 800;
             letter-spacing: 2px;
@@ -174,7 +174,13 @@
             display: block; 
         }
 
-        /* **【新增樣式：結束】** */
+        /* **【新增樣式：分隔符與單行文字樣式】** */
+        .hero h1 .separator {
+            /* 讓分隔符與中文/英文線條一樣擁有漸層效果 */
+            font-weight: 800; /* 加粗 */
+            margin: 0 15px; /* 稍微增加左右間距 */
+        }
+        /* **【新增/修改樣式：結束】** */
 
         .nav-links {
             display: flex;
@@ -539,6 +545,11 @@
                 font-weight: 600;
                 line-height: 1.4;
             }
+
+            /* **【新增樣式：在行動版下隱藏分隔符】** */
+            .hero h1 .separator {
+                display: none;
+            }
             /* **【CSS 修改：結束】** */
             
             .hero {
@@ -660,7 +671,7 @@
         <div class="container">
             <h1>
                 <span class="zh-line">喵方旅團</span> 
-                <span class="en-line">MeowFang Legion</span>
+                <span class="separator"> | </span> <span class="en-line">MeowFang Legion</span>
             </h1>
             <p>喵方旅團是一個玩 Minecraft 為主的團體。我們聚集了來自各地的玩家，無論你喜歡建築、探索、對戰或單純聊天，都能在這裡找到屬於自己的位置。</p>
             <p>「加入旅團不只是玩遊戲，而是一趟夢幻的旅程」</p> 

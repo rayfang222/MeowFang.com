@@ -151,30 +151,29 @@
         }
         /* ---------------------------------------------------- */
         
-        /* **【新增樣式：Hero 區塊 Logo 樣式覆蓋】** */
-        .hero-logo {
-            /* 繼承 .logo 的 flex 結構，但調整字體大小 */
+        /* **【新增/修改樣式：Hero 區塊 <h1> 樣式覆蓋】** */
+        .hero h1 {
+            /* 繼承 .logo 的漸層設定 */
             font-size: 6rem; /* 比原來的 5rem 稍大一點 */
             margin-bottom: 25px;
-            /* 重複漸層設定，確保 Hero 區塊內字體有漸層效果 */
+            font-weight: 800;
+            letter-spacing: 2px;
+
             background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent), var(--light)); 
             background-size: 300% 100%;
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             animation: gradient-shift 6s linear infinite;
+
+            /* 預設為單行 (桌面版樣式) */
+            line-height: 1.2;
+            white-space: nowrap; /* 強制不換行 */
+
+            /* 確保不會從原本的 .hero-logo 結構繼承 flex-direction: column */
+            display: block; 
         }
 
-        .hero-logo .zh {
-            font-size: 1em; /* 保持 6rem 的大小 */
-            line-height: 1.1;
-        }
-
-        .hero-logo .en {
-            font-size: 0.4em; /* 英文行相對中文行更小，配合大標題 */
-            font-weight: 600;
-            line-height: 1.4;
-        }
         /* **【新增樣式：結束】** */
 
         .nav-links {
@@ -271,7 +270,7 @@
         }
 
         /* **【CSS 修改：移除原 .hero h1 樣式】** */
-        /* .hero h1 { ... 樣式已移除，由 .hero-logo 接管樣式 */
+        /* .hero h1 { ... 樣式已移除，由 .hero h1 接管樣式 */
 
         .hero p {
             font-size: 1.3rem;
@@ -288,17 +287,13 @@
             margin-top: 40px;
         }
         /*修復#7 手機、平板 中間大標題的「團」會跑到下一行*/ 
-        /* **【CSS 修改：調整為適用於新結構的樣式】** */
-        .hero-title, .hero-logo { /* 適用於新的 .hero-logo 結構 */
+        /* **【CSS 修改：原樣式調整，但現在主要由 .hero h1 控制】** */
+        .hero-title { 
             line-height: 1.2;
             overflow: visible;
             white-space: nowrap;
         }
-        @media (max-width: 600px) {
-            .hero-title, .hero-logo { /* 適用於新的 .hero-logo 結構 */
-                font-size: 5vw;
-            }
-        }
+        /* @media (max-width: 600px) 移除，因為行動版有自己的 h1 換行邏輯 */
 
         /* 次要按鈕樣式優化 (略) */
         .secondary-button {
@@ -332,13 +327,13 @@
         .section-title span { background: linear-gradient(to right, var(--primary), var(--accent)); -webkit-background-clip: text; background-clip: text; color: transparent; }
         .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
         .feature-card { background: rgba(36, 18, 60, 0.6); border-radius: 20px; padding: 35px; text-align: center; transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease; backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.15); opacity: 0; transform: translateY(20px); }
-        /* 卡片 hover 效果變更為藍紫色 */
+        /* 卡片 hover 效果變更為藍紫色 (略) */
         .feature-card:hover { transform: translateY(-15px); box-shadow: 0 25px 40px rgba(0, 0, 0, 0.5), 0 0 15px var(--accent); border-color: var(--accent); }
         .feature-icon { font-size: 3.5rem; margin-bottom: 25px; 
-            /* 圖標漸層變更為洋紅/蘭花紫 */
+            /* 圖標漸層變更為洋紅/蘭花紫 (略) */
             background: linear-gradient(45deg, var(--primary), var(--secondary)); 
             -webkit-background-clip: text; background-clip: text; color: transparent; 
-            /* 圖標陰影變更為洋紅色 */
+            /* 圖標陰影變更為洋紅色 (略) */
             text-shadow: 0 0 5px rgba(255, 0, 255, 0.5); 
         }
         .feature-card h3 { font-size: 1.7rem; margin-bottom: 15px; color: var(--light); font-weight: 700; }
@@ -347,16 +342,16 @@
         .stats { padding: 100px 0; background: var(--mid-dark); }
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; text-align: center; }
         .stat-item h3 { font-size: 4.5rem; margin-bottom: 10px; 
-            /* 數字漸層變更為洋紅/蘭花紫 */
+            /* 數字漸層變更為洋紅/蘭花紫 (略) */
             background: linear-gradient(to right, var(--primary), var(--secondary)); 
             -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: 900; 
-            /* 數字陰影變更為洋紅色 */
+            /* 數字陰影變更為洋紅色 (略) */
             text-shadow: 0 0 8px rgba(255, 0, 255, 0.5); 
         }
         .stat-item p { font-size: 1.3rem; color: var(--light); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
         /* Testimonials Section Styles (略) */
         .testimonials { padding: 100px 0; }
-        /* 調整 Testimonial Grid 佈局以容納 5 個元素 */
+        /* 調整 Testimonial Grid 佈局以容納 5 個元素 (略) */
         .testimonial-grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* 略微縮小最小寬度以容納更多欄位 */
@@ -368,12 +363,12 @@
             border-radius: 20px; 
             padding: 30px; 
             backdrop-filter: blur(10px); 
-            /* 卡片邊框變更為藍紫色透明 */
+            /* 卡片邊框變更為藍紫色透明 (略) */
             border: 1px solid rgba(138, 43, 226, 0.3); 
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); 
             transition: transform 0.3s ease; 
         }
-        /* 新增：在較大的螢幕上，確保每列顯示的卡片數量適當 (例如 5 個卡片時，一行 3 個，下一行 2 個) */
+        /* 新增：在較大的螢幕上，確保每列顯示的卡片數量適當 (例如 5 個卡片時，一行 3 個，下一行 2 個) (略) */
         @media (min-width: 1200px) {
             .testimonial-grid {
                 /* 在大螢幕上嘗試 4 欄或 5 欄 */
@@ -405,7 +400,7 @@
             width: 55px; 
             height: 55px; 
             border-radius: 50%; 
-            /* 光暈效果變更為洋紅色 */
+            /* 光暈效果變更為洋紅色 (略) */
             box-shadow: 0 0 8px var(--primary); 
             margin-right: 15px; 
         }
@@ -416,47 +411,47 @@
             height: 55px;
             border-radius: 50%; /* 圓形 */
             object-fit: cover; /* 確保圖片不被拉伸 */
-            /* 邊框顏色變更為洋紅色 */
+            /* 邊框顏色變更為洋紅色 (略) */
             border: 3px solid var(--primary); 
-            /* 強化光暈效果變更為洋紅色 */
+            /* 強化光暈效果變更為洋紅色 (略) */
             box-shadow: 0 0 8px var(--primary), 0 0 15px rgba(255, 0, 255, 0.5); 
         }
         
         .testimonial-info h4 { font-size: 1.4rem; margin-bottom: 3px; color: var(--light); }
-        /* 副標題顏色變更為蘭花紫 */
+        /* 副標題顏色變更為蘭花紫 (略) */
         .testimonial-info p { color: var(--secondary); font-size: 1rem; font-weight: 600; }
         .testimonial-content p { color: #e9e4f0; line-height: 1.7; font-style: italic; }
         /* CTA Section Styles (略) */
         .cta-section { padding: 120px 0; text-align: center; 
-            /* CTA 背景漸層變更為藍紫/洋紅 */
+            /* CTA 背景漸層變更為藍紫/洋紅 (略) */
             background: linear-gradient(135deg, rgba(138, 43, 226, 0.1), rgba(255, 0, 255, 0.1)); 
             border-top: 1px solid rgba(255, 255, 255, 0.1); }
         .cta-section h2 { font-size: 3.5rem; margin-bottom: 25px; 
-            /* 標題漸層變更為洋紅/蘭花紫 */
+            /* 標題漸層變更為洋紅/蘭花紫 (略) */
             background: linear-gradient(to right, var(--primary), var(--secondary)); 
             -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: 800; }
         .cta-section p { max-width: 700px; margin: 0 auto 50px; color: #d8c2e6; font-size: 1.2rem; line-height: 1.6; }
         /* Footer Styles (略) */
         footer { padding: 80px 0 40px; background: var(--dark); 
-            /* 邊框顏色變更為藍紫色 */
+            /* 邊框顏色變更為藍紫色 (略) */
             border-top: 2px solid var(--accent); 
         }
         .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 50px; }
         .footer-column h3 { font-size: 1.5rem; margin-bottom: 20px; position: relative; padding-bottom: 10px; color: var(--light); }
-        /* 頁腳標題下劃線顏色變更為蘭花紫 */
+        /* 頁腳標題下劃線顏色變更為蘭花紫 (略) */
         .footer-column h3::after { content: ''; position: absolute; bottom: 0; left: 0; width: 60px; height: 3px; background: var(--secondary); }
         .footer-links { list-style: none; }
         .footer-links li { margin-bottom: 15px; }
         .footer-links a { color: #d8c2e6; text-decoration: none; transition: color 0.3s ease, transform 0.3s ease; display: inline-block; }
-        /* 連結 hover 顏色變更為洋紅色 */
+        /* 連結 hover 顏色變更為洋紅色 (略) */
         .footer-links a:hover { color: var(--primary); transform: translateX(5px); }
         .social-icons { display: flex; gap: 15px; margin-top: 25px; }
         .social-icons a { display: flex; align-items: center; justify-content: center; width: 45px; height: 45px; border-radius: 50%; 
-            /* 社交圖標背景變更為藍紫透明 */
+            /* 社交圖標背景變更為藍紫透明 (略) */
             background: rgba(138, 43, 226, 0.2); 
             color: var(--light); font-size: 1.2rem; transition: all 0.3s ease; }
         .social-icons a:hover { 
-            /* 社交圖標 hover 效果變更為洋紅色 */
+            /* 社交圖標 hover 效果變更為洋紅色 (略) */
             background: var(--primary); 
             color: var(--dark); 
             transform: scale(1.1) rotate(5deg); 
@@ -511,7 +506,7 @@
                 height: 40px; 
             }
             
-            /* 【核心修改區域】行動版 Logo 尺寸調整 */
+            /* 【核心修改區域】行動版 Logo 尺寸調整 (略) */
             .logo {
                 font-size: 20px; /* 行動版 Logo 縮小 (作為基礎字體大小) */
             }
@@ -524,9 +519,25 @@
                 font-size: 0.5em; /* 英文行維持一半大小 */
             }
             
-            /* **【CSS 修改：Hero Logo 行動版調整】** */
-            .hero-logo {
-                font-size: 3.5rem; /* Hero Logo 在手機上縮小 */
+            /* **【CSS 修改：Hero h1 行動版調整】** */
+            .hero h1 {
+                font-size: 3.5rem; /* Hero 標題在手機上縮小 */
+                /* 恢復原本的兩行顯示 (即覆蓋桌面版的 white-space: nowrap) */
+                white-space: normal; /* 允許換行 */
+                display: flex; /* 使用 flex 垂直排版來強制中文/英文在不同行 */
+                flex-direction: column;
+                align-items: center; /* 讓兩行居中 */
+            }
+            /* **【新增樣式：在行動版下調整 h1 內的行間距，模擬原本的 .hero-logo 結構】** */
+            .hero h1 .zh-line {
+                font-size: 1em; /* 繼承 3.5rem */
+                line-height: 1.1;
+                font-weight: 800;
+            }
+            .hero h1 .en-line {
+                font-size: 0.4em; /* 英文行相對中文行更小 */
+                font-weight: 600;
+                line-height: 1.4;
             }
             /* **【CSS 修改：結束】** */
             
@@ -567,12 +578,12 @@
                 flex-direction: column;
                 gap: 0;
                 padding: 0;
-                /* 邊框顏色變更為藍紫色 */
+                /* 邊框顏色變更為藍紫色 (略) */
                 border-top: 1px solid var(--accent); 
                 
                 max-height: 0;
                 overflow: hidden;
-                /* 更改為 cubic-bezier 增加開合的科技感 */
+                /* 更改為 cubic-bezier 增加開合的科技感 (略) */
                 transition: max-height 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
                 box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5);
             }
@@ -647,10 +658,10 @@
 
     <section class="hero" id="home">
         <div class="container">
-            <div class="logo hero-logo">
-                <span class="zh">喵方旅團</span>
-                <span class="en">MeowFang Legion</span>
-            </div>
+            <h1>
+                <span class="zh-line">喵方旅團</span> 
+                <span class="en-line">MeowFang Legion</span>
+            </h1>
             <p>喵方旅團是一個玩 Minecraft 為主的團體。我們聚集了來自各地的玩家，無論你喜歡建築、探索、對戰或單純聊天，都能在這裡找到屬於自己的位置。</p>
             <p>「加入旅團不只是玩遊戲，而是一趟夢幻的旅程」</p> 
             <div class="hero-buttons">

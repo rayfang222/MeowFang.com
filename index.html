@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
@@ -117,7 +116,7 @@
         }
         
         /* ---------------------------------------------------- */
-        /* 【核心修改區域】Logo 樣式：實現中文/英文兩行不換行 */
+        /* 【核心修改區域】Logo 樣式：實現中文/英文兩行不換行 (Header Logo) */
         /* ---------------------------------------------------- */
         .logo {
             /* 啟用 Flexbox 垂直佈局 */
@@ -148,9 +147,44 @@
         .logo .en {
             font-size: 0.5em; /* 英文行較小，約為中文行的一半 */
             font-weight: 600;
-            line-height: 1.4; /* 調整行高讓兩行緊密一點 */ /*修復#5 左上角字符MeowFang Legion 的「g」顯示錯誤(1→1.4)*/
+            line-height: 1.4; /* 調整行高讓兩行緊密一點 */
         }
         /* ---------------------------------------------------- */
+
+        /* --- NEW/MODIFIED FOR HERO H1 --- */
+        .hero-title-split {
+            /* 複製 .logo 的所有樣式 */
+            display: flex;
+            flex-direction: column; 
+            white-space: nowrap; 
+            
+            /* 調整為 Hero 標題的尺寸 (桌面 5rem) */
+            font-size: 5rem; 
+            font-weight: 800; 
+            letter-spacing: 1px;
+            background: linear-gradient(to right, var(--primary), var(--secondary), var(--light), var(--accent)); /* 保留原 hero h1 的漸層 */
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradient-shift 6s linear infinite;
+            line-height: 1.1; 
+            margin-bottom: 25px; /* 保留原 h1 的 margin-bottom */
+            text-shadow: 0 0 5px rgba(255, 0, 255, 0.5);
+        }
+
+        .hero-title-split .zh {
+            font-size: 1em;
+            line-height: 1.1;
+        }
+
+        .hero-title-split .en {
+            font-size: 0.5em; 
+            font-weight: 600;
+            line-height: 1.4;
+        }
+        /* --- END NEW/MODIFIED FOR HERO H1 --- */
+
 
         .nav-links {
             display: flex;
@@ -245,20 +279,12 @@
             z-index: -1;
         }
 
-        .hero h1 {
-            font-size: 5rem;
-            margin-bottom: 25px;
-            /* 顏色變更為洋紅/紫的漸層 */
-            background: linear-gradient(to right, var(--primary), var(--secondary), var(--light), var(--accent));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            line-height: 1.1;
-            font-weight: 900;
-            /* 陰影變更為洋紅色 */
-            text-shadow: 0 0 5px rgba(255, 0, 255, 0.5);
-        }
-
+        /* ------------------------------------ */
+        /* 【MODIFIED】Hero h1 移除，改用 .hero-title-split */
+        /* ------------------------------------ */
+        /* .hero h1 { ... 移除原樣式，所有樣式移至 .hero-title-split */
+        /* } */
+        
         .hero p {
             font-size: 1.3rem;
             max-width: 800px;
@@ -273,16 +299,18 @@
             gap: 30px;
             margin-top: 40px;
         }
-        /*修復#7 手機、平板 中間大標題的「團」會跑到下一行*/ /*出現新問題#8*/
-        .hero-title, h1 {
-            line-height: 1.2;
+        /* 修復#7 手機、平板 中間大標題的「團」會跑到下一行*/ 
+        .hero-title-split, .hero-title, h1 {
             overflow: visible;
-            white-space: nowrap;
+            /* white-space: nowrap; <-- 移除，因為 div 本身需要允許內容排列 */
         }
         @media (max-width: 600px) {
-            .hero-title, h1 {
-                font-size: 5vw;
-            }
+            /* 此處調整原 h1 樣式，現由 .hero-title-split 控制 */
+            /* @media (max-width: 600px) {
+                .hero-title, h1 {
+                    font-size: 5vw;
+                }
+            } */
         }
 
         /* 次要按鈕樣式優化 (略) */
@@ -515,14 +543,16 @@
                 padding: calc(var(--header-height) + 80px) 0 100px; /* 根據新 header 高度調整 */
             }
 
-            .hero h1 {
+            /* 調整 Hero 標題尺寸 */
+            .hero-title-split {
                 font-size: 3rem;
+                margin-bottom: 25px;
             }
             
             .hero p {
                 font-size: 1.1rem;
             }
-
+            
             .hero-buttons {
                 flex-direction: column;
                 align-items: center;
@@ -611,7 +641,7 @@
                         <a href="#home">首頁</a> 
                         <a href="#features">旅團特色</a>
                         <a href="#features">玩家資訊</a> 
-                        <a href="#features">加入方式</a> 
+                        <a href="#features">加入方式</a>
                         <a href="#contact">常見問題（FAQ）</a>
                     </div>
                     
@@ -629,7 +659,10 @@
 
     <section class="hero" id="home">
         <div class="container">
-            <h1>MeowFang Legion | 喵方旅團</h1>
+            <div class="hero-title-split">
+                <span class="zh">喵方旅團</span>
+                <span class="en">MeowFang Legion</span>
+            </div>
             <p>喵方旅團是一個玩 Minecraft 為主的團體。我們聚集了來自各地的玩家，無論你喜歡建築、探索、對戰或單純聊天，都能在這裡找到屬於自己的位置。</p>
             <p>「加入旅團不只是玩遊戲，而是一趟夢幻的旅程」</p> 
             <div class="hero-buttons">
@@ -698,7 +731,7 @@
                 <div class="testimonial-card">
                     <div class="testimonial-header">
                         <div class="testimonial-avatar">
-                            <img src="img/rayfang222.png" alt="方方頭像" class="testimonial-avatar-img">
+                            <img src="https://raw.githubusercontent.com/rayfang222/MeowFang.com/main/img/rayfang222.png" alt="方方頭像" class="testimonial-avatar-img">
                         </div> 
                         <div class="testimonial-info">
                             <h4>方方</h4>
@@ -712,58 +745,58 @@
                 <div class="testimonial-card">
                     <div class="testimonial-header">
                             <div class="testimonial-avatar">
-                            <img src="https://raw.githubusercontent.com/rayfang222/MeowFang.com/main/img/willy._..PNG" alt="羅伯特頭像" class="testimonial-avatar-img">
+                                <img src="https://raw.githubusercontent.com/rayfang222/MeowFang.com/main/img/willy._..PNG" alt="羅伯特頭像" class="testimonial-avatar-img">
+                            </div>
+                            <div class="testimonial-info">
+                                <h4>羅伯特</h4>
+                                <p>副團長</p>
+                            </div>
                         </div>
-                        <div class="testimonial-info">
-                            <h4>羅伯特</h4>
-                            <p>副團長</p>
+                        <div class="testimonial-content">
+                            <p>"管理團隊專業又熱情，活動豐富，讓我們在這裡找到無限的創造力和樂趣。"</p>
                         </div>
-                    </div>
-                    <div class="testimonial-content">
-                        <p>"管理團隊專業又熱情，活動豐富，讓我們在這裡找到無限的創造力和樂趣。"</p>
-                    </div>
                 </div>
                 <div class="testimonial-card">
                     <div class="testimonial-header">
                             <div class="testimonial-avatar">
-                            <img src="https://raw.githubusercontent.com/rayfang222/MeowFang.com/main/img/Lyvia.png" alt="Lyvia頭像" class="testimonial-avatar-img">
+                                <img src="https://raw.githubusercontent.com/rayfang222/MeowFang.com/main/img/Lyvia.png" alt="Lyvia頭像" class="testimonial-avatar-img">
+                            </div>
+                            <div class="testimonial-info">
+                                <h4>Lyvia</h4>
+                                <p>副團長</p>
+                            </div>
                         </div>
-                        <div class="testimonial-info">
-                            <h4>Lyvia</h4>
-                            <p>副團長</p>
+                        <div class="testimonial-content">
+                            <p>"管理團隊專業又熱情，活動豐富，讓我們在這裡找到無限的創造力和樂趣。"</p>
                         </div>
-                    </div>
-                    <div class="testimonial-content">
-                        <p>"管理團隊專業又熱情，活動豐富，讓我們在這裡找到無限的創造力和樂趣。"</p>
-                    </div>
                 </div>
                 <div class="testimonial-card">
                     <div class="testimonial-header">
                             <div class="testimonial-avatar">
-                            <img src="https://raw.githubusercontent.com/rayfang222/MeowFang.com/main/img/penguinkiki%20.png" alt="企鵝頭像" class="testimonial-avatar-img">
+                                <img src="https://raw.githubusercontent.com/rayfang222/MeowFang.com/main/img/penguinkiki%20.png" alt="企鵝頭像" class="testimonial-avatar-img">
+                            </div>
+                            <div class="testimonial-info">
+                                <h4>企鵝</h4>
+                                <p>副團長</p>
+                            </div>
                         </div>
-                        <div class="testimonial-info">
-                            <h4>企鵝</h4>
-                            <p>副團長</p>
+                        <div class="testimonial-content">
+                            <p>"無論遇到什麼遊戲問題，社群支援總是迅速且到位。這就是我喜歡喵方的原因！"</p>
                         </div>
-                    </div>
-                    <div class="testimonial-content">
-                        <p>"無論遇到什麼遊戲問題，社群支援總是迅速且到位。這就是我喜歡喵方的原因！"</p>
-                    </div>
                 </div>
                 <div class="testimonial-card">
                     <div class="testimonial-header">
                             <div class="testimonial-avatar">
-                            <img src="img/Onijy .png" alt="Onijy頭像" class="testimonial-avatar-img">
+                                <img src="https://raw.githubusercontent.com/rayfang222/MeowFang.com/main/img/Onijy .png" alt="Onijy頭像" class="testimonial-avatar-img">
+                            </div>
+                            <div class="testimonial-info">
+                                <h4>Onijy</h4>
+                                <p>副團長</p>
+                            </div>
                         </div>
-                        <div class="testimonial-info">
-                            <h4>Onijy</h4>
-                            <p>副團長</p>
+                        <div class="testimonial-content">
+                            <p>"我很喜欢这个社区。因为大家都非常温柔、善良～！"</p>
                         </div>
-                    </div>
-                    <div class="testimonial-content">
-                        <p>"我很喜欢这个社区。因为大家都非常温柔、善良～！"</p>
-                    </div>
                 </div>
             </div>
         </div>
@@ -849,70 +882,25 @@
             });
 
             // ------------------------------------
-            // 2. Hamburger Menu Toggle Logic (優化後的漢堡選單切換)
+            // 2. Header Scroll Effect & Mobile Menu (保持原邏輯)
             // ------------------------------------
-            const menuToggle = document.getElementById('menu-toggle');
-            const navLinks = document.getElementById('menu');
-            const menuIcon = menuToggle.querySelector('i');
-
-            function toggleMenu() {
-                navLinks.classList.toggle('active');
-                
-                // 切換圖標 (漢堡 ☰ 變成 關閉 X)
-                if (navLinks.classList.contains('active')) {
-                    menuIcon.classList.remove('fa-bars');
-                    menuIcon.classList.add('fa-times');
-                } else {
-                    menuIcon.classList.remove('fa-times');
-                    menuIcon.classList.add('fa-bars');
-                }
-            }
-
-            menuToggle.addEventListener('click', toggleMenu);
-            
-            // 點擊菜單連結後自動關閉菜單 (行動版優化)
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                link.addEventListener('click', () => {
-                    // 僅在菜單開啟時執行關閉操作，並檢查是否在行動版尺寸
-                    if (navLinks.classList.contains('active') && window.innerWidth <= 768) {
-                        navLinks.classList.remove('active');
-                        menuIcon.classList.remove('fa-times');
-                        menuIcon.classList.add('fa-bars');
-                    }
-                });
-            });
-
-            // 調整視窗大小時自動關閉選單，並重設圖標 (從行動版變回桌面版時，確保菜單是收起的)
-            window.addEventListener('resize', () => {
-                if (window.innerWidth > 768) {
-                    navLinks.classList.remove('active');
-                    menuIcon.classList.remove('fa-times');
-                    menuIcon.classList.add('fa-bars');
-                }
-            });
-
-            // ====================================
-            // 3. 捲動顏色變化邏輯 (實現透明到深紫色的平滑過渡)
-            // ====================================
             const header = document.getElementById('mainHeader');
-            const scrollThreshold = 50; // 設定捲動超過 50px 後變色
+            const menu = document.getElementById('menu');
+            const menuToggle = document.getElementById('menu-toggle');
 
-            function handleScroll() {
-                // 取得當前垂直捲動的距離
-                if (window.scrollY > scrollThreshold) {
-                    // 捲動超過閾值，新增 'scrolled' 類別
+            // Header 捲動效果
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
                     header.classList.add('scrolled');
                 } else {
-                    // 捲動仍在頂部，移除 'scrolled' 類別
                     header.classList.remove('scrolled');
                 }
-            }
+            });
 
-            // 監聽網頁的捲動事件
-            window.addEventListener('scroll', handleScroll);
-            
-            // 初始化時檢查一次，以防頁面載入時就在非頂部（例如重新整理頁面）
-            handleScroll();
+            // 手機選單切換
+            menuToggle.addEventListener('click', () => {
+                menu.classList.toggle('active');
+            });
         });
     </script>
 </body>

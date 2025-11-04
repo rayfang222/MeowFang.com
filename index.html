@@ -154,7 +154,7 @@
         /* **【核心修改：Hero 區塊 <h1> 樣式覆蓋】** */
         .hero h1 {
             /* 繼承 .logo 的漸層設定 */
-            font-size: 4rem; /* 比原來的 5rem 稍大一點 */
+            font-size: 6rem; /* 比原來的 5rem 稍大一點 */
             margin-bottom: 25px;
             font-weight: 800;
             letter-spacing: 2px;
@@ -174,13 +174,12 @@
             display: block; 
         }
 
-        /* **【新增樣式：分隔符與單行文字樣式】** */
+        /* **【分隔符與單行文字樣式】** */
         .hero h1 .separator {
             /* 讓分隔符與中文/英文線條一樣擁有漸層效果 */
             font-weight: 800; /* 加粗 */
             margin: 0 15px; /* 稍微增加左右間距 */
         }
-        /* **【新增/修改樣式：結束】** */
 
         .nav-links {
             display: flex;
@@ -357,12 +356,12 @@
         .stat-item p { font-size: 1.3rem; color: var(--light); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
         /* Testimonials Section Styles (略) */
         .testimonials { padding: 100px 0; }
-        /* 調整 Testimonial Grid 佈局以容納 5 個元素 (略) */
+        /* 調整 Testimonial Grid 佈局以容納 6 個元素 */
         .testimonial-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* 略微縮小最小寬度以容納更多欄位 */
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
             gap: 30px; 
-            justify-content: center; /* 讓整體居中 */
+            justify-content: center; 
         }
         .testimonial-card { 
             background: rgba(36, 18, 60, 0.8); 
@@ -374,11 +373,11 @@
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); 
             transition: transform 0.3s ease; 
         }
-        /* 新增：在較大的螢幕上，確保每列顯示的卡片數量適當 (例如 5 個卡片時，一行 3 個，下一行 2 個) (略) */
+        /* 新增：在較大的螢幕上，確保每列顯示的卡片數量適當 (這裡針對 6 個卡片，在大螢幕上可以考慮 3 欄或 6 欄) */
         @media (min-width: 1200px) {
             .testimonial-grid {
-                /* 在大螢幕上嘗試 4 欄或 5 欄 */
-                grid-template-columns: repeat(5, 1fr); 
+                /* 在大螢幕上嘗試 3 欄，每行 3 個 */
+                grid-template-columns: repeat(3, 1fr); 
             }
         }
 
@@ -741,7 +740,7 @@
                 <div class="testimonial-card">
                     <div class="testimonial-header">
                         <div class="testimonial-avatar">
-                            <img src="img/rayfang222.png" alt="方方頭像" class="testimonial-avatar-img">
+                            <img src="https://raw.githubusercontent.com/rayfang222/MeowFang.com/main/img/rayfang222.png" alt="方方頭像" class="testimonial-avatar-img">
                         </div> 
                         <div class="testimonial-info">
                             <h4>方方</h4>
@@ -783,7 +782,7 @@
                 <div class="testimonial-card">
                     <div class="testimonial-header">
                             <div class="testimonial-avatar">
-                            <img src="https://raw.githubusercontent.com/rayfang222/MeowFang.com/main/img/penguinkiki%20.png" alt="企鵝頭像" class="testimonial-avatar-img">
+                            <img src="https://raw.githubusercontent.com/rayfang222/MeowFang.com/main/img/Timmy.png" alt="企鵝頭像" class="testimonial-avatar-img">
                             </div>
                             <div class="testimonial-info">
                                 <h4>企鵝</h4>
@@ -797,7 +796,7 @@
                 <div class="testimonial-card">
                     <div class="testimonial-header">
                             <div class="testimonial-avatar">
-                            <img src="img/Onijy .png" alt="Onijy頭像" class="testimonial-avatar-img">
+                            <img src="https://raw.githubusercontent.com/rayfang222/MeowFang.com/main/img/Onijy .png" alt="Onijy頭像" class="testimonial-avatar-img">
                             </div>
                             <div class="testimonial-info">
                                 <h4>Onijy</h4>
@@ -805,10 +804,24 @@
                             </div>
                         </div>
                     <div class="testimonial-content">
-                        <p>"我很喜欢这个社区。因为大家都非常温柔、善良～！"</p>
+                        <p>"我很喜歡這個團。因為大家都非常溫柔、善良～！"</p>
                     </div>
                 </div>
-            </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                            <div class="testimonial-avatar">
+                            <img src="https://raw.githubusercontent.com/rayfang222/MeowFang.com/main/img/new_member.png" alt="Timmy頭像" class="testimonial-avatar-img">
+                            </div>
+                            <div class="testimonial-info">
+                                <h4>Timmy</h4>
+                                <p>首席工程師</p>
+                            </div>
+                        </div>
+                    <div class="testimonial-content">
+                        <p>"新的冒險家，歡迎來到喵方！讓我們一起打造屬於自己的方塊傳奇吧。"</p>
+                    </div>
+                </div>
+                </div>
         </div>
     </section>
 

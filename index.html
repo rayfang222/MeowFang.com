@@ -116,7 +116,7 @@
         }
         
         /* ---------------------------------------------------- */
-        /* 【核心修改區域】Logo 樣式：實現中文/英文兩行不換行 (Header Logo) */
+        /* 【核心修改區域】Logo 樣式：實現中文/英文兩行不換行 (用於導航欄) */
         /* ---------------------------------------------------- */
         .logo {
             /* 啟用 Flexbox 垂直佈局 */
@@ -150,41 +150,32 @@
             line-height: 1.4; /* 調整行高讓兩行緊密一點 */
         }
         /* ---------------------------------------------------- */
-
-        /* --- NEW/MODIFIED FOR HERO H1 --- */
-        .hero-title-split {
-            /* 複製 .logo 的所有樣式 */
-            display: flex;
-            flex-direction: column; 
-            white-space: nowrap; 
-            
-            /* 調整為 Hero 標題的尺寸 (桌面 5rem) */
-            font-size: 5rem; 
-            font-weight: 800; 
-            letter-spacing: 1px;
-            background: linear-gradient(to right, var(--primary), var(--secondary), var(--light), var(--accent)); /* 保留原 hero h1 的漸層 */
+        
+        /* **【新增樣式：Hero 區塊 Logo 樣式覆蓋】** */
+        .hero-logo {
+            /* 繼承 .logo 的 flex 結構，但調整字體大小 */
+            font-size: 6rem; /* 比原來的 5rem 稍大一點 */
+            margin-bottom: 25px;
+            /* 重複漸層設定，確保 Hero 區塊內字體有漸層效果 */
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent), var(--light)); 
             background-size: 300% 100%;
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             animation: gradient-shift 6s linear infinite;
-            line-height: 1.1; 
-            margin-bottom: 25px; /* 保留原 h1 的 margin-bottom */
-            text-shadow: 0 0 5px rgba(255, 0, 255, 0.5);
         }
 
-        .hero-title-split .zh {
-            font-size: 1em;
+        .hero-logo .zh {
+            font-size: 1em; /* 保持 6rem 的大小 */
             line-height: 1.1;
         }
 
-        .hero-title-split .en {
-            font-size: 0.5em; 
+        .hero-logo .en {
+            font-size: 0.4em; /* 英文行相對中文行更小，配合大標題 */
             font-weight: 600;
             line-height: 1.4;
         }
-        /* --- END NEW/MODIFIED FOR HERO H1 --- */
-
+        /* **【新增樣式：結束】** */
 
         .nav-links {
             display: flex;
@@ -279,12 +270,9 @@
             z-index: -1;
         }
 
-        /* ------------------------------------ */
-        /* 【MODIFIED】Hero h1 移除，改用 .hero-title-split */
-        /* ------------------------------------ */
-        /* .hero h1 { ... 移除原樣式，所有樣式移至 .hero-title-split */
-        /* } */
-        
+        /* **【CSS 修改：移除原 .hero h1 樣式】** */
+        /* .hero h1 { ... 樣式已移除，由 .hero-logo 接管樣式 */
+
         .hero p {
             font-size: 1.3rem;
             max-width: 800px;
@@ -299,18 +287,17 @@
             gap: 30px;
             margin-top: 40px;
         }
-        /* 修復#7 手機、平板 中間大標題的「團」會跑到下一行*/ 
-        .hero-title-split, .hero-title, h1 {
+        /*修復#7 手機、平板 中間大標題的「團」會跑到下一行*/ 
+        /* **【CSS 修改：調整為適用於新結構的樣式】** */
+        .hero-title, .hero-logo { /* 適用於新的 .hero-logo 結構 */
+            line-height: 1.2;
             overflow: visible;
-            /* white-space: nowrap; <-- 移除，因為 div 本身需要允許內容排列 */
+            white-space: nowrap;
         }
         @media (max-width: 600px) {
-            /* 此處調整原 h1 樣式，現由 .hero-title-split 控制 */
-            /* @media (max-width: 600px) {
-                .hero-title, h1 {
-                    font-size: 5vw;
-                }
-            } */
+            .hero-title, .hero-logo { /* 適用於新的 .hero-logo 結構 */
+                font-size: 5vw;
+            }
         }
 
         /* 次要按鈕樣式優化 (略) */
@@ -526,7 +513,7 @@
             
             /* 【核心修改區域】行動版 Logo 尺寸調整 */
             .logo {
-                font-size: 20px; /* 行動版 Logo 縮小 (原本是 22px，現改為 20px 作為基礎) */
+                font-size: 20px; /* 行動版 Logo 縮小 (作為基礎字體大小) */
             }
 
             .logo .zh {
@@ -536,18 +523,19 @@
             .logo .en {
                 font-size: 0.5em; /* 英文行維持一半大小 */
             }
-            /* -------------------------------------- */
-
-
+            
+            /* **【CSS 修改：Hero Logo 行動版調整】** */
+            .hero-logo {
+                font-size: 3.5rem; /* Hero Logo 在手機上縮小 */
+            }
+            /* **【CSS 修改：結束】** */
+            
             .hero {
                 padding: calc(var(--header-height) + 80px) 0 100px; /* 根據新 header 高度調整 */
             }
 
-            /* 調整 Hero 標題尺寸 */
-            .hero-title-split {
-                font-size: 3rem;
-                margin-bottom: 25px;
-            }
+            /* **【CSS 修改：移除原 .hero h1 相關調整】** */
+            /* .hero h1 { font-size: 3rem; } */
             
             .hero p {
                 font-size: 1.1rem;
@@ -612,7 +600,7 @@
                 border-bottom: none;
             }
             
-            /* 行動版卡片和標題調整 (略) */
+            /* 調整 section-title */
             .section-title {
                 font-size: 2.2rem;
             }
@@ -641,7 +629,7 @@
                         <a href="#home">首頁</a> 
                         <a href="#features">旅團特色</a>
                         <a href="#features">玩家資訊</a> 
-                        <a href="#features">加入方式</a>
+                        <a href="#features">加入方式</a> 
                         <a href="#contact">常見問題（FAQ）</a>
                     </div>
                     
@@ -659,7 +647,7 @@
 
     <section class="hero" id="home">
         <div class="container">
-            <div class="hero-title-split">
+            <div class="logo hero-logo">
                 <span class="zh">喵方旅團</span>
                 <span class="en">MeowFang Legion</span>
             </div>
@@ -731,7 +719,7 @@
                 <div class="testimonial-card">
                     <div class="testimonial-header">
                         <div class="testimonial-avatar">
-                            <img src="https://raw.githubusercontent.com/rayfang222/MeowFang.com/main/img/rayfang222.png" alt="方方頭像" class="testimonial-avatar-img">
+                            <img src="img/rayfang222.png" alt="方方頭像" class="testimonial-avatar-img">
                         </div> 
                         <div class="testimonial-info">
                             <h4>方方</h4>
@@ -745,58 +733,58 @@
                 <div class="testimonial-card">
                     <div class="testimonial-header">
                             <div class="testimonial-avatar">
-                                <img src="https://raw.githubusercontent.com/rayfang222/MeowFang.com/main/img/willy._..PNG" alt="羅伯特頭像" class="testimonial-avatar-img">
+                            <img src="https://raw.githubusercontent.com/rayfang222/MeowFang.com/main/img/willy._..PNG" alt="羅伯特頭像" class="testimonial-avatar-img">
                             </div>
                             <div class="testimonial-info">
                                 <h4>羅伯特</h4>
                                 <p>副團長</p>
                             </div>
                         </div>
-                        <div class="testimonial-content">
-                            <p>"管理團隊專業又熱情，活動豐富，讓我們在這裡找到無限的創造力和樂趣。"</p>
-                        </div>
+                    <div class="testimonial-content">
+                        <p>"管理團隊專業又熱情，活動豐富，讓我們在這裡找到無限的創造力和樂趣。"</p>
+                    </div>
                 </div>
                 <div class="testimonial-card">
                     <div class="testimonial-header">
                             <div class="testimonial-avatar">
-                                <img src="https://raw.githubusercontent.com/rayfang222/MeowFang.com/main/img/Lyvia.png" alt="Lyvia頭像" class="testimonial-avatar-img">
+                            <img src="https://raw.githubusercontent.com/rayfang222/MeowFang.com/main/img/Lyvia.png" alt="Lyvia頭像" class="testimonial-avatar-img">
                             </div>
                             <div class="testimonial-info">
                                 <h4>Lyvia</h4>
                                 <p>副團長</p>
                             </div>
                         </div>
-                        <div class="testimonial-content">
-                            <p>"管理團隊專業又熱情，活動豐富，讓我們在這裡找到無限的創造力和樂趣。"</p>
-                        </div>
+                    <div class="testimonial-content">
+                        <p>"管理團隊專業又熱情，活動豐富，讓我們在這裡找到無限的創造力和樂趣。"</p>
+                    </div>
                 </div>
                 <div class="testimonial-card">
                     <div class="testimonial-header">
                             <div class="testimonial-avatar">
-                                <img src="https://raw.githubusercontent.com/rayfang222/MeowFang.com/main/img/penguinkiki%20.png" alt="企鵝頭像" class="testimonial-avatar-img">
+                            <img src="https://raw.githubusercontent.com/rayfang222/MeowFang.com/main/img/penguinkiki%20.png" alt="企鵝頭像" class="testimonial-avatar-img">
                             </div>
                             <div class="testimonial-info">
                                 <h4>企鵝</h4>
                                 <p>副團長</p>
                             </div>
                         </div>
-                        <div class="testimonial-content">
-                            <p>"無論遇到什麼遊戲問題，社群支援總是迅速且到位。這就是我喜歡喵方的原因！"</p>
-                        </div>
+                    <div class="testimonial-content">
+                        <p>"無論遇到什麼遊戲問題，社群支援總是迅速且到位。這就是我喜歡喵方的原因！"</p>
+                    </div>
                 </div>
                 <div class="testimonial-card">
                     <div class="testimonial-header">
                             <div class="testimonial-avatar">
-                                <img src="https://raw.githubusercontent.com/rayfang222/MeowFang.com/main/img/Onijy .png" alt="Onijy頭像" class="testimonial-avatar-img">
+                            <img src="img/Onijy .png" alt="Onijy頭像" class="testimonial-avatar-img">
                             </div>
                             <div class="testimonial-info">
                                 <h4>Onijy</h4>
                                 <p>副團長</p>
                             </div>
                         </div>
-                        <div class="testimonial-content">
-                            <p>"我很喜欢这个社区。因为大家都非常温柔、善良～！"</p>
-                        </div>
+                    <div class="testimonial-content">
+                        <p>"我很喜欢这个社区。因为大家都非常温柔、善良～！"</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -879,16 +867,20 @@
             featureCards.forEach(card => {
                 // 初始樣式已在 CSS 中定義，這裡只需開始觀察
                 observer.observe(card);
-            });
-
+            })
+            
             // ------------------------------------
-            // 2. Header Scroll Effect & Mobile Menu (保持原邏輯)
+            // 2. RWD 導航欄開關 (略，保持原邏輯)
             // ------------------------------------
-            const header = document.getElementById('mainHeader');
-            const menu = document.getElementById('menu');
             const menuToggle = document.getElementById('menu-toggle');
+            const navLinks = document.getElementById('menu');
 
-            // Header 捲動效果
+            menuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+            
+            // 捲動時 Header 樣式改變 (略，保持原邏輯)
+            const header = document.getElementById('mainHeader');
             window.addEventListener('scroll', () => {
                 if (window.scrollY > 50) {
                     header.classList.add('scrolled');
@@ -897,11 +889,7 @@
                 }
             });
 
-            // 手機選單切換
-            menuToggle.addEventListener('click', () => {
-                menu.classList.toggle('active');
-            });
-        });
+        })
     </script>
 </body>
 </html>

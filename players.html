@@ -4,41 +4,127 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>玩家資訊 | 喵方旅團</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="img/MeowFang-logo.PNG">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #FF00FF;
+            --secondary: #DA70D6;
+            --dark: #120721;
+            --mid-dark: #24123C;
+            --light: #fbeaff;
+            --accent: #8A2BE2;
+        }
+
+        body {
+            background: linear-gradient(145deg, var(--dark) 0%, var(--mid-dark) 100%);
+            color: var(--light);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        header {
+            background: rgba(18, 7, 33, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradient-shift 6s linear infinite;
+        }
+
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        nav a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 600;
+            margin-left: 25px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--secondary);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 40px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradient-shift 6s linear infinite;
+        }
+
+        .player-card {
+            background: rgba(36, 18, 60, 0.5);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .player-card h2 {
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+
+        .player-info {
+            line-height: 1.8;
+        }
+    </style>
 </head>
 
 <body>
-<header>
-    <div class="logo">喵方旅團</div>
-    <nav>
-        <ul class="nav-links">
-            <li><a href="index.html">首頁</a></li>
-            <li><a href="players.html" class="active">玩家資訊</a></li>
-            <li><a href="faq.html">常見問題</a></li>
-        </ul>
-    </nav>
-    <a class="cta-button" href="#">加入旅團</a>
-</header>
+    <header>
+        <div class="logo">喵方旅團</div>
+        <nav>
+            <a href="index.html">首頁</a>
+            <a href="player-info.html" style="color: var(--secondary);">玩家資訊</a>
+        </nav>
+    </header>
 
-<main>
-    <section class="content">
+    <div class="container">
         <h1>玩家資訊</h1>
-        <p>這裡未來可以放：</p>
-        <ul>
-            <li>玩家名單</li>
-            <li>旅團成員等級 / 職位</li>
-            <li>活躍玩家列表</li>
-            <li>貢獻排行榜</li>
-            <li>玩家規則、身分與稱號系統</li>
-        </ul>
 
-        <p>你可以告訴我要呈現什麼，我幫你做漂亮表格。</p>
-    </section>
-</main>
+        <!-- 玩家卡片範例 -->
+        <div class="player-card">
+            <h2><i class="fa-solid fa-user-ninja"></i> 玩家名稱：ExamplePlayer</h2>
+            <div class="player-info">
+                <p>等級：🏆 Lv.42</p>
+                <p>加入時間：2025-01-01</p>
+                <p>累積遊玩時間：120 小時</p>
+                <p>稱號：<span style="color: var(--primary);">資深探險家</span></p>
+            </div>
+        </div>
 
-<footer>
-    <p>© 2025 喵方旅團. All rights reserved.</p>
-</footer>
-<script src="script.js"></script>
+    </div>
 </body>
 </html>

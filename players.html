@@ -38,10 +38,18 @@
             z-index: 100;
         }
 
-        .logo {
-            font-size: 24px;
+       .logo {
+            /* 啟用 Flexbox 垂直佈局 */
+            display: flex;
+            flex-direction: column; 
+            /* 確保整個 Logo 區域不會換行 */
+            white-space: nowrap; 
+            
+            font-size: 28px; /* 桌面版總體大小 */
             font-weight: 800;
-            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            letter-spacing: 1px;
+            /* 顏色變更為洋紅/紫的漸層 */
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent)); 
             background-size: 300% 100%;
             -webkit-background-clip: text;
             background-clip: text;
@@ -49,12 +57,18 @@
             animation: gradient-shift 6s linear infinite;
         }
 
-        @keyframes gradient-shift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        /* 調整中文行樣式 */
+        .logo .zh {
+            font-size: 1em; /* 繼承父層的 28px */
+            line-height: 1.1;
         }
 
+        /* 調整英文行樣式 */
+        .logo .en {
+            font-size: 0.5em; /* 英文行較小，約為中文行的一半 */
+            font-weight: 600;
+            line-height: 1.4; /* 調整行高讓兩行緊密一點 */
+        }
         nav a {
             color: var(--light);
             text-decoration: none;

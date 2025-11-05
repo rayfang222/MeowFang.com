@@ -3,7 +3,7 @@
 [
   {
     "id": "MF-001",
-    "name": "小雞",
+    "name": "雪糕",
     "image": "img/player-avatar-01.png",
     "level": 99,
     "title": "創世神聖",
@@ -13,7 +13,7 @@
   },
   {
     "id": "MF-002",
-    "name": "方塊探索家",
+    "name": "小雞",
     "image": "img/player-avatar-02.png",
     "level": 55,
     "title": "冒險者先驅",

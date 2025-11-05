@@ -39,36 +39,20 @@
         }
 
        .logo {
-            /* 啟用 Flexbox 垂直佈局 */
             display: flex;
             flex-direction: column; 
-            /* 確保整個 Logo 區域不會換行 */
             white-space: nowrap; 
-            
-            font-size: 28px; /* 桌面版總體大小 */
+            font-size: 28px;
             font-weight: 800;
             letter-spacing: 1px;
-            /* 顏色變更為洋紅/紫的漸層 */
             background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent)); 
             background-size: 300% 100%;
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            animation: gradient-shift 6s linear infinite;
         }
-
-        /* 調整中文行樣式 */
-        .logo .zh {
-            font-size: 1em; /* 繼承父層的 28px */
-            line-height: 1.1;
-        }
-
-        /* 調整英文行樣式 */
-        .logo .en {
-            font-size: 0.5em; /* 英文行較小，約為中文行的一半 */
-            font-weight: 600;
-            line-height: 1.4; /* 調整行高讓兩行緊密一點 */
-        }
+        .logo .zh { font-size: 1em; line-height: 1.1; }
+        .logo .en { font-size: 0.5em; font-weight: 600; line-height: 1.4; }
         nav a {
             color: var(--light);
             text-decoration: none;
@@ -77,9 +61,7 @@
             transition: 0.3s;
         }
 
-        nav a:hover {
-            color: var(--secondary);
-        }
+        nav a:hover { color: var(--secondary); }
 
         .container {
             max-width: 1000px;
@@ -95,7 +77,6 @@
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            animation: gradient-shift 6s linear infinite;
         }
 
         .player-card {
@@ -103,6 +84,12 @@
             padding: 25px;
             border-radius: 15px;
             margin-bottom: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .player-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
 
         .player-card h2 {
@@ -110,8 +97,18 @@
             margin-bottom: 10px;
         }
 
-        .player-info {
-            line-height: 1.8;
+        .player-info { line-height: 1.8; }
+        
+        .player-info strong {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        /* 載入狀態樣式 */
+        #loading-message {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--secondary);
+            margin-top: 50px;
         }
     </style>
 </head>
@@ -130,18 +127,72 @@
 
     <div class="container">
         <h1>玩家資訊</h1>
-
-        <!-- 玩家卡片範例 -->
-        <div class="player-card">
-            <h2><i class="fa-solid fa-user-ninja"></i> 玩家名稱：ExamplePlayer</h2>
-            <div class="player-info">
-                <p>等級：🏆 Lv.42</p>
-                <p>加入時間：2025-01-01</p>
-                <p>累積遊玩時間：120 小時</p>
-                <p>稱號：<span style="color: var(--primary);">資深探險家</span></p>
-            </div>
-        </div>
-
+        <div id="loading-message">正在載入玩家數據... <i class="fa-solid fa-spinner fa-spin"></i></div>
     </div>
+
+    <script>
+        // 獲取容器元素
+        const container = document.querySelector('.container');
+        const loadingMessage = document.getElementById('loading-message');
+
+        /**
+         * 根據玩家數據陣列，動態生成並渲染 HTML 卡片
+         * @param {Array} playersData - 包含玩家物件的陣列
+         */
+        function renderPlayers(playersData) {
+            // 渲染前先移除載入訊息
+            if (loadingMessage) {
+                loadingMessage.remove();
+            }
+
+            playersData.forEach(player => {
+                const card = document.createElement('div');
+                card.classList.add('player-card');
+
+                const title = document.createElement('h2');
+                title.innerHTML = `<i class="fa-solid ${player.icon}"></i> 玩家名稱：${player.name}`;
+
+                const infoDiv = document.createElement('div');
+                infoDiv.classList.add('player-info');
+
+                infoDiv.innerHTML = `
+                    <p><strong>等級：</strong>🏆 Lv.${player.level}</p>
+                    <p><strong>加入時間：</strong>${player.joinDate}</p>
+                    <p><strong>累積遊玩時間：</strong>${player.playTime} 小時</p>
+                    <p><strong>稱號：</strong><span style="color: var(--primary);">${player.title}</span></p>
+                `;
+
+                card.appendChild(title);
+                card.appendChild(infoDiv);
+
+                container.appendChild(card);
+            });
+        }
+
+        fetch('data/players.json') // 這裡替換成您的 JSON 檔案路徑
+            .then(response => {
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                // 將響應主體解析為 JSON
+                return response.json();
+            })
+            .then(playersData => {
+                // 成功獲取並解析數據後，呼叫渲染函數
+                renderPlayers(playersData);
+                console.log("玩家資訊已成功從 players.json 載入並渲染。");
+            })
+            .catch(error => {
+                // 處理任何錯誤，例如網路問題或 JSON 解析失敗
+                console.error("載入玩家數據時發生錯誤：", error);
+                
+                // 顯示錯誤訊息給用戶
+                if (loadingMessage) {
+                    loadingMessage.innerHTML = `載入失敗：${error.message}，請確認 players.json 檔案是否存在且格式正確，並在本地伺服器上運行。`;
+                    loadingMessage.style.color = 'red';
+                }
+            });
+    </script>
 </body>
 </html>

@@ -26,11 +26,11 @@
             min-height: 100vh;
         }
 
-        /* ------------------ 導航列樣式 (保持不變) ------------------ */
+        /* ------------------ 導航列樣式 (優化 RWD) ------------------ */
         header {
             background: rgba(18, 7, 33, 0.95);
             backdrop-filter: blur(10px);
-            padding: 15px 40px;
+            padding: 15px 20px; /* 縮小左右內邊距 */
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -40,17 +40,18 @@
         }
         
         .full-width-logo {
-            width: 45px;
-            height: 45px;
+            width: 40px; /* 縮小 Logo 尺寸 */
+            height: 40px;
             object-fit: cover;
             transition: none;
+            margin-right: 10px; /* logo 和文字之間增加間隔 */
         }
         
        .logo {
             display: flex;
             flex-direction: column; 
             white-space: nowrap; 
-            font-size: 28px;
+            font-size: 24px; /* 縮小字體 */
             font-weight: 800;
             letter-spacing: 1px;
             background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent)); 
@@ -58,19 +59,76 @@
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            /* 讓 Logo 保持一行顯示 */
+            min-width: 0;
+        }
+        .logo-group {
+             display: flex;
+             align-items: center;
         }
         .logo .zh { font-size: 1em; line-height: 1.1; }
         .logo .en { font-size: 0.5em; font-weight: 600; line-height: 1.4; }
+        
         nav a {
             color: var(--light);
             text-decoration: none;
             font-weight: 600;
-            margin-left: 25px;
+            margin-left: 15px; /* 縮小間隔 */
             transition: 0.3s;
+            /* 讓 Font-Awesome 圖示更大 */
+            font-size: 1.2rem;
         }
 
         nav a:hover { color: var(--secondary); }
+        
+        /* Font-Awesome 圖示的額外樣式 */
+        nav a .fa-house {
+            font-size: 1.5rem; /* 讓 Home 圖示更突出 */
+            vertical-align: middle;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover .fa-house {
+            color: var(--primary);
+        }
 
+        /* 媒體查詢：優化小螢幕佈局 */
+        @media (max-width: 600px) {
+            header {
+                flex-direction: row; /* 保持標誌和導覽列在同一行 */
+                align-items: center;
+                padding: 10px 15px;
+            }
+            
+            nav {
+                margin-left: auto; /* 將導覽列推到最右邊 */
+            }
+            
+            .logo {
+                font-size: 20px; /* 小螢幕更小的字體 */
+            }
+            .full-width-logo {
+                width: 35px;
+                height: 35px;
+            }
+            
+            /* 將導覽列項目並排顯示，僅使用圖示 */
+            nav a {
+                margin-left: 10px;
+                font-size: 1.1rem;
+            }
+            
+            /* 隱藏首頁的文字 (如果有的話，但我們這裡只用圖示了) */
+            nav a span {
+                 display: none;
+            }
+            
+            nav a .fa-house {
+                font-size: 1.4rem; /* 小螢幕的 Home 圖示大小 */
+            }
+        }
+        
+        /* ------------------ 內容區塊樣式 (保持不變) ------------------ */
         .container {
             max-width: 1000px;
             margin: 60px auto;
@@ -95,12 +153,11 @@
             margin-top: 50px;
         }
 
-        /* ------------------ 玩家網格新樣式 ------------------ */
+        /* ------------------ 玩家網格新樣式 (保持不變) ------------------ */
         #player-grid {
             display: grid;
-            /* 響應式網格：最小寬度 150px，自動填充一行 */
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 30px; /* 網格間距 */
+            gap: 30px;
             padding-top: 20px;
         }
 
@@ -112,7 +169,7 @@
             padding: 15px;
             border-radius: 15px;
             text-align: center;
-            cursor: pointer; /* 顯示可點擊 */
+            cursor: pointer;
             transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
             border: 2px solid transparent;
         }
@@ -127,7 +184,7 @@
         .player-item img {
             width: 100px;
             height: 100px;
-            border-radius: 50%; /* 圓形頭像 */
+            border-radius: 50%;
             object-fit: cover;
             margin-bottom: 10px;
             border: 4px solid var(--primary);
@@ -138,36 +195,36 @@
             color: var(--light);
             font-size: 1.2rem;
             margin: 5px 0 0 0;
-            white-space: nowrap; /* 防止名稱換行 */
+            white-space: nowrap;
             overflow: hidden;
-            text-overflow: ellipsis; /* 超出部分顯示省略號 */
+            text-overflow: ellipsis;
             width: 100%;
         }
 
-        /* ------------------ 彈出視窗 (Modal) 樣式 ------------------ */
+        /* ------------------ 彈出視窗 (Modal) 樣式 (保持不變) ------------------ */
         .modal {
-            display: none; /* 預設隱藏 */
+            display: none;
             position: fixed;
-            z-index: 200; /* 確保在最上層 */
+            z-index: 200;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
             overflow: auto;
-            background-color: rgba(0,0,0,0.7); /* 半透明黑色背景 */
+            background-color: rgba(0,0,0,0.7);
             backdrop-filter: blur(5px);
         }
 
         .modal-content {
             background-color: var(--mid-dark);
-            margin: 10% auto; /* 垂直居中，並從頂部向下 10% */
+            margin: 10% auto;
             padding: 30px;
             border: 1px solid var(--primary);
             width: 80%;
             max-width: 500px;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            animation: slideIn 0.3s ease-out; /* 入場動畫 */
+            animation: slideIn 0.3s ease-out;
         }
         
         @keyframes slideIn {
@@ -208,7 +265,7 @@
             color: var(--secondary);
             font-weight: 600;
             display: inline-block;
-            width: 120px; /* 統一標籤寬度 */
+            width: 120px;
         }
         
         #modal-details .detail-image {
@@ -226,15 +283,16 @@
 
 <body>
     <header>
-        <img class="full-width-logo" src="https://raw.githubusercontent.com/rayfang222/MeowFang.com/main/img/MeowFang_Logo.png" alt="喵方旅團 Logo">
-        <div class="logo">
-            <span class="zh">喵方旅團</span>
-            <span class="en">MeowFang Legion</span>
+        <div class="logo-group">
+            <img class="full-width-logo" src="https://raw.githubusercontent.com/rayfang222/MeowFang.com/main/img/MeowFang_Logo.png" alt="喵方旅團 Logo">
+            <div class="logo">
+                <span class="zh">喵方旅團</span>
+                <span class="en">MeowFang Legion</span>
+            </div>
         </div>
         <nav>
-            <a href="index.html">首頁</a>
-            <a href="players.html" style="color: var(--secondary);">玩家資訊</a>
-        </nav>
+            <a href="https://rayfang222.github.io/MeowFang.com/" title="首頁"><i class="fa-solid fa-house"></i></a>
+            </nav>
     </header>
 
     <div class="container">
@@ -248,7 +306,7 @@
         <div class="modal-content">
             <span class="close-btn">&times;</span>
             <div id="modal-details">
-                </div>
+            </div>
         </div>
     </div>
 

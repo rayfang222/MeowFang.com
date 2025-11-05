@@ -26,6 +26,7 @@
             min-height: 100vh;
         }
 
+        /* ------------------ 導航列樣式 (保持不變) ------------------ */
         header {
             background: rgba(18, 7, 33, 0.95);
             backdrop-filter: blur(10px);
@@ -79,37 +80,140 @@
             color: transparent;
         }
 
-        .player-card {
-            background: rgba(36, 18, 60, 0.5);
-            padding: 25px;
-            border-radius: 15px;
-            margin-bottom: 20px;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .player-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .player-card h2 {
-            color: var(--secondary);
-            margin-bottom: 10px;
-        }
-
-        .player-info { line-height: 1.8; }
-        
-        .player-info strong {
-            color: var(--primary);
-            font-weight: 600;
-        }
-        /* 載入狀態樣式 */
+        /* 載入狀態樣式 (保持不變) */
         #loading-message {
             text-align: center;
             font-size: 1.2rem;
             color: var(--secondary);
             margin-top: 50px;
         }
+
+        /* ------------------ 玩家網格新樣式 ------------------ */
+        #player-grid {
+            display: grid;
+            /* 響應式網格：最小寬度 150px，自動填充一行 */
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 30px; /* 網格間距 */
+            padding-top: 20px;
+        }
+
+        .player-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(36, 18, 60, 0.5);
+            padding: 15px;
+            border-radius: 15px;
+            text-align: center;
+            cursor: pointer; /* 顯示可點擊 */
+            transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .player-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px var(--secondary);
+            background: rgba(36, 18, 60, 0.8);
+            border-color: var(--primary);
+        }
+
+        .player-item img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%; /* 圓形頭像 */
+            object-fit: cover;
+            margin-bottom: 10px;
+            border: 4px solid var(--primary);
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
+        }
+
+        .player-item h3 {
+            color: var(--light);
+            font-size: 1.2rem;
+            margin: 5px 0 0 0;
+            white-space: nowrap; /* 防止名稱換行 */
+            overflow: hidden;
+            text-overflow: ellipsis; /* 超出部分顯示省略號 */
+            width: 100%;
+        }
+
+        /* ------------------ 彈出視窗 (Modal) 樣式 ------------------ */
+        .modal {
+            display: none; /* 預設隱藏 */
+            position: fixed;
+            z-index: 200; /* 確保在最上層 */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.7); /* 半透明黑色背景 */
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: var(--mid-dark);
+            margin: 10% auto; /* 垂直居中，並從頂部向下 10% */
+            padding: 30px;
+            border: 1px solid var(--primary);
+            width: 80%;
+            max-width: 500px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            animation: slideIn 0.3s ease-out; /* 入場動畫 */
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close-btn {
+            color: var(--secondary);
+            float: right;
+            font-size: 30px;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .close-btn:hover,
+        .close-btn:focus {
+            color: var(--primary);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        #modal-details h2 {
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        #modal-details p {
+            line-height: 1.8;
+            font-size: 1.1rem;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+            padding: 8px 0;
+        }
+        
+        #modal-details strong {
+            color: var(--secondary);
+            font-weight: 600;
+            display: inline-block;
+            width: 120px; /* 統一標籤寬度 */
+        }
+        
+        #modal-details .detail-image {
+            display: block;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 20px auto;
+            border: 4px solid var(--accent);
+            box-shadow: 0 0 20px var(--accent);
+        }
+        
     </style>
 </head>
 
@@ -127,16 +231,30 @@
 
     <div class="container">
         <h1>玩家資訊</h1>
-        <div id="loading-message">正在載入玩家數據... <i class="fa-solid fa-spinner fa-spin"></i></div>
+        <div id="player-grid">
+            <div id="loading-message">正在載入玩家數據... <i class="fa-solid fa-spinner fa-spin"></i></div>
+        </div>
+    </div>
+    
+    <div id="playerModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div id="modal-details">
+                </div>
+        </div>
     </div>
 
     <script>
         // 獲取容器元素
-        const container = document.querySelector('.container');
+        const playerGrid = document.getElementById('player-grid');
         const loadingMessage = document.getElementById('loading-message');
+        const modal = document.getElementById('playerModal');
+        const modalDetails = document.getElementById('modal-details');
+        const closeBtn = document.getElementsByClassName('close-btn')[0];
+        let allPlayersData = []; // 用於儲存從 JSON 載入的所有玩家數據
 
         /**
-         * 根據玩家數據陣列，動態生成並渲染 HTML 卡片
+         * 根據玩家數據陣列，動態生成並渲染簡潔的 HTML 卡片
          * @param {Array} playersData - 包含玩家物件的陣列
          */
         function renderPlayers(playersData) {
@@ -145,49 +263,78 @@
                 loadingMessage.remove();
             }
 
-            playersData.forEach(player => {
+            playersData.forEach((player, index) => {
                 const card = document.createElement('div');
-                card.classList.add('player-card');
+                card.classList.add('player-item');
+                // 將玩家索引存儲在 data 屬性中，以便點擊時查找詳細資料
+                card.setAttribute('data-player-index', index); 
+                card.addEventListener('click', () => showPlayerDetails(index)); // 添加點擊事件
 
-                const title = document.createElement('h2');
-                title.innerHTML = `<i class="fa-solid ${player.icon}"></i> 玩家名稱：${player.name}`;
-
-                const infoDiv = document.createElement('div');
-                infoDiv.classList.add('player-info');
-
-                infoDiv.innerHTML = `
-                    <p><strong>等級：</strong>🏆 Lv.${player.level}</p>
-                    <p><strong>加入時間：</strong>${player.joinDate}</p>
-                    <p><strong>累積遊玩時間：</strong>${player.playTime} 小時</p>
-                    <p><strong>稱號：</strong><span style="color: var(--primary);">${player.title}</span></p>
+                // 注意：這裡假設玩家數據中有一個 'image' 屬性指向頭像路徑，如果你的 JSON 中沒有，請修改這裡
+                // 暫時使用一個通用圖標作為 fallback
+                const imagePath = player.image || 'img/default-avatar.png'; // 假設頭像路徑
+                
+                card.innerHTML = `
+                    <img src="${imagePath}" alt="${player.name} 的頭像" class="player-avatar">
+                    <h3>${player.name}</h3>
                 `;
 
-                card.appendChild(title);
-                card.appendChild(infoDiv);
-
-                container.appendChild(card);
+                playerGrid.appendChild(card);
             });
         }
+        
+        /**
+         * 顯示特定玩家的詳細資訊在彈出視窗中
+         * @param {number} index - allPlayersData 陣列中的索引
+         */
+        function showPlayerDetails(index) {
+            const player = allPlayersData[index];
 
+            const imagePath = player.image || 'img/default-avatar.png'; // 假設頭像路徑
+
+            modalDetails.innerHTML = `
+                <img src="${imagePath}" alt="${player.name} 的頭像" class="detail-image">
+                <h2>${player.name}</h2>
+                <p><strong><i class="fa-solid fa-crown"></i> 等級：</strong> 🏆 Lv.${player.level}</p>
+                <p><strong><i class="fa-solid fa-hat-wizard"></i> 稱號：</strong> <span style="color: var(--primary);">${player.title}</span></p>
+                <p><strong><i class="fa-solid fa-calendar-days"></i> 加入時間：</strong> ${player.joinDate}</p>
+                <p><strong><i class="fa-solid fa-clock"></i> 遊玩時間：</strong> ${player.playTime} 小時</p>
+                <p><strong><i class="fa-solid fa-palette"></i> 喜愛風格：</strong> ${player.style || '無資料'}</p>
+                <p><strong><i class="fa-solid fa-address-card"></i> ID：</strong> ${player.id || 'N/A'}</p>
+            `;
+            
+            modal.style.display = "block"; // 顯示彈出視窗
+        }
+        
+        // 點擊關閉按鈕時關閉彈出視窗
+        closeBtn.onclick = function() {
+            modal.style.display = "none";
+        }
+        
+        // 點擊視窗外時關閉彈出視窗
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+
+        // 數據載入邏輯 (保持不變)
         fetch('data/players.json') // 這裡替換成您的 JSON 檔案路徑
             .then(response => {
-                // 檢查請求是否成功 (HTTP 狀態碼在 200-299 之間)
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
-                // 將響應主體解析為 JSON
                 return response.json();
             })
             .then(playersData => {
-                // 成功獲取並解析數據後，呼叫渲染函數
-                renderPlayers(playersData);
+                allPlayersData = playersData; // 儲存完整的數據
+                renderPlayers(allPlayersData); // 渲染簡潔的卡片
                 console.log("玩家資訊已成功從 players.json 載入並渲染。");
             })
             .catch(error => {
-                // 處理任何錯誤，例如網路問題或 JSON 解析失敗
                 console.error("載入玩家數據時發生錯誤：", error);
                 
-                // 顯示錯誤訊息給用戶
                 if (loadingMessage) {
                     loadingMessage.innerHTML = `載入失敗：${error.message}，請確認 players.json 檔案是否存在且格式正確，並在本地伺服器上運行。`;
                     loadingMessage.style.color = 'red';

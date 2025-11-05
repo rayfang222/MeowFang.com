@@ -5,7 +5,8 @@
         "joinDate": "2024-05-15",
         "playTime": 350,
         "title": "星際艦長",
-        "icon": "fa-rocket"
+        "icon": "fa-rocket",
+        "image": "img/player-master.png"  // 新增圖像路徑
     },
     {
         "name": "幻影貓",
@@ -13,7 +14,8 @@
         "joinDate": "2024-08-01",
         "playTime": 180,
         "title": "資深探險家",
-        "icon": "fa-user-ninja"
+        "icon": "fa-user-ninja",
+        "image": "img/player-phantom.png"
     },
     {
         "name": "紫羅蘭",
@@ -21,7 +23,8 @@
         "joinDate": "2025-01-10",
         "playTime": 85,
         "title": "新手嚮導",
-        "icon": "fa-paw"
+        "icon": "fa-paw",
+        "image": "img/player-violet.png"
     },
     {
         "name": "小黑球",
@@ -29,6 +32,7 @@
         "joinDate": "2024-11-20",
         "playTime": 120,
         "title": "尋寶獵人",
-        "icon": "fa-ghost"
+        "icon": "fa-ghost",
+        "image": "img/player-darkball.png"
     }
 ]

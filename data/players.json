@@ -1,38 +1,50 @@
 [
-    {
-        "name": "喵喵大師",
-        "level": 99,
-        "joinDate": "2024-05-15",
-        "playTime": 350,
-        "title": "星際艦長",
-        "icon": "fa-rocket",
-        "image": "img/player-master.png"  // 新增圖像路徑
-    },
-    {
-        "name": "幻影貓",
-        "level": 75,
-        "joinDate": "2024-08-01",
-        "playTime": 180,
-        "title": "資深探險家",
-        "icon": "fa-user-ninja",
-        "image": "img/player-phantom.png"
-    },
-    {
-        "name": "紫羅蘭",
-        "level": 42,
-        "joinDate": "2025-01-10",
-        "playTime": 85,
-        "title": "新手嚮導",
-        "icon": "fa-paw",
-        "image": "img/player-violet.png"
-    },
-    {
-        "name": "小黑球",
-        "level": 60,
-        "joinDate": "2024-11-20",
-        "playTime": 120,
-        "title": "尋寶獵人",
-        "icon": "fa-ghost",
-        "image": "img/player-darkball.png"
-    }
+  {
+    "id": "mf_001",
+    "name": "CatMaster",
+    "level": 105,
+    "joinDate": "2023/01/15",
+    "playTime": 850,
+    "title": "喵喵大師",
+    "icon": "fa-cat", 
+    "image": "img/avatar_catmaster.jpg",
+    "style": "建築與紅石",
+    "description": "喵方旅團的創始成員之一，擅長複雜的自動化紅石裝置和宏偉的結構設計。"
+  },
+  {
+    "id": "mf_002",
+    "name": "PurpleRain",
+    "level": 92,
+    "joinDate": "2023/03/01",
+    "playTime": 620,
+    "title": "紫雨騎士",
+    "icon": "fa-shield-halved", 
+    "image": "img/avatar_purplerain.png",
+    "style": "PVE與探險",
+    "description": "熱衷於探索未知領域和挑戰強大 Boss 的PVE玩家，裝備總是最好的！"
+  },
+  {
+    "id": "mf_003",
+    "name": "StarDust",
+    "level": 78,
+    "joinDate": "2023/05/20",
+    "playTime": 410,
+    "title": "星塵工匠",
+    "icon": "fa-wand-magic-sparkles", 
+    "image": "img/avatar_stardust.jpg",
+    "style": "裝飾與景觀",
+    "description": "專注於美化環境的工匠，總能將普通的區域變成令人驚嘆的藝術品。"
+  },
+  {
+    "id": "mf_004",
+    "name": "IronChef",
+    "level": 65,
+    "joinDate": "2023/08/10",
+    "playTime": 290,
+    "title": "食物鍊頂端",
+    "icon": "fa-utensils", 
+    "image": "img/avatar_ironchef.png",
+    "style": "農業與釀造",
+    "description": "旅團中的專業農夫和釀造師，提供所有成員最佳的食物和藥水補給。"
+  }
 ]

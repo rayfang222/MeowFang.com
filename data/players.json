@@ -1,50 +1,32 @@
 [
   {
-    "id": "mf_001",
-    "name": "CatMaster",
-    "level": 105,
-    "joinDate": "2023/01/15",
-    "playTime": 850,
-    "title": "喵喵大師",
-    "icon": "fa-cat", 
-    "image": "img/avatar_catmaster.jpg",
-    "style": "建築與紅石",
-    "description": "喵方旅團的創始成員之一，擅長複雜的自動化紅石裝置和宏偉的結構設計。"
+    "id": "MF-001",
+    "name": "喵喵大師",
+    "image": "img/player-avatar-01.png",
+    "level": 99,
+    "title": "創世神聖",
+    "joinDate": "2023-01-01",
+    "playTime": 8760,
+    "style": "史詩級建築與紅石機關"
   },
   {
-    "id": "mf_002",
-    "name": "PurpleRain",
-    "level": 92,
-    "joinDate": "2023/03/01",
-    "playTime": 620,
-    "title": "紫雨騎士",
-    "icon": "fa-shield-halved", 
-    "image": "img/avatar_purplerain.png",
-    "style": "PVE與探險",
-    "description": "熱衷於探索未知領域和挑戰強大 Boss 的PVE玩家，裝備總是最好的！"
+    "id": "MF-002",
+    "name": "方塊探索家",
+    "image": "img/player-avatar-02.png",
+    "level": 55,
+    "title": "冒險者先驅",
+    "joinDate": "2023-03-15",
+    "playTime": 1245,
+    "style": "生存、PVP 與地底探險"
   },
   {
-    "id": "mf_003",
-    "name": "StarDust",
-    "level": 78,
-    "joinDate": "2023/05/20",
-    "playTime": 410,
-    "title": "星塵工匠",
-    "icon": "fa-wand-magic-sparkles", 
-    "image": "img/avatar_stardust.jpg",
-    "style": "裝飾與景觀",
-    "description": "專注於美化環境的工匠，總能將普通的區域變成令人驚嘆的藝術品。"
-  },
-  {
-    "id": "mf_004",
-    "name": "IronChef",
-    "level": 65,
-    "joinDate": "2023/08/10",
-    "playTime": 290,
-    "title": "食物鍊頂端",
-    "icon": "fa-utensils", 
-    "image": "img/avatar_ironchef.png",
-    "style": "農業與釀造",
-    "description": "旅團中的專業農夫和釀造師，提供所有成員最佳的食物和藥水補給。"
+    "id": "MF-003",
+    "name": "紫月工程師",
+    "image": "img/player-avatar-03.png",
+    "level": 42,
+    "title": "紅石研究員",
+    "joinDate": "2023-06-20",
+    "playTime": 678,
+    "style": "自動化農場與複雜電路"
   }
 ]

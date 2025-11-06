@@ -361,12 +361,12 @@
             modalDetails.innerHTML = `
                 <img src="${imagePath}" alt="${player.name} 的頭像" class="detail-image">
                 <h2>${player.name}</h2>
-                <p><strong><i class="fa-solid fa-crown"></i> 等級：</strong>  ${player.title}</p>
-                <p><strong><i class="fa-solid fa-hat-wizard"></i> 稱號：</strong> <span style="color: var(--primary);">${player.joinDate}</span></p>
-                <p><strong><i class="fa-solid fa-calendar-days"></i> 加入時間：</strong> ${player.id}</p>
+                <p><strong><i class="fa-solid fa-crown"></i> 身分：</strong>  ${player.title}</p>
+                <p><strong><i class="fa-solid fa-hat-wizard"></i> 入團時間：</strong> <span style="color: var(--primary);">${player.joinDate}</span></p>
+                <p><strong><i class="fa-solid fa-calendar-days"></i> MCID：</strong> ${player.id}</p>
                 <p><strong><i class="fa-solid fa-clock"></i> MC伺服器：</strong> ${player.sever} </p>
-                <p><strong><i class="fa-solid fa-palette"></i> 遊玩遊戲：</strong> ${player.playgame || '無資料'}</p>
-                <p><strong><i class="fa-solid fa-address-card"></i> ID：</strong> ${player.style || 'N/A'}</p>
+                <p><strong><i class="fa-solid fa-palette"></i> 遊玩遊戲：</strong> ${player.playgame || }</p>
+                <p><strong><i class="fa-solid fa-address-card"></i> ID：</strong> ${player.style || }</p>
             `;
             
             modal.style.display = "block"; // 顯示彈出視窗

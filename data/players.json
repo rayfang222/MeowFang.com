@@ -3,7 +3,7 @@
     "id": "MF-001",
     "name": "雪糕",
     "image": "img/player-avatar-01.png",
-    "server": "空島伺服器.tw"
+    "server": "空島伺服器.tw",
     "title": "旅團員",
     "joinDate": "2025-08-22",
     "playgame": "嘟嘟臉惡作劇",
@@ -13,7 +13,7 @@
     "id": "MF-002",
     "name": "小雞",
     "image": "img/player-avatar-02.png",
-    "server": "貓芽伺服器,空島伺服器.tw"
+    "server": "貓芽伺服器,空島伺服器.tw",
     "title": "空島.tw 外務官",
     "joinDate": "2025-09-15",
     "playgame": "雀魂麻將,嘟嘟臉惡作劇,瓦羅蘭-VALORANT",

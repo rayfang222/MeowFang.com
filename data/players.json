@@ -1,6 +1,6 @@
 [
   {
-    "id": "MF-001",
+    "MCid": "MF-001",
     "name": "雪糕",
     "image": "img/player-avatar-01.png",
     "server": "空島伺服器.tw",
@@ -10,7 +10,7 @@
     "style": "超級養老人一個，不可食用，建築只會一點，PVP給你虐打，紅石完全不會，來自香港，就一個繪師（但畫不好看）（被貓芽永ban的人"
   },
   {
-    "id": "MF-002",
+    "MCid": "MF-002",
     "name": "小雞",
     "image": "img/player-avatar-02.png",
     "server": "貓芽伺服器,空島伺服器.tw",
@@ -20,7 +20,7 @@
     "style": "-"
   },
   {
-    "id": "MF-003",
+    "MCid": "MF-003",
     "name": "紫月工程師",
     "image": "img/player-avatar-03.png",
     "server": 42,

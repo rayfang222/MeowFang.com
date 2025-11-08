@@ -50,26 +50,6 @@
     "style": "-"
   },
   {
-    "MCid": "-",
-    "name": "-",
-    "image": "",
-    "server": "-",
-    "title": "-",
-    "joinDate": "-",
-    "playgame": "-",
-    "style": "-"
-  },
-  {
-    "MCid": "-",
-    "name": "-",
-    "image": "",
-    "server": "-",
-    "title": "-",
-    "joinDate": "-",
-    "playgame": "-",
-    "style": "-"
-  },
-  {
     "MCid": "Hanicolehaha",
     "name": "雪糕",
     "image": "img/nicohanico.png",
@@ -90,11 +70,71 @@
     "style": "-"
   },
   {
+    "MCid": "rayfang223",
+    "name": "小安",
+    "image": "",
+    "server": "貓芽伺服器,Minecraft 貓芽-Pokémon副服,空島伺服器.tw",
+    "title": "旅團員",
+    "joinDate": "2025-07-02",
+    "playgame": "瓦羅蘭-VALORANT",
+    "style": "-"
+  }
+  {
+    "MCid": "WestTox",
+    "name": "白熊",
+    "image": "",
+    "server": "貓芽伺服器",
+    "title": "旅團員",
+    "joinDate": "2025-07-01",
+    "playgame": "-",
+    "style": "囉大家好，我是一隻來自北極的熊"
+  },
+  {
+    "MCid": "slime0220",
+    "name": "胡桃",
+    "image": "",
+    "server": "貓芽伺服器",
+    "title": "旅團員",
+    "joinDate": "-",
+    "playgame": "-",
+    "style": "-"
+  }
+  {
+    "MCid": "Rui_Rui_cute",
+    "name": "可可",
+    "image": "",
+    "server": "貓芽伺服器",
+    "title": "旅團員",
+    "joinDate": "2025-07-02",
+    "playgame": "-",
+    "style": "-"
+  },
+  {
     "MCid": "-",
     "name": "-",
     "image": "",
-    "server": "-",
-    "title": "-",
+    "server": "貓芽伺服器",
+    "title": "旅團員",
+    "joinDate": "-",
+    "playgame": "-",
+    "style": "-"
+  }
+  {
+    "MCid": "-",
+    "name": "-",
+    "image": "",
+    "server": "貓芽伺服器",
+    "title": "旅團員",
+    "joinDate": "-",
+    "playgame": "-",
+    "style": "-"
+  }
+  {
+    "MCid": "-",
+    "name": "-",
+    "image": "",
+    "server": "貓芽伺服器",
+    "title": "旅團員",
     "joinDate": "-",
     "playgame": "-",
     "style": "-"

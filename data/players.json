@@ -70,16 +70,6 @@
     "style": "-"
   },
   {
-    "MCid": "rayfang223",
-    "name": "小安",
-    "image": "",
-    "server": "貓芽伺服器,Minecraft 貓芽-Pokémon副服,空島伺服器.tw",
-    "title": "旅團員",
-    "joinDate": "2025-07-02",
-    "playgame": "瓦羅蘭-VALORANT",
-    "style": "-"
-  },
-  {
     "MCid": "WestTox",
     "name": "白熊",
     "image": "",
@@ -100,7 +90,27 @@
     "style": "-"
   },
   {
-    "MCid": "Rui_Rui_cute",
+    "MCid": "rayfang223",
+    "name": "小安",
+    "image": "",
+    "server": "貓芽伺服器,Minecraft 貓芽-Pokémon副服,空島伺服器.tw",
+    "title": "旅團員",
+    "joinDate": "2025-07-02",
+    "playgame": "瓦羅蘭-VALORANT",
+    "style": "-"
+  },
+  {
+    "MCid": "ggoppppe",
+    "name": "羊咩咩",
+    "image": "",
+    "server": "貓芽伺服器",
+    "title": "旅團員",
+    "joinDate": "2025-07-08",
+    "playgame": "-",
+    "style": "-"
+  },
+  {
+    "MCid": "rui_rui_cute",
     "name": "可可",
     "image": "",
     "server": "貓芽伺服器",
@@ -110,14 +120,14 @@
     "style": "-"
   },
   {
-    "MCid": "-",
-    "name": "-",
+    "MCid": "iangoodfriend",
+    "name": "青蛙",
     "image": "",
     "server": "貓芽伺服器",
     "title": "旅團員",
     "joinDate": "-",
-    "playgame": "-",
-    "style": "-"
+    "playgame": "",
+    "style": "休閒玩家一位 正在自學bbox跟插畫，目前還沒進步，我要跟大家和平相處，建築不強不知道為啥    valorant id:iangoodfriend#hello"
   },
   {
     "MCid": "-",

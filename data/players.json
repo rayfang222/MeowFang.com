@@ -1,5 +1,25 @@
 [
   {
+    "MCid": "rayfang222",
+    "name": "方方",
+    "image": "",
+    "server": "貓芽伺服器",
+    "title": "團長",
+    "joinDate": "2025-7-1",
+    "playgame": "-",
+    "style": "哈囉大家好，偶4方方啦！平常喜歡畫插畫、看一些動漫、玩遊戲。希望之後能和大家一起玩遊戲、分享建築靈感"
+  },
+  {
+    "MCid": "-",
+    "name": "-",
+    "image": "",
+    "server": "-",
+    "title": "-",
+    "joinDate": "-",
+    "playgame": "-",
+    "style": "-"
+  },
+  {
     "MCid": "Hanicolehaha",
     "name": "雪糕",
     "image": "img/nicohanico.png",
@@ -20,13 +40,13 @@
     "style": "-"
   },
   {
-    "MCid": "MF-003",
-    "name": "紫月工程師",
+    "MCid": "-",
+    "name": "-",
     "image": "",
-    "server": 42,
-    "title": "紅石研究員",
-    "joinDate": "2023-06-20",
-    "playTime": 678,
-    "style": "自動化農場與複雜電路"
-  }
+    "server": "-",
+    "title": "-",
+    "joinDate": "-",
+    "playgame": "-",
+    "style": "-"
+  },
 ]

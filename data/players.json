@@ -12,7 +12,7 @@
   {
     "MCid": "MF-002",
     "name": "小雞",
-    "image": "img/player-avatar-02.png",
+    "image": "img/default_avatar.png",
     "server": "貓芽伺服器,空島伺服器.tw",
     "title": "空島.tw 外務官",
     "joinDate": "2025-09-15",
@@ -22,7 +22,7 @@
   {
     "MCid": "MF-003",
     "name": "紫月工程師",
-    "image": "img/player-avatar-03.png",
+    "image": "",
     "server": 42,
     "title": "紅石研究員",
     "joinDate": "2023-06-20",

@@ -338,7 +338,7 @@
 
                 // 注意：這裡假設玩家數據中有一個 'image' 屬性指向頭像路徑，如果你的 JSON 中沒有，請修改這裡
                 // 暫時使用一個通用圖標作為 fallback
-                const imagePath = player.image || 'img/default-avatar.png'; // 假設頭像路徑
+                const imagePath = player.image || 'img/default_avatar.png'; // 假設頭像路徑
                 
                 card.innerHTML = `
                     <img src="${imagePath}" alt="${player.name} 的頭像" class="player-avatar">

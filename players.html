@@ -73,9 +73,16 @@
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            animation: gradient-shift 6s linear infinite;
             /* 讓 Logo 保持一行顯示 */
             min-width: 0;
         }
+        @keyframes gradient-shift {
+            0%   { background-position: 0% 50%; }
+            50%  { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         .logo-group {
              display: flex;
              align-items: center;

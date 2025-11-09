@@ -272,7 +272,40 @@
             border-color: var(--D-leder);
             box-shadow: 0 0 20px var(--D-leder-light);
         }
-        
+        /* 🟡 團長（金色漸層） */
+        .role-leader {
+            border-color: var(--T-leder);
+            box-shadow: 0 0 25px var(--T-leder-light);
+            background: linear-gradient(145deg, rgba(253, 246, 48, 0.15), rgba(254, 249, 215, 0.2));
+        }
+        /* 🟣 副團長（紫色光暈） */
+        .role-deputy {
+            border-color: var(--D-leder);
+            box-shadow: 0 0 20px var(--D-leder-light);
+            background: linear-gradient(145deg, rgba(188, 48, 253, 0.15), rgba(254, 215, 251, 0.2));
+        }
+        /* 🌈 加成玩家（粉藍漸層＋閃爍） */
+        .role-plus {
+            border-color: var(--plus2);
+            box-shadow: 0 0 20px var(--plus4);
+            background: linear-gradient(90deg, var(--plus1), var(--plus2), var(--plus3), var(--plus4));
+            background-size: 300% 100%;
+            animation: rolePlusFlow 8s linear infinite;
+        }
+        /* 讓加成玩家的名字也有流動漸層 */
+        .role-plus h3 {
+            background: linear-gradient(90deg, var(--plus1), var(--plus2), var(--plus3), var(--plus4));
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            color: transparent;
+            animation: rolePlusFlow 8s linear infinite;
+        }
+        /* 動畫關鍵幀 */
+        @keyframes rolePlusFlow {
+            0%   { background-position: 0% 50%; }
+            50%  { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
         .close-btn {
             color: var(--secondary);
             float: right;

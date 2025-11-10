@@ -252,46 +252,7 @@
             from { transform: translateY(-50px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
-        /* ✨ 加成玩家漸層框與光暈 */
-        .role-plus {
-            border-color: var(--plus2) !important;
-            box-shadow: 0 0 25px var(--plus3);
-            background: linear-gradient(145deg, rgba(168,237,234,0.2), rgba(254,214,227,0.2));
-        }
-        .role-plus:hover {
-            transform: scale(1.08);
-            box-shadow: 0 0 30px var(--plus4);
-        }
-        /* 團長（舉例） */
-        .role-leader {
-            border-color: var(--T-leder);
-            box-shadow: 0 0 20px var(--T-leder-light);
-        }
-        /* 副團長（舉例） */
-        .role-deputy {
-            border-color: var(--D-leder);
-            box-shadow: 0 0 20px var(--D-leder-light);
-        }
-        /* 🟡 團長（金色漸層） */
-        .role-leader {
-            border-color: var(--T-leder);
-            box-shadow: 0 0 25px var(--T-leder-light);
-            background: linear-gradient(145deg, rgba(253, 246, 48, 0.15), rgba(254, 249, 215, 0.2));
-        }
-        /* 🟣 副團長（紫色光暈） */
-        .role-deputy {
-            border-color: var(--D-leder);
-            box-shadow: 0 0 20px var(--D-leder-light);
-            background: linear-gradient(145deg, rgba(188, 48, 253, 0.15), rgba(254, 215, 251, 0.2));
-        }
-        /* 🌈 加成玩家（粉藍漸層＋閃爍） */
-        .role-plus {
-            border-color: var(--plus2);
-            box-shadow: 0 0 20px var(--plus4);
-            background: linear-gradient(90deg, var(--plus1), var(--plus2), var(--plus3), var(--plus4));
-            background-size: 300% 100%;
-            animation: rolePlusFlow 8s linear infinite;
-        }
+        
         /* 讓加成玩家的名字也有流動漸層 */
         .role-plus h3 {
             background: linear-gradient(90deg, var(--plus1), var(--plus2), var(--plus3), var(--plus4));
@@ -406,14 +367,7 @@
             playersData.forEach((player, index) => {
                 const card = document.createElement('div');
                 card.classList.add('player-item');
-                    // 根據角色給不同 class
-                if (player.role === 'plus') {
-                    card.classList.add('role-plus'); // 加成
-                } else if (player.role === 'leader') {
-                    card.classList.add('role-leader'); // 團長
-                } else if (player.role === 'deputy') {
-                    card.classList.add('role-deputy'); // 副團長
-                }
+               
                 // 將玩家索引存儲在 data 屬性中，以便點擊時查找詳細資料
                 card.setAttribute('data-player-index', index); 
                 card.addEventListener('click', () => showPlayerDetails(index)); // 添加點擊事件

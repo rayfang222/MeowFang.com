@@ -211,6 +211,23 @@
             border: 4px solid var(--primary);
             box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
         }
+        /* ✨ 加成玩家漸層框與光暈 */
+        .role-plus:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px var(--plus3);
+            background: rgba(36, 18, 60, 0.8);
+            border-color: var(--plus2);
+        }
+
+        .role-plus img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+            border: 4px solid var(--plus3);
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
+        }
 
         .player-item h3 {
             color: var(--light);
@@ -367,7 +384,11 @@
             playersData.forEach((player, index) => {
                 const card = document.createElement('div');
                 card.classList.add('player-item');
-               
+                
+                // 根據角色給不同 class
+                if (player.role === 'plus') {
+                    card.classList.add('role-plus'); // 加成
+
                 // 將玩家索引存儲在 data 屬性中，以便點擊時查找詳細資料
                 card.setAttribute('data-player-index', index); 
                 card.addEventListener('click', () => showPlayerDetails(index)); // 添加點擊事件
